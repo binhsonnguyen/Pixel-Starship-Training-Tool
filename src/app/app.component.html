@@ -1,9 +1,17 @@
-<label for="totalTp">
-  TP:
-  <input id="totalTp" type="number" [(ngModel)]="totalTrainingPoint">
-</label>
+<mat-grid-list cols="12" rowHeight="24px">
+  <mat-grid-tile colspan="12">
+    <b>PSS Training Tool</b>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="2">TP</mat-grid-tile>
+  <mat-grid-tile colspan="5">
+    <input matInput #number placeholder="Total TP" [(ngModel)]="totalTrainingPoint">
+  </mat-grid-tile>
+  <mat-grid-tile colspan="2">{{trainingTask.statsEffectitotalTrainingPointve.}/mat-grid-tile>
+  <mat-grid-tile colspan="2">Fatigue</mat-grid-tile>
+  <mat-grid-tile colspan="5">
+    <input matInput #number placeholder="Fatigue" [(ngModel)]="fatigue">
+  </mat-grid-tile>
 
-<label for="fatigue">
-  Fatigue:
-  <input id="fatigue" type="number" [(ngModel)]="fatigue">
-</label>
+  <mat-grid-tile colspan="12">Current Training</mat-grid-tile>
+
+</mat-grid-list>
