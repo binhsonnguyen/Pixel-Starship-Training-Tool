@@ -7,7 +7,7 @@ import TrainingTask from "pss-training-lib/dist/TrainingTask";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })
