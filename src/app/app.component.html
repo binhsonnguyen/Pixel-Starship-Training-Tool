@@ -2,9 +2,14 @@
   <mat-grid-tile colspan="12">
     <b>PSS Training Tool</b>
   </mat-grid-tile>
-  <mat-grid-tile colspan="2">TP</mat-grid-tile>
-  <mat-grid-tile colspan="5">
-    <input matInput #number placeholder="Total TP" [(ngModel)]="totalTrainingPoint">
+
+  <mat-grid-tile colspan="12">
+    <mat-form-field class="example-full-width">
+      <mat-label>Total Training Point</mat-label>
+      <input matInput #number [(ngModel)]="totalTrainingPoint">
+    </mat-form-field>
+
+<!--    <input matInput #number placeholder="Total TP" [(ngModel)]="totalTrainingPoint">-->
   </mat-grid-tile>
   <mat-grid-tile colspan="5"></mat-grid-tile>
 
@@ -13,6 +18,18 @@
     <input matInput #number placeholder="Fatigue" [(ngModel)]="fatigue">
   </mat-grid-tile>
   <mat-grid-tile colspan="5"></mat-grid-tile>
+
+  <mat-grid-tile colspan="12">Current Training</mat-grid-tile>
+
+  <mat-grid-tile colspan="2">Training</mat-grid-tile>
+  <mat-grid-tile colspan="5">
+    filter
+  </mat-grid-tile>
+  <mat-grid-tile colspan="5">
+    training
+  </mat-grid-tile>
+
+
 
   <mat-grid-tile colspan="12">Current Training</mat-grid-tile>
 

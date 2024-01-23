@@ -5,9 +5,10 @@ import StatsSet from "pss-training-lib/dist/StatsSet";
 import TrainingTask from "pss-training-lib/dist/TrainingTask";
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 import {CommonModule} from "@angular/common";
-import {MatInput} from "@angular/material/input";
+import {MatFormField, MatInput, MatInputModule, MatLabel} from "@angular/material/input";
 import Training from "pss-training-lib/dist/Training";
 import Stat from "pss-training-lib/dist/Stat";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 export interface Tile {
   color: string;
@@ -19,7 +20,7 @@ export interface Tile {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, MatGridTile, MatGridList, CommonModule, MatInput],
+  imports: [RouterOutlet, FormsModule, MatGridTile, MatGridList, CommonModule, FormsModule, MatFormFieldModule, MatInputModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })
