@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   totalTrainingPoint: number = 110
   fatigue: number = 0;
   currentTraining: StatsSet = new StatsSet();
-  trainingTask: TrainingTask = TrainingTask.ABL_COMMON
+  trainingTask: TrainingTask = TrainingTask.HP_UNIQUE
   training: Training = new Training(
     this.totalTrainingPoint,
     this.fatigue,
@@ -38,7 +38,6 @@ export class AppComponent implements OnInit {
   )
 
   ngOnInit(): void {
-    this.currentTraining.hp = 10
   }
 
   protected readonly Stat = Stat;
