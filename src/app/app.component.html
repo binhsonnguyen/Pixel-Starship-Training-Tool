@@ -16,7 +16,7 @@
   </tr>
   <tr>
     <td colspan="2">
-      <app-stat-explain [stat]="Stat.HP"
+      <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.HP, $event)" [stat]="Stat.HP"
                         [current_training]="currentTraining.hp"
                         [training_effect]="trainingTask.statsEffective.hp"
                         [required_effect]="training.requiredStatEffect(Stat.HP)"

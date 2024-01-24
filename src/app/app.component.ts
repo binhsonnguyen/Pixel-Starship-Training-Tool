@@ -37,4 +37,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  updateCurrentTraining(stat: Stat, value: number) {
+    this.currentTraining.set(stat, value)
+  }
 }
