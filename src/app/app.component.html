@@ -14,6 +14,22 @@
       </mat-form-field>
     </td>
   </tr>
+
+  <tr>
+    <td>
+      <mat-form-field>
+        <mat-label>Target Stat</mat-label>
+        <mat-select (selectionChange)="onTargetStatChanged(targetStat)" [(ngModel)]="targetStat">
+          <mat-option>
+          </mat-option>
+          <mat-option *ngFor="let item of Stat.ALL" value="{{item.name}}">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+  </tr>
+
   <tr>
     <td colspan="2">
       <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.HP, $event)" [stat]="Stat.HP"

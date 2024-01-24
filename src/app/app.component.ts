@@ -10,6 +10,7 @@ import Stat from "pss-training-lib/dist/Stat";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {StatExplainComponent} from "./stat-explain/stat-explain.component";
+import {MatOption, MatSelect} from "@angular/material/select";
 
 export interface Tile {
   color: string;
@@ -21,7 +22,7 @@ export interface Tile {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, MatGridTile, MatGridList, CommonModule, FormsModule, MatFormFieldModule, MatInputModule, StatExplainComponent],
+  imports: [RouterOutlet, FormsModule, MatGridTile, MatGridList, CommonModule, FormsModule, MatFormFieldModule, MatInputModule, StatExplainComponent, MatSelect, MatOption],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })
@@ -35,10 +36,18 @@ export class AppComponent implements OnInit {
   training: Training = new Training(this.totalTrainingPoint, this.fatigue, this.trainingTask, this.currentTraining)
   protected readonly Stat = Stat;
 
+  stats = Stat.ALL
+  targetStat: string = "";
+
   ngOnInit(): void {
   }
 
   updateCurrentTraining(stat: Stat, value: number) {
     this.currentTraining.set(stat, value)
+  }
+
+  onTargetStatChanged(stat: string) {
+    console.log(stat)
+    console.log(this.targetStat)
   }
 }
