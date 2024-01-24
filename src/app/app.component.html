@@ -1,144 +1,154 @@
-<mat-grid-list cols="12" rowHeight="24px">
-  <mat-grid-tile colspan="12">
-    <b>PSS Training Tool</b>
-  </mat-grid-tile>
+<table class="full-width">
+  <thead></thead>
+  <tbody>
+  <tr>
+    <td>
+      <mat-form-field class="full-width">
+        <input matInput #number [(ngModel)]="totalTrainingPoint">
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field class="full-width">
+        <mat-label>Fatigue</mat-label>
+        <input matInput #number [(ngModel)]="fatigue">
+      </mat-form-field>
+    </td>
+  </tr>
 
-  <mat-grid-tile colspan="12">
-    <mat-form-field class="example-full-width">
-      <mat-label>Total Training Point</mat-label>
-      <input matInput #number [(ngModel)]="totalTrainingPoint">
-    </mat-form-field>
-
-<!--    <input matInput #number placeholder="Total TP" [(ngModel)]="totalTrainingPoint">-->
-  </mat-grid-tile>
-  <mat-grid-tile colspan="5"></mat-grid-tile>
-
-  <mat-grid-tile colspan="2">Fatigue</mat-grid-tile>
-  <mat-grid-tile colspan="5">
-    <input matInput #number placeholder="Fatigue" [(ngModel)]="fatigue">
-  </mat-grid-tile>
-  <mat-grid-tile colspan="5"></mat-grid-tile>
-
-  <mat-grid-tile colspan="12">Current Training</mat-grid-tile>
-
-  <mat-grid-tile colspan="2">Training</mat-grid-tile>
-  <mat-grid-tile colspan="5">
-    filter
-  </mat-grid-tile>
-  <mat-grid-tile colspan="5">
-    training
-  </mat-grid-tile>
-
-
-
-  <mat-grid-tile colspan="12">Current Training</mat-grid-tile>
-
-  <!--  HP-->
-  <mat-grid-tile colspan="2">HP</mat-grid-tile>
-  <mat-grid-tile colspan="5">
-    <input matInput #number placeholder="HP" [(ngModel)]="currentTraining.hp">
-  </mat-grid-tile>
-  <mat-grid-tile colspan="3">
-    {{training.minimumPossibleImprovement(Stat.HP)}}
-    ~
-    {{training.maximumPossibleImprovement(Stat.HP)}}
-  </mat-grid-tile>
-  <mat-grid-tile colspan="2">{{trainingTask.statsEffective.hp}}</mat-grid-tile>
-
+  <tr app-stat-explain [stat]="Stat.HP"
+    [current_training]="currentTraining.hp"
+    [training_effect]="trainingTask.statsEffective.hp"
+    [minimum_possibility]="training.minimumPossibleImprovement(Stat.HP)"
+    [maximum_possibility]="training.maximumPossibleImprovement(Stat.HP)"
+  ></tr>
   <!--  ATK-->
-  <mat-grid-tile colspan="2">ATK</mat-grid-tile>
-  <mat-grid-tile colspan="5">
-    <input matInput #number placeholder="ATK" [(ngModel)]="currentTraining.atk">
-  </mat-grid-tile>
-  <mat-grid-tile colspan="3">
-    {{training.minimumPossibleImprovement(Stat.ATK)}}
-    ~
-    {{training.maximumPossibleImprovement(Stat.ATK)}}
-  </mat-grid-tile>
-  <mat-grid-tile colspan="2">{{trainingTask.statsEffective.atk}}</mat-grid-tile>
+  <tr>
 
+    <td>
+      <mat-form-field class="full-width">
+        <mat-label>ATK</mat-label>
+        <input matInput #number placeholder="ATK" [(ngModel)]="currentTraining.atk">
+      </mat-form-field>
+    </td>
+  </tr>
   <!--  RPR-->
-  <mat-grid-tile colspan="2">RPR</mat-grid-tile>
-  <mat-grid-tile colspan="5">
-    <input matInput #number placeholder="RPR" [(ngModel)]="currentTraining.rpr">
-  </mat-grid-tile>
-  <mat-grid-tile colspan="3">
-    {{training.minimumPossibleImprovement(Stat.RPR)}}
-    ~
-    {{training.maximumPossibleImprovement(Stat.RPR)}}
-  </mat-grid-tile>
-  <mat-grid-tile colspan="2">{{trainingTask.statsEffective.rpr}}</mat-grid-tile>
+  <tr>
 
+    <td>
+      <mat-form-field class="full-width">
+        <mat-label>RPR</mat-label>
+        <input matInput #number placeholder="RPR" [(ngModel)]="currentTraining.rpr">
+      </mat-form-field>
+    </td>
+    <td>
+      {{training.minimumPossibleImprovement(Stat.RPR)}}
+      ~
+      {{training.maximumPossibleImprovement(Stat.RPR)}}
+      |
+      {{trainingTask.statsEffective.rpr}}
+    </td>
+  </tr>
   <!--  ABL-->
-  <mat-grid-tile colspan="2">ABL</mat-grid-tile>
-  <mat-grid-tile colspan="5">
-    <input matInput #number placeholder="ABL" [(ngModel)]="currentTraining.abl">
-  </mat-grid-tile>
-  <mat-grid-tile colspan="3">
-    {{training.minimumPossibleImprovement(Stat.ABL)}}
-    ~
-    {{training.maximumPossibleImprovement(Stat.ABL)}}
-  </mat-grid-tile>
-  <mat-grid-tile colspan="2">{{trainingTask.statsEffective.abl}}</mat-grid-tile>
+  <tr>
 
+    <td>
+      <mat-form-field class="full-width">
+        <mat-label>ABL</mat-label>
+        <input matInput #number placeholder="ABL" [(ngModel)]="currentTraining.abl">
+      </mat-form-field>
+    </td>
+    <td>
+      {{training.minimumPossibleImprovement(Stat.ABL)}}
+      ~
+      {{training.maximumPossibleImprovement(Stat.ABL)}}
+      |
+      {{trainingTask.statsEffective.abl}}
+    </td>
+  </tr>
   <!--  STA-->
-  <mat-grid-tile colspan="2">STA</mat-grid-tile>
-  <mat-grid-tile colspan="5">
-    <input matInput #number placeholder="STA" [(ngModel)]="currentTraining.sta">
-  </mat-grid-tile>
-  <mat-grid-tile colspan="3">
-    {{training.minimumPossibleImprovement(Stat.STA)}}
-    ~
-    {{training.maximumPossibleImprovement(Stat.STA)}}
-  </mat-grid-tile>
-  <mat-grid-tile colspan="2">{{trainingTask.statsEffective.sta}}</mat-grid-tile>
+  <tr>
 
+    <td>
+      <mat-form-field class="full-width">
+        <mat-label>STA</mat-label>
+        <input matInput #number placeholder="STA" [(ngModel)]="currentTraining.sta">
+      </mat-form-field>
+    </td>
+    <td>
+      {{training.minimumPossibleImprovement(Stat.STA)}}
+      ~
+      {{training.maximumPossibleImprovement(Stat.STA)}}
+      |
+      {{trainingTask.statsEffective.sta}}
+    </td>
+  </tr>
   <!--  PLT-->
-  <mat-grid-tile colspan="2">PLT</mat-grid-tile>
-  <mat-grid-tile colspan="5">
-    <input matInput #number placeholder="PLT" [(ngModel)]="currentTraining.plt">
-  </mat-grid-tile>
-  <mat-grid-tile colspan="3">
-    {{training.minimumPossibleImprovement(Stat.PLT)}}
-    ~
-    {{training.maximumPossibleImprovement(Stat.PLT)}}
-  </mat-grid-tile>
-  <mat-grid-tile colspan="2">{{trainingTask.statsEffective.plt}}</mat-grid-tile>
+  <tr>
 
+    <td>
+      <mat-form-field class="full-width">
+        <mat-label>PLT</mat-label>
+        <input matInput #number placeholder="PLT" [(ngModel)]="currentTraining.plt">
+      </mat-form-field>
+    </td>
+    <td>
+      {{training.minimumPossibleImprovement(Stat.PLT)}}
+      ~
+      {{training.maximumPossibleImprovement(Stat.PLT)}}
+      |
+      {{trainingTask.statsEffective.plt}}
+    </td>
+  </tr>
   <!--  SCI-->
-  <mat-grid-tile colspan="2">SCI</mat-grid-tile>
-  <mat-grid-tile colspan="5">
-    <input matInput #number placeholder="SCI" [(ngModel)]="currentTraining.sci">
-  </mat-grid-tile>
-  <mat-grid-tile colspan="3">
-    {{training.minimumPossibleImprovement(Stat.SCI)}}
-    ~
-    {{training.maximumPossibleImprovement(Stat.SCI)}}
-  </mat-grid-tile>
-  <mat-grid-tile colspan="2">{{trainingTask.statsEffective.sci}}</mat-grid-tile>
+  <tr>
 
+    <td>
+      <mat-form-field class="full-width">
+        <mat-label>SCI</mat-label>
+        <input matInput #number placeholder="SCI" [(ngModel)]="currentTraining.sci">
+      </mat-form-field>
+    </td>
+    <td>
+      {{training.minimumPossibleImprovement(Stat.SCI)}}
+      ~
+      {{training.maximumPossibleImprovement(Stat.SCI)}}
+      |
+      {{trainingTask.statsEffective.sci}}
+    </td>
+  </tr>
   <!--  ENG-->
-  <mat-grid-tile colspan="2">ENG</mat-grid-tile>
-  <mat-grid-tile colspan="5">
-    <input matInput #number placeholder="ENG" [(ngModel)]="currentTraining.eng">
-  </mat-grid-tile>
-  <mat-grid-tile colspan="3">
-    {{training.minimumPossibleImprovement(Stat.ENG)}}
-    ~
-    {{training.maximumPossibleImprovement(Stat.ENG)}}
-  </mat-grid-tile>
-  <mat-grid-tile colspan="2">{{trainingTask.statsEffective.eng}}</mat-grid-tile>
+  <tr>
 
+    <td>
+      <mat-form-field class="full-width">
+        <mat-label>ENG</mat-label>
+        <input matInput #number placeholder="ENG" [(ngModel)]="currentTraining.eng">
+      </mat-form-field>
+    </td>
+    <td>
+      {{training.minimumPossibleImprovement(Stat.ENG)}}
+      ~
+      {{training.maximumPossibleImprovement(Stat.ENG)}}
+      |
+      {{trainingTask.statsEffective.eng}}
+    </td>
+  </tr>
   <!--  WPN-->
-  <mat-grid-tile colspan="2">WPN</mat-grid-tile>
-  <mat-grid-tile colspan="5">
-    <input matInput #number placeholder="WPN" [(ngModel)]="currentTraining.wpn">
-  </mat-grid-tile>
-  <mat-grid-tile colspan="3">
-    {{training.minimumPossibleImprovement(Stat.WPN)}}
-    ~
-    {{training.maximumPossibleImprovement(Stat.WPN)}}
-  </mat-grid-tile>
-  <mat-grid-tile colspan="2">{{trainingTask.statsEffective.wpn}}</mat-grid-tile>
+  <tr>
 
-</mat-grid-list>
+    <td>
+      <mat-form-field class="full-width">
+        <mat-label>WPN</mat-label>
+        <input matInput #number placeholder="WPN" [(ngModel)]="currentTraining.wpn">
+      </mat-form-field>
+    </td>
+    <td>
+      {{training.minimumPossibleImprovement(Stat.WPN)}}
+      ~
+      {{training.maximumPossibleImprovement(Stat.WPN)}}
+      |
+      {{trainingTask.statsEffective.wpn}}
+    </td>
+  </tr>
+  </tbody>
+</table>
