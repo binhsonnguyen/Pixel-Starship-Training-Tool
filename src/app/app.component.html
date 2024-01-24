@@ -1,6 +1,4 @@
 <table class="training-board" style="border-spacing: 0">
-  <thead>
-  </thead>
   <tbody>
   <tr>
     <td>
@@ -16,7 +14,6 @@
       </mat-form-field>
     </td>
   </tr>
-
   <tr>
     <td colspan="2">
       <app-stat-explain [stat]="Stat.HP"
@@ -28,5 +25,95 @@
       </app-stat-explain>
     </td>
   </tr>
+  <tr>
+    <td colspan="2">
+      <app-stat-explain [stat]="Stat.ATK"
+                        [current_training]="currentTraining.atk"
+                        [training_effect]="trainingTask.statsEffective.atk"
+                        [required_effect]="training.requiredStatEffect(Stat.ATK)"
+                        [minimum_possibility]="training.minimumPossibleImprovement(Stat.ATK)"
+                        [maximum_possibility]="training.maximumPossibleImprovement(Stat.ATK)">
+      </app-stat-explain>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <app-stat-explain [stat]="Stat.RPR"
+                        [current_training]="currentTraining.rpr"
+                        [training_effect]="trainingTask.statsEffective.rpr"
+                        [required_effect]="training.requiredStatEffect(Stat.RPR)"
+                        [minimum_possibility]="training.minimumPossibleImprovement(Stat.RPR)"
+                        [maximum_possibility]="training.maximumPossibleImprovement(Stat.RPR)">
+      </app-stat-explain>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <app-stat-explain [stat]="Stat.ABL"
+                        [current_training]="currentTraining.abl"
+                        [training_effect]="trainingTask.statsEffective.abl"
+                        [required_effect]="training.requiredStatEffect(Stat.ABL)"
+                        [minimum_possibility]="training.minimumPossibleImprovement(Stat.ABL)"
+                        [maximum_possibility]="training.maximumPossibleImprovement(Stat.ABL)">
+      </app-stat-explain>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <app-stat-explain [stat]="Stat.STA"
+                        [current_training]="currentTraining.sta"
+                        [training_effect]="trainingTask.statsEffective.sta"
+                        [required_effect]="training.requiredStatEffect(Stat.STA)"
+                        [minimum_possibility]="training.minimumPossibleImprovement(Stat.STA)"
+                        [maximum_possibility]="training.maximumPossibleImprovement(Stat.STA)">
+      </app-stat-explain>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <app-stat-explain [stat]="Stat.PLT"
+                        [current_training]="currentTraining.plt"
+                        [training_effect]="trainingTask.statsEffective.plt"
+                        [required_effect]="training.requiredStatEffect(Stat.PLT)"
+                        [minimum_possibility]="training.minimumPossibleImprovement(Stat.PLT)"
+                        [maximum_possibility]="training.maximumPossibleImprovement(Stat.PLT)">
+      </app-stat-explain>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <app-stat-explain [stat]="Stat.SCI"
+                        [current_training]="currentTraining.sci"
+                        [training_effect]="trainingTask.statsEffective.sci"
+                        [required_effect]="training.requiredStatEffect(Stat.SCI)"
+                        [minimum_possibility]="training.minimumPossibleImprovement(Stat.SCI)"
+                        [maximum_possibility]="training.maximumPossibleImprovement(Stat.SCI)">
+      </app-stat-explain>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <app-stat-explain [stat]="Stat.ENG"
+                        [current_training]="currentTraining.eng"
+                        [training_effect]="trainingTask.statsEffective.eng"
+                        [required_effect]="training.requiredStatEffect(Stat.ENG)"
+                        [minimum_possibility]="training.minimumPossibleImprovement(Stat.ENG)"
+                        [maximum_possibility]="training.maximumPossibleImprovement(Stat.ENG)">
+      </app-stat-explain>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <app-stat-explain [stat]="Stat.WPN"
+                        [current_training]="currentTraining.wpn"
+                        [training_effect]="trainingTask.statsEffective.wpn"
+                        [required_effect]="training.requiredStatEffect(Stat.WPN)"
+                        [minimum_possibility]="training.minimumPossibleImprovement(Stat.WPN)"
+                        [maximum_possibility]="training.maximumPossibleImprovement(Stat.WPN)">
+      </app-stat-explain>
+    </td>
+  </tr>
   </tbody>
+  <thead>
+  </thead>
 </table>
