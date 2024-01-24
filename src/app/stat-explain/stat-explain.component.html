@@ -1,22 +1,14 @@
 <div style="display: inline-flex; width: 100%">
-  <mat-form-field style="flex-grow:1;">
-    <mat-label>{{!!stat ? stat.name : ""}}</mat-label>
+  <mat-form-field style="flex-grow:1;" floatLabel="always">
+    <mat-label>{{!!stat ? stat.name : ""}}, applied effect: {{trainingEffect}}, required effect: {{requiredEffect}}</mat-label>
     <input matInput type="number"
-           placeholder="HP"
            [(ngModel)]="currentTraining">
   </mat-form-field>
 
-  <mat-form-field style="width: 50px">
-    <mat-label>Effect</mat-label>
-    <input matInput type="number" disabled
-           value="{{trainingEffect}}">
-  </mat-form-field>
-
-
-  <mat-form-field style="width: 80px">
+  <mat-form-field style="width: 90px">
     <mat-label>Possibility</mat-label>
     <input matInput disabled
-           value="{{minimumPossibility || 0}}~{{maximumPossibility || 0}}">
+           value="{{minimumPossibility || 0}} ~ {{maximumPossibility || 0}}">
   </mat-form-field>
 
 </div>

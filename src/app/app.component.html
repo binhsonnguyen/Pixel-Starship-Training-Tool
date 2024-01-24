@@ -22,6 +22,7 @@
       <app-stat-explain [stat]="Stat.HP"
                         [current_training]="currentTraining.hp"
                         [training_effect]="trainingTask.statsEffective.hp"
+                        [required_effect]="training.requiredStatEffect(Stat.HP)"
                         [minimum_possibility]="training.minimumPossibleImprovement(Stat.HP)"
                         [maximum_possibility]="training.maximumPossibleImprovement(Stat.HP)">
       </app-stat-explain>
