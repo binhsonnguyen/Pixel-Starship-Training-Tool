@@ -1,9 +1,11 @@
-<table class="full-width">
-  <thead></thead>
+<table class="full-width" style="border-spacing: 0">
+  <thead>
+  </thead>
   <tbody>
   <tr>
     <td>
       <mat-form-field>
+        <mat-label>TP</mat-label>
         <input matInput #number [(ngModel)]="totalTrainingPoint">
       </mat-form-field>
     </td>
@@ -16,15 +18,7 @@
   </tr>
 
   <tr>
-    <td>
-      <app-stat-explain [stat]="Stat.HP"
-                        [current_training]="currentTraining.hp"
-                        [training_effect]="trainingTask.statsEffective.hp"
-                        [minimum_possibility]="training.minimumPossibleImprovement(Stat.HP)"
-                        [maximum_possibility]="training.maximumPossibleImprovement(Stat.HP)">
-      </app-stat-explain>
-    </td>
-    <td>
+    <td colspan="2">
       <app-stat-explain [stat]="Stat.HP"
                         [current_training]="currentTraining.hp"
                         [training_effect]="trainingTask.statsEffective.hp"
