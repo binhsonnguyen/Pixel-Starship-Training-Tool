@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import Stat from "pss-training-lib/dist/Stat";
 import {FormsModule} from "@angular/forms";
-import {MatFormField, MatLabel, MatPrefix} from "@angular/material/form-field";
+import {MatFormField, MatLabel, MatPrefix, MatSuffix} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 
 @Component({
@@ -12,7 +12,8 @@ import {MatInput} from "@angular/material/input";
     MatFormField,
     MatInput,
     MatLabel,
-    MatPrefix
+    MatPrefix,
+    MatSuffix
   ],
   templateUrl: './stat-explain.component.html',
   styleUrl: './stat-explain.component.sass'
