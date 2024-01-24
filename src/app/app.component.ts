@@ -30,23 +30,48 @@ export interface Tile {
 
 export class AppComponent implements OnInit {
   title: string = "pixel-starship-training-tool"
-  totalTrainingPoint: number = 110
-  fatigue: number = 0;
-  currentTraining: StatsSet = new StatsSet();
-  trainingTask: TrainingTask = TrainingTask.HP_COMMON
+  training: Training = new Training(110, 0, TrainingTask.HP_COMMON, new StatsSet())
   targetStat: Stat = this.trainingTask.mainStat;
-  trainingQuality: TrainingQuality = TrainingQuality.COMMON
-  targetQuality: TrainingQuality = this.trainingQuality
-  training: Training = new Training(this.totalTrainingPoint, this.fatigue, this.trainingTask, this.currentTraining)
+  targetQuality: TrainingQuality = this.trainingTask.quality
 
-  protected readonly Stat = Stat;
-  protected readonly TrainingQuality = TrainingQuality;
+  minimumPossibility: StatsSet = new StatsSet()
+  maximumPossibility: StatsSet = new StatsSet()
 
   ngOnInit(): void {
+    this.updatePosibility()
+  }
+
+  get totalTrainingPoint() {
+    return this.training.totalTrainingPoint
+  }
+
+  set totalTrainingPoint(value: number) {
+    this.training.totalTrainingPoint = value
+  }
+
+  get fatigue() {
+    return this.training.fatigue
+  }
+
+  set fatigue(value: number) {
+    this.training.fatigue = value
+  }
+
+  get trainingTask() {
+    return this.training.traingTask
+  }
+
+  set trainingTask(task: TrainingTask) {
+    this.training.traingTask = task
+  }
+
+  get currentTraining() {
+    return this.training.currentTraining
   }
 
   updateCurrentTraining(stat: Stat, value: number) {
     this.currentTraining.set(stat, value)
+    this.updatePosibility()
   }
 
   onTargetStatChanged(stat: Stat) {
@@ -58,6 +83,7 @@ export class AppComponent implements OnInit {
       throw new Error("no any match")
     }
     this.trainingTask = task
+    this.updatePosibility()
   }
 
   onTargetQualityChanged(targetQuality: TrainingQuality) {
@@ -69,30 +95,18 @@ export class AppComponent implements OnInit {
       throw new Error("no any match")
     }
     this.trainingTask = task
+    this.updatePosibility()
   }
 
-  private getStatByName(name: string): Stat {
-    switch (name) {
-      case "HP":
-        return Stat.HP
-      case "ATK":
-        return Stat.ATK
-      case "RPR":
-        return Stat.RPR
-      case "ABL":
-        return Stat.ABL
-      case "STA":
-        return Stat.STA
-      case "PLT":
-        return Stat.PLT
-      case "SCI":
-        return Stat.SCI
-      case "ENG":
-        return Stat.ENG
-      case "WPN":
-        return Stat.WPN
-      default:
-        throw new Error("no any matching")
+  updatePosibility() {
+    for (const stat of Stat.ALL) {
+      const min = this.training.minimumPossibleImprovement(stat)
+      this.minimumPossibility.set(stat, min)
+      const max = this.training.maximumPossibleImprovement(stat)
+      this.maximumPossibility.set(stat, max)
     }
   }
+
+  protected readonly Stat = Stat;
+  protected readonly TrainingQuality = TrainingQuality;
 }
