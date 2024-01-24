@@ -20,9 +20,17 @@
       <mat-form-field>
         <mat-label>Target Stat</mat-label>
         <mat-select (selectionChange)="onTargetStatChanged(targetStat)" [(ngModel)]="targetStat">
-          <mat-option>
-          </mat-option>
           <mat-option *ngFor="let item of Stat.ALL" [value]="item">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field>
+        <mat-label>Quality</mat-label>
+        <mat-select (selectionChange)="onTargetQualityChanged(targetQuality)" [(ngModel)]="targetQuality">
+          <mat-option *ngFor="let item of TrainingQuality.ALL" [value]="item">
             {{item.name}}
           </mat-option>
         </mat-select>

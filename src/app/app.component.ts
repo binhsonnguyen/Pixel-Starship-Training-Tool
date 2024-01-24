@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
   training: Training = new Training(this.totalTrainingPoint, this.fatigue, this.trainingTask, this.currentTraining)
 
   protected readonly Stat = Stat;
+  protected readonly TrainingQuality = TrainingQuality;
 
   ngOnInit(): void {
   }
@@ -50,6 +51,17 @@ export class AppComponent implements OnInit {
 
   onTargetStatChanged(stat: Stat) {
     console.log(stat.name)
+    const task = TrainingTask.ALL
+      .filter(t => t.mainStat == this.targetStat)
+      .find(t => t.quality == this.targetQuality)
+    if (!task) {
+      throw new Error("no any match")
+    }
+    this.trainingTask = task
+  }
+
+  onTargetQualityChanged(targetQuality: TrainingQuality) {
+    console.log(targetQuality.name)
     const task = TrainingTask.ALL
       .filter(t => t.mainStat == this.targetStat)
       .find(t => t.quality == this.targetQuality)
