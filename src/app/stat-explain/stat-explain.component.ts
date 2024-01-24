@@ -5,7 +5,7 @@ import {MatFormField, MatLabel, MatPrefix, MatSuffix} from "@angular/material/fo
 import {MatInput} from "@angular/material/input";
 
 @Component({
-  selector: 'app-stat-explain, [app-stat-explain]',
+  selector: 'app-stat-explain',
   standalone: true,
   imports: [
     FormsModule,

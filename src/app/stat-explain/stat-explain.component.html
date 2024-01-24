@@ -1,18 +1,8 @@
-<td>
-  <mat-form-field class="full-width">
-    <mat-label>{{!!stat ? stat.name : ""}}</mat-label>
-    <input matInput #number
-           placeholder="HP"
-           [(ngModel)]="currentTraining">
-    <span matTextSuffix class="possible-improvement">⬆{{trainingEffect || "0"}} &emsp; 🎲 {{minimumPossibility}}~{{maximumPossibility}}</span>
-  </mat-form-field>
-</td>
-<td>
-  <mat-form-field class="full-width">
-    <mat-label>{{!!stat ? stat.name : ""}}</mat-label>
-    <input matInput #number
-           placeholder="HP"
-           [(ngModel)]="currentTraining">
-    <span matTextSuffix class="possible-improvement">⬆{{trainingEffect || "0"}} &emsp; 🎲 {{minimumPossibility}}~{{maximumPossibility}}</span>
-  </mat-form-field>
-</td>
+<mat-form-field>
+  <mat-label>{{!!stat ? stat.name : ""}}</mat-label>
+  <input matInput #number
+         placeholder="HP"
+         [(ngModel)]="currentTraining">
+  <span matTextSuffix class="possible-improvement">⬆{{trainingEffect || "0"}}/{{2}} &emsp; 🎲 {{minimumPossibility}}~{{maximumPossibility}}</span>
+</mat-form-field>
+
