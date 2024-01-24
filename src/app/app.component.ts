@@ -11,6 +11,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {StatExplainComponent} from "./stat-explain/stat-explain.component";
 import {MatOption, MatSelect} from "@angular/material/select";
+import TrainingQuality from "pss-training-lib/dist/TrainingQuality";
 
 export interface Tile {
   color: string;
@@ -32,12 +33,13 @@ export class AppComponent implements OnInit {
   totalTrainingPoint: number = 110
   fatigue: number = 0;
   currentTraining: StatsSet = new StatsSet();
-  trainingTask: TrainingTask = TrainingTask.HP_UNIQUE
+  trainingTask: TrainingTask = TrainingTask.HP_COMMON
+  targetStat: Stat = this.trainingTask.mainStat;
+  trainingQuality: TrainingQuality = TrainingQuality.COMMON
+  targetQuality: TrainingQuality = this.trainingQuality
   training: Training = new Training(this.totalTrainingPoint, this.fatigue, this.trainingTask, this.currentTraining)
-  protected readonly Stat = Stat;
 
-  stats = Stat.ALL
-  targetStat: string = "";
+  protected readonly Stat = Stat;
 
   ngOnInit(): void {
   }
@@ -46,8 +48,39 @@ export class AppComponent implements OnInit {
     this.currentTraining.set(stat, value)
   }
 
-  onTargetStatChanged(stat: string) {
-    console.log(stat)
-    console.log(this.targetStat)
+  onTargetStatChanged(stat: Stat) {
+    console.log(stat.name)
+    const task = TrainingTask.ALL
+      .filter(t => t.mainStat == this.targetStat)
+      .find(t => t.quality == this.targetQuality)
+    if (!task) {
+      throw new Error("no any match")
+    }
+    this.trainingTask = task
+  }
+
+  private getStatByName(name: string): Stat {
+    switch (name) {
+      case "HP":
+        return Stat.HP
+      case "ATK":
+        return Stat.ATK
+      case "RPR":
+        return Stat.RPR
+      case "ABL":
+        return Stat.ABL
+      case "STA":
+        return Stat.STA
+      case "PLT":
+        return Stat.PLT
+      case "SCI":
+        return Stat.SCI
+      case "ENG":
+        return Stat.ENG
+      case "WPN":
+        return Stat.WPN
+      default:
+        throw new Error("no any matching")
+    }
   }
 }
