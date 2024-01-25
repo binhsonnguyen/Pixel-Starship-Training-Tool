@@ -31,9 +31,6 @@ export interface Tile {
 export class AppComponent implements OnInit {
   title: string = "pixel-starship-training-tool"
   training: Training = new Training(110, 0, TrainingTask.HP_COMMON, new StatsSet())
-  targetStat: Stat = this.trainingTask.mainStat;
-  targetQuality: TrainingQuality = this.trainingTask.quality
-
   minimumPossibility: StatsSet = new StatsSet()
   maximumPossibility: StatsSet = new StatsSet()
 
@@ -47,6 +44,7 @@ export class AppComponent implements OnInit {
 
   set totalTrainingPoint(value: number) {
     this.training.totalTrainingPoint = value
+    this.updatePosibility()
   }
 
   get fatigue() {
@@ -55,6 +53,25 @@ export class AppComponent implements OnInit {
 
   set fatigue(value: number) {
     this.training.fatigue = value
+    this.updatePosibility()
+  }
+
+  get targetStat(): Stat {
+    return this.training.traingTask.mainStat
+  }
+
+  set targetStat(value: Stat) {
+    this.training.traingTask = this.getTrainingTask(value, this.targetQuality)
+    this.updatePosibility()
+  }
+
+  get targetQuality(): TrainingQuality {
+    return this.training.traingTask.quality
+  }
+
+  set targetQuality(value: TrainingQuality) {
+    this.training.traingTask = this.getTrainingTask(this.targetStat, value)
+    this.updatePosibility()
   }
 
   get trainingTask() {
@@ -74,28 +91,14 @@ export class AppComponent implements OnInit {
     this.updatePosibility()
   }
 
-  onTargetStatChanged(stat: Stat) {
-    console.log(stat.name)
+  private getTrainingTask(mainStat: Stat, quality: TrainingQuality) {
     const task = TrainingTask.ALL
-      .filter(t => t.mainStat == this.targetStat)
-      .find(t => t.quality == this.targetQuality)
+      .filter(t => t.mainStat == mainStat)
+      .find(t => t.quality == quality)
     if (!task) {
       throw new Error("no any match")
     }
-    this.trainingTask = task
-    this.updatePosibility()
-  }
-
-  onTargetQualityChanged(targetQuality: TrainingQuality) {
-    console.log(targetQuality.name)
-    const task = TrainingTask.ALL
-      .filter(t => t.mainStat == this.targetStat)
-      .find(t => t.quality == this.targetQuality)
-    if (!task) {
-      throw new Error("no any match")
-    }
-    this.trainingTask = task
-    this.updatePosibility()
+    return task
   }
 
   updatePosibility() {
