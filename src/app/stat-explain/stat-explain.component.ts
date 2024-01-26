@@ -21,6 +21,7 @@ import {MatInput} from "@angular/material/input";
 export class StatExplainComponent {
 
   @Input("stat") stat?: Stat;
+  @Input("is_main_stat") isMainStat: boolean = false
   @Input("current_training") currentTraining: number = 0;
   @Input("training_effect") trainingEffect: number = 0;
   @Input("required_effect") requiredEffect: number = 0;

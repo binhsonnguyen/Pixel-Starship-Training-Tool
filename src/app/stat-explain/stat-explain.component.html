@@ -1,5 +1,5 @@
 <div style="display: inline-flex; width: 100%">
-  <mat-form-field style="flex-grow:1;" floatLabel="always">
+  <mat-form-field style="flex-grow:1;" floatLabel="always" [class.mainstat]="isMainStat">
     <mat-label>{{!!stat ? stat.name : ""}}, applied effect: {{trainingEffect}}, required effect: {{requiredEffect}}</mat-label>
     <input matInput type="number" (input)="onCurrentTrainingChanged()"
            [(ngModel)]="currentTraining">

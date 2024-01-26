@@ -50,6 +50,7 @@
   <tr>
     <td colspan="2">
       <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.HP, $event)" [stat]="Stat.HP"
+                        [is_main_stat]="trainingTask.mainStat == Stat.HP"
                         [current_training]="currentTraining.hp"
                         [training_effect]="trainingTask.statsEffective.hp"
                         [required_effect]="training.requiredStatEffect(Stat.HP)"
@@ -61,6 +62,7 @@
   <tr>
     <td colspan="2">
       <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ATK, $event)" [stat]="Stat.ATK"
+                        [is_main_stat]="trainingTask.mainStat == Stat.ATK"
                         [current_training]="currentTraining.atk"
                         [training_effect]="trainingTask.statsEffective.atk"
                         [required_effect]="training.requiredStatEffect(Stat.ATK)"
@@ -72,6 +74,7 @@
   <tr>
     <td colspan="2">
       <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.RPR, $event)" [stat]="Stat.RPR"
+                        [is_main_stat]="trainingTask.mainStat == Stat.RPR"
                         [current_training]="currentTraining.rpr"
                         [training_effect]="trainingTask.statsEffective.rpr"
                         [required_effect]="training.requiredStatEffect(Stat.RPR)"
@@ -83,6 +86,7 @@
   <tr>
     <td colspan="2">
       <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ABL, $event)" [stat]="Stat.ABL"
+                        [is_main_stat]="trainingTask.mainStat == Stat.ABL"
                         [current_training]="currentTraining.abl"
                         [training_effect]="trainingTask.statsEffective.abl"
                         [required_effect]="training.requiredStatEffect(Stat.ABL)"
@@ -94,6 +98,7 @@
   <tr>
     <td colspan="2">
       <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.STA, $event)" [stat]="Stat.STA"
+                        [is_main_stat]="trainingTask.mainStat == Stat.STA"
                         [current_training]="currentTraining.sta"
                         [training_effect]="trainingTask.statsEffective.sta"
                         [required_effect]="training.requiredStatEffect(Stat.STA)"
@@ -105,6 +110,7 @@
   <tr>
     <td colspan="2">
       <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.PLT, $event)" [stat]="Stat.PLT"
+                        [is_main_stat]="trainingTask.mainStat == Stat.PLT"
                         [current_training]="currentTraining.plt"
                         [training_effect]="trainingTask.statsEffective.plt"
                         [required_effect]="training.requiredStatEffect(Stat.PLT)"
@@ -116,6 +122,7 @@
   <tr>
     <td colspan="2">
       <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.SCI, $event)" [stat]="Stat.SCI"
+                        [is_main_stat]="trainingTask.mainStat == Stat.SCI"
                         [current_training]="currentTraining.sci"
                         [training_effect]="trainingTask.statsEffective.sci"
                         [required_effect]="training.requiredStatEffect(Stat.SCI)"
@@ -127,6 +134,7 @@
   <tr>
     <td colspan="2">
       <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ENG, $event)" [stat]="Stat.ENG"
+                        [is_main_stat]="trainingTask.mainStat == Stat.ENG"
                         [current_training]="currentTraining.eng"
                         [training_effect]="trainingTask.statsEffective.eng"
                         [required_effect]="training.requiredStatEffect(Stat.ENG)"
@@ -138,6 +146,7 @@
   <tr>
     <td colspan="2">
       <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.WPN, $event)" [stat]="Stat.WPN"
+                        [is_main_stat]="trainingTask.mainStat == Stat.WPN"
                         [current_training]="currentTraining.wpn"
                         [training_effect]="trainingTask.statsEffective.wpn"
                         [required_effect]="training.requiredStatEffect(Stat.WPN)"
