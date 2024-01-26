@@ -8,8 +8,11 @@
            [(ngModel)]="currentTraining">
   </mat-form-field>
 
-  <mat-form-field style="width: 90px" [class.has_effect]="hasEffect">
-    <mat-label>Possibility</mat-label>
+  <mat-form-field style="width: 90px"
+                  [class.has_side_effect]="hasSideEffect"
+                  [class.has_effect]="hasEffect"
+  >
+    <mat-label>{{posibility}}</mat-label>
     <input matInput disabled
            value="{{minimumPossibility || 0}} ~ {{maximumPossibility || 0}}">
   </mat-form-field>

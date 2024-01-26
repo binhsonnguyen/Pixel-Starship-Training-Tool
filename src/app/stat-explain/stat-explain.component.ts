@@ -31,6 +31,17 @@ export class StatExplainComponent {
     return !this.isMainStat && this.maximumPossibility > 0
   }
 
+  get posibility() {
+    if (this.maximumPossibility <= 0) {
+      return "0%"
+    } else {
+      const roundedRequireEffect = Math.floor(this.requiredEffect)
+      const effectivenessPoints = this.trainingEffect - roundedRequireEffect + 1
+      const rate = Math.round(effectivenessPoints * 100 / (this.trainingEffect + 1))
+      return rate + "%"
+    }
+  }
+
   onCurrentTrainingChanged() {
     this.currentTrainingChanged.emit(this.currentTraining)
   }
