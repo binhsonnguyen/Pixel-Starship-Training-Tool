@@ -33,4 +33,8 @@ export class StatExplainComponent {
   onCurrentTrainingChanged() {
     this.currentTrainingChanged.emit(this.currentTraining)
   }
+
+  get hasSideEffect() {
+    return !this.isMainStat && this.maximumPossibility > 0
+  }
 }
