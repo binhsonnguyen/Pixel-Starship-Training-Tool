@@ -7,14 +7,7 @@ import {MatInput} from "@angular/material/input";
 @Component({
   selector: 'app-stat-explain',
   standalone: true,
-  imports: [
-    FormsModule,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    MatPrefix,
-    MatSuffix
-  ],
+  imports: [FormsModule, MatFormField, MatInput, MatLabel, MatPrefix, MatSuffix],
   templateUrl: './stat-explain.component.html',
   styleUrl: './stat-explain.component.sass'
 })
@@ -30,11 +23,15 @@ export class StatExplainComponent {
 
   @Output("onCurrentTrainingChanged") currentTrainingChanged = new EventEmitter<number>();
 
-  onCurrentTrainingChanged() {
-    this.currentTrainingChanged.emit(this.currentTraining)
-  }
+  get hasEffect(): boolean {
+    return this.maximumPossibility > 0
+  };
 
   get hasSideEffect() {
     return !this.isMainStat && this.maximumPossibility > 0
+  }
+
+  onCurrentTrainingChanged() {
+    this.currentTrainingChanged.emit(this.currentTraining)
   }
 }
