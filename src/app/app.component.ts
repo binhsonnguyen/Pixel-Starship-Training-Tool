@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
   training: Training = new Training(110, 0, TrainingTask.HP_COMMON, new StatsSet())
   minimumPossibility: StatsSet = new StatsSet()
   maximumPossibility: StatsSet = new StatsSet()
+  defaultFatigue = this.training.fatigue
 
   ngOnInit(): void {
     this.updatePosibility()
@@ -47,11 +48,11 @@ export class AppComponent implements OnInit {
     this.updatePosibility()
   }
 
-  get fatigue() {
+  get fatiguee(): number {
     return this.training.fatigue
   }
 
-  set fatigue(value: number) {
+  set fatiguee(value: number) {
     this.training.fatigue = value
     this.updatePosibility()
   }
