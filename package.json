@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "golive": "ng build --configuration production && firebase deploy",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
