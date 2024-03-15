@@ -17,7 +17,7 @@
         </option>
       </select>
     </div>
-    <div class="fatigue input-group input-group-sm mb-5">
+    <div class="fatigue input-group input-group-sm mb-1">
       <span class="input-group-text">F</span>
       <input readonly class="form-control" type="number" [(ngModel)]="fatiguee">
       <button class="fatigue btn btn-outline-primary" type="button" (click)="fatiguee=0">
@@ -41,9 +41,82 @@
         <img src="assets/fatigue/Fatigue10.webp" alt="f10">
       </button>
     </div>
-    <div class="input-group input-group-sm mt-1 mb-1">
-
+    <div class="input-group input-group-sm mb-1">
+      <input class="form-control text-primary bg-white border-primary-subtle text-center" readonly disabled type="text" [value]="trainingTask.name">
     </div>
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.HP, $event)" [stat]="Stat.HP"
+                      [is_main_stat]="(trainingTask.mainStat == Stat.HP)"
+                      [current_training]="currentTraining.hp"
+                      [training_effect]="trainingTask.statsEffective.hp"
+                      [required_effect]="training.requiredStatEffect(Stat.HP)"
+                      [minimum_possibility]="minimumPossibility.hp"
+                      [maximum_possibility]="maximumPossibility.hp">
+    </app-stat-explain>
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ATK, $event)" [stat]="Stat.ATK"
+                      [is_main_stat]="trainingTask.mainStat == Stat.ATK"
+                      [current_training]="currentTraining.atk"
+                      [training_effect]="trainingTask.statsEffective.atk"
+                      [required_effect]="training.requiredStatEffect(Stat.ATK)"
+                      [minimum_possibility]="minimumPossibility.atk"
+                      [maximum_possibility]="maximumPossibility.atk">
+    </app-stat-explain>
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.RPR, $event)" [stat]="Stat.RPR"
+                      [is_main_stat]="trainingTask.mainStat == Stat.RPR"
+                      [current_training]="currentTraining.rpr"
+                      [training_effect]="trainingTask.statsEffective.rpr"
+                      [required_effect]="training.requiredStatEffect(Stat.RPR)"
+                      [minimum_possibility]="minimumPossibility.rpr"
+                      [maximum_possibility]="maximumPossibility.rpr">
+    </app-stat-explain>
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ABL, $event)" [stat]="Stat.ABL"
+                      [is_main_stat]="trainingTask.mainStat == Stat.ABL"
+                      [current_training]="currentTraining.abl"
+                      [training_effect]="trainingTask.statsEffective.abl"
+                      [required_effect]="training.requiredStatEffect(Stat.ABL)"
+                      [minimum_possibility]="minimumPossibility.abl"
+                      [maximum_possibility]="maximumPossibility.abl">
+    </app-stat-explain>
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.STA, $event)" [stat]="Stat.STA"
+                      [is_main_stat]="trainingTask.mainStat == Stat.STA"
+                      [current_training]="currentTraining.sta"
+                      [training_effect]="trainingTask.statsEffective.sta"
+                      [required_effect]="training.requiredStatEffect(Stat.STA)"
+                      [minimum_possibility]="minimumPossibility.sta"
+                      [maximum_possibility]="maximumPossibility.sta">
+    </app-stat-explain>
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.PLT, $event)" [stat]="Stat.PLT"
+                      [is_main_stat]="trainingTask.mainStat == Stat.PLT"
+                      [current_training]="currentTraining.plt"
+                      [training_effect]="trainingTask.statsEffective.plt"
+                      [required_effect]="training.requiredStatEffect(Stat.PLT)"
+                      [minimum_possibility]="minimumPossibility.plt"
+                      [maximum_possibility]="maximumPossibility.plt">
+    </app-stat-explain>
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.SCI, $event)" [stat]="Stat.SCI"
+                      [is_main_stat]="trainingTask.mainStat == Stat.SCI"
+                      [current_training]="currentTraining.sci"
+                      [training_effect]="trainingTask.statsEffective.sci"
+                      [required_effect]="training.requiredStatEffect(Stat.SCI)"
+                      [minimum_possibility]="minimumPossibility.sci"
+                      [maximum_possibility]="maximumPossibility.sci">
+    </app-stat-explain>
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ENG, $event)" [stat]="Stat.ENG"
+                      [is_main_stat]="trainingTask.mainStat == Stat.ENG"
+                      [current_training]="currentTraining.eng"
+                      [training_effect]="trainingTask.statsEffective.eng"
+                      [required_effect]="training.requiredStatEffect(Stat.ENG)"
+                      [minimum_possibility]="minimumPossibility.eng"
+                      [maximum_possibility]="maximumPossibility.eng">
+    </app-stat-explain>
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.WPN, $event)" [stat]="Stat.WPN"
+                      [is_main_stat]="trainingTask.mainStat == Stat.WPN"
+                      [current_training]="currentTraining.wpn"
+                      [training_effect]="trainingTask.statsEffective.wpn"
+                      [required_effect]="training.requiredStatEffect(Stat.WPN)"
+                      [minimum_possibility]="minimumPossibility.wpn"
+                      [maximum_possibility]="maximumPossibility.wpn">
+    </app-stat-explain>
+
   </div>
 
 </div>
