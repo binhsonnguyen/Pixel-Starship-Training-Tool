@@ -1,20 +1,21 @@
 <div style="display: inline-flex; width: 100%">
-  <mat-form-field style="flex-grow:1;" floatLabel="always"
-                  [class.mainstat]="isMainStat"
+  <div style="flex-grow:1;" [class.mainstat]="isMainStat"
                   [class.has_side_effect]="hasSideEffect"
   >
-    <mat-label>{{!!stat ? stat.name : ""}}, applied effect: {{trainingEffect}}, required effect: {{requiredEffect}}</mat-label>
-    <input matInput type="number" (input)="onCurrentTrainingChanged()"
+    <label>{{!!stat ? stat.name : ""}}, applied effect: {{trainingEffect}}, required effect: {{requiredEffect}}</label>
+    <input  type="number" (input)="onCurrentTrainingChanged()"
            [(ngModel)]="currentTraining">
-  </mat-form-field>
+  </div>
 
-  <mat-form-field style="width: 90px"
+
+  <div style="width: 90px"
                   [class.has_side_effect]="hasSideEffect"
                   [class.has_effect]="hasEffect"
   >
-    <mat-label>{{posibility}}</mat-label>
-    <input matInput disabled
+    <label>{{posibility}}</label>
+    <input  disabled
            value="{{minimumPossibility || 0}} ~ {{maximumPossibility || 0}}">
-  </mat-form-field>
+  </div>
+
 
 </div>

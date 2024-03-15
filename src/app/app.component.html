@@ -2,24 +2,21 @@
   <tbody>
   <tr>
     <td>
-      <mat-form-field>
-        <mat-label>TP</mat-label>
-        <input matInput #number [(ngModel)]="totalTrainingPoint">
-      </mat-form-field>
+        <label>TP</label>
+        <input #number [(ngModel)]="totalTrainingPoint">
     </td>
     <td>
-      <mat-form-field>
-        <mat-label>Fatigue</mat-label>
-        <mat-select [(ngModel)]="fatiguee">
-          <mat-option class="fatigue" [value]="0">
+        <label>Fatigue</label>
+        <select [(ngModel)]="fatiguee">
+          <option class="fatigue" [value]="0">
             <div class="fatigue-list-item">
               <span>0</span>
               <div class="fatigue-list-item-imgs">
                 <img src="assets/fatigue/Fatigue0.webp" alt="f0">
               </div>
             </div>
-          </mat-option>
-          <mat-option class="fatigue" value="1">
+          </option>
+          <option class="fatigue" value="1">
             <div class="fatigue-list-item">
               <span>1~50</span>
               <div class="fatigue-list-item-imgs">
@@ -30,8 +27,8 @@
                 <img src="assets/fatigue/Fatigue5.webp" alt="f5">
               </div>
             </div>
-          </mat-option>
-          <mat-option class="fatigue" value="51">
+          </option>
+          <option class="fatigue" value="51">
             <div class="fatigue-list-item">
               <span>51~99</span>
               <div class="fatigue-list-item-imgs">
@@ -42,8 +39,8 @@
                 <img src="assets/fatigue/Fatigue10.webp" alt="f10">
               </div>
             </div>
-          </mat-option>
-          <mat-option class="fatigue" value="100">
+          </option>
+          <option class="fatigue" value="100">
             <div class="fatigue-list-item">
               <span>100</span>
               <div class="fatigue-list-item-imgs">
@@ -51,41 +48,37 @@
                 <img src="assets/fatigue/Fatigue10.webp" alt="f10">
               </div>
             </div>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+          </option>
+        </select>
     </td>
   </tr>
 
   <tr>
     <td>
-      <mat-form-field>
-        <mat-label>Target Stat</mat-label>
-        <mat-select [(ngModel)]="targetStat">
-          <mat-option *ngFor="let item of Stat.ALL" [value]="item">
+        <label>Target Stat</label>
+        <select [(ngModel)]="targetStat">
+          <option *ngFor="let item of Stat.ALL" [value]="item">
             {{item.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+          </option>
+        </select>
+
     </td>
     <td>
-      <mat-form-field>
-        <mat-label>Quality</mat-label>
-        <mat-select [(ngModel)]="targetQuality">
-          <mat-option *ngFor="let item of TrainingQuality.ALL" [value]="item">
+
+        <label>Quality</label>
+        <select [(ngModel)]="targetQuality">
+          <option *ngFor="let item of TrainingQuality.ALL" [value]="item">
             {{item.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+          </option>
+        </select>
+
     </td>
   </tr>
 
   <tr>
     <td colspan="2">
-      <mat-form-field class="full-width">
-        <mat-label>Training Task</mat-label>
-        <input matInput disabled value="{{trainingTask.name}}">
-      </mat-form-field>
+        <label>Training Task</label>
+        <input  disabled value="{{trainingTask.name}}">
     </td>
   </tr>
 
