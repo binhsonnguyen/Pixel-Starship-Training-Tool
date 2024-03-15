@@ -3,14 +3,10 @@ import {RouterOutlet} from '@angular/router';
 import {FormsModule} from "@angular/forms";
 import StatsSet from "pss-training-lib/dist/StatsSet";
 import TrainingTask from "pss-training-lib/dist/TrainingTask";
-import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 import {CommonModule} from "@angular/common";
 import Training from "pss-training-lib/dist/Training";
 import Stat from "pss-training-lib/dist/Stat";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
 import {StatExplainComponent} from "./stat-explain/stat-explain.component";
-import {MatOption, MatSelect} from "@angular/material/select";
 import TrainingQuality from "pss-training-lib/dist/TrainingQuality";
 
 export interface Tile {
@@ -23,7 +19,7 @@ export interface Tile {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, MatGridTile, MatGridList, CommonModule, FormsModule, MatFormFieldModule, MatInputModule, StatExplainComponent, MatSelect, MatOption],
+  imports: [RouterOutlet, FormsModule, CommonModule, FormsModule, StatExplainComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })
