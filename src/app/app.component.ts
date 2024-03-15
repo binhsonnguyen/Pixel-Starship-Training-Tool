@@ -33,7 +33,8 @@ export class AppComponent implements OnInit {
   defaultFatigue = this.training.fatigue
 
   ngOnInit(): void {
-    this.updatePosibility()
+    console.log("hello")
+    this.updatePossibility()
   }
 
   get totalTrainingPoint() {
@@ -42,7 +43,7 @@ export class AppComponent implements OnInit {
 
   set totalTrainingPoint(value: number) {
     this.training.totalTrainingPoint = value
-    this.updatePosibility()
+    this.updatePossibility()
   }
 
   get fatiguee(): number {
@@ -51,7 +52,7 @@ export class AppComponent implements OnInit {
 
   set fatiguee(value: number) {
     this.training.fatigue = value
-    this.updatePosibility()
+    this.updatePossibility()
   }
 
   get targetStat(): Stat {
@@ -60,7 +61,7 @@ export class AppComponent implements OnInit {
 
   set targetStat(value: Stat) {
     this.training.traingTask = this.getTrainingTask(value, this.targetQuality)
-    this.updatePosibility()
+    this.updatePossibility()
   }
 
   get targetQuality(): TrainingQuality {
@@ -69,7 +70,7 @@ export class AppComponent implements OnInit {
 
   set targetQuality(value: TrainingQuality) {
     this.training.traingTask = this.getTrainingTask(this.targetStat, value)
-    this.updatePosibility()
+    this.updatePossibility()
   }
 
   get trainingTask() {
@@ -86,7 +87,7 @@ export class AppComponent implements OnInit {
 
   updateCurrentTraining(stat: Stat, value: number) {
     this.currentTraining.set(stat, value)
-    this.updatePosibility()
+    this.updatePossibility()
   }
 
   private getTrainingTask(mainStat: Stat, quality: TrainingQuality) {
@@ -99,7 +100,8 @@ export class AppComponent implements OnInit {
     return task
   }
 
-  updatePosibility() {
+  updatePossibility() {
+    console.log("hello")
     for (const stat of Stat.ALL) {
       const min = this.training.minimumPossibleImprovement(stat)
       this.minimumPossibility.set(stat, min)
