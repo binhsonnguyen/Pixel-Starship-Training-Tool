@@ -8,6 +8,7 @@ import Training from "pss-training-lib/dist/Training";
 import Stat from "pss-training-lib/dist/Stat";
 import {StatExplainComponent} from "./stat-explain/stat-explain.component";
 import TrainingQuality from "pss-training-lib/dist/TrainingQuality";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export interface Tile {
   color: string;
@@ -19,7 +20,7 @@ export interface Tile {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, CommonModule, FormsModule, StatExplainComponent],
+  imports: [RouterOutlet, FormsModule, CommonModule, FormsModule, StatExplainComponent, NgbModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })
