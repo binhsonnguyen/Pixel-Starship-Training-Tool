@@ -111,8 +111,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.training = this.localStorageService.readTraining()
-    this.updatePossibility()
+    this.autoSave = this.localStorageService.readSaveOption()
+    if (this.autoSave) {
+      this.training = this.localStorageService.readTraining();
+    } else {
+      this.training = new Training(110, 0, TrainingTask.HP_COMMON, new StatsSet());
+    }
+    this.updatePossibility();
   }
 
   updateCurrentTraining(stat: Stat, value: number) {
