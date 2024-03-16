@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {FormsModule} from "@angular/forms";
 import StatsSet from "pss-training-lib/dist/StatsSet";
@@ -8,7 +8,7 @@ import Training from "pss-training-lib/dist/Training";
 import Stat from "pss-training-lib/dist/Stat";
 import {StatExplainComponent} from "./stat-explain/stat-explain.component";
 import TrainingQuality from "pss-training-lib/dist/TrainingQuality";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {LocalStorageService} from "./local-storage.service";
 import {TrainingTaskHelperService} from "./training-task-helper.service";
 
@@ -32,15 +32,10 @@ export class AppComponent implements OnInit {
   training: Training = new Training(110, 0, TrainingTask.HP_COMMON, new StatsSet())
   minimumPossibility: StatsSet = new StatsSet()
   maximumPossibility: StatsSet = new StatsSet()
+  protected readonly Stat = Stat;
+  protected readonly TrainingQuality = TrainingQuality;
 
-  constructor(
-    private readonly localStorageService: LocalStorageService,
-    private readonly trainingTaskHelper: TrainingTaskHelperService) {
-  }
-
-  ngOnInit(): void {
-    this.training = this.localStorageService.read()
-    this.updatePossibility()
+  constructor(private readonly localStorageService: LocalStorageService, private readonly trainingTaskHelper: TrainingTaskHelperService) {
   }
 
   get totalTrainingPoint() {
@@ -102,6 +97,11 @@ export class AppComponent implements OnInit {
     }, 0)
   }
 
+  ngOnInit(): void {
+    this.training = this.localStorageService.read()
+    this.updatePossibility()
+  }
+
   updateCurrentTraining(stat: Stat, value: number) {
     this.currentTraining.set(stat, value)
     this.localStorageService.save(this.training)
@@ -116,7 +116,4 @@ export class AppComponent implements OnInit {
       this.maximumPossibility.set(stat, max)
     }
   }
-
-  protected readonly Stat = Stat;
-  protected readonly TrainingQuality = TrainingQuality;
 }
