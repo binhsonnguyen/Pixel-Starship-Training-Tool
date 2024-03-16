@@ -126,6 +126,18 @@
     </app-stat-explain>
 
   </div>
+  <div class="row align-items-center">
+    <label class="form-check-label col-4">
+      <input type="checkbox" checked class="border-success text-success bg-success" [(ngModel)]="autoSave">
+      Auto Save
+    </label>
+    <div class="col-8">
+      <div class="input-group input-group-sm mt-1 mb-1 align-items-center justify-content-end">
+        <button class="fatigue btn btn-outline-danger col-4" type="button" (click)="resetStats()">Reset</button>
+        <button class="fatigue btn btn-success col-5" type="button">Save</button>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="text-center mt-1 small">2024 ~Kafka</div></div>
 </div>

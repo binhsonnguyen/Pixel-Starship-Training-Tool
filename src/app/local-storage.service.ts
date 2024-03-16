@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import Training from "pss-training-lib/dist/Training";
-import TrainingTask from "pss-training-lib/dist/TrainingTask";
 import StatsSet from "pss-training-lib/dist/StatsSet";
 import {TrainingTaskHelperService} from "./training-task-helper.service";
 import Stat from "pss-training-lib/dist/Stat";
@@ -11,9 +10,10 @@ import TrainingQuality from "pss-training-lib/dist/TrainingQuality";
 })
 export class LocalStorageService {
 
-  constructor(private readonly trainingTaskHelper: TrainingTaskHelperService) { }
+  constructor(private readonly trainingTaskHelper: TrainingTaskHelperService) {
+  }
 
-  read(): Training {
+  readTraining(): Training {
     const totalTp = Number(localStorage.getItem("totalTp"))
     const fatigue = Number(localStorage.getItem("fatigue"))
     let mainStat = localStorage.getItem("mainStat") || Stat.HP.name
@@ -27,7 +27,7 @@ export class LocalStorageService {
     return new Training(totalTp, fatigue, traningTask, currentTraining);
   }
 
-  save(value: Training) {
+  saveTraining(value: Training) {
     localStorage.setItem("totalTp", value.totalTrainingPoint.toString())
     localStorage.setItem("fatigue", value.fatigue.toString())
     localStorage.setItem("mainStat", value.traingTask.mainStat.name)
@@ -35,5 +35,14 @@ export class LocalStorageService {
     for (const stat of Stat.ALL) {
       localStorage.setItem(stat.name, value.currentTraining.get(stat).toString())
     }
+  }
+
+  readSaveOption() {
+    const autosaveConf = localStorage.getItem("autosave")
+    return autosaveConf == "true"
+  }
+
+  setSaveOption(value: boolean) {
+    localStorage.setItem("autosave", String(value))
   }
 }

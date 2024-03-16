@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {FormsModule} from "@angular/forms";
 import StatsSet from "pss-training-lib/dist/StatsSet";
@@ -38,13 +38,21 @@ export class AppComponent implements OnInit {
   constructor(private readonly localStorageService: LocalStorageService, private readonly trainingTaskHelper: TrainingTaskHelperService) {
   }
 
+  get autoSave(): boolean {
+    return this.localStorageService.readSaveOption();
+  }
+
+  set autoSave(value: boolean) {
+    this.localStorageService.setSaveOption(value);
+  }
+
   get totalTrainingPoint() {
     return this.training.totalTrainingPoint
   }
 
   set totalTrainingPoint(value: number) {
     this.training.totalTrainingPoint = value
-    this.localStorageService.save(this.training)
+    this.localStorageService.saveTraining(this.training)
     this.updatePossibility()
   }
 
@@ -54,7 +62,7 @@ export class AppComponent implements OnInit {
 
   set fatiguee(value: number) {
     this.training.fatigue = value
-    this.localStorageService.save(this.training)
+    this.localStorageService.saveTraining(this.training)
     this.updatePossibility()
   }
 
@@ -64,7 +72,7 @@ export class AppComponent implements OnInit {
 
   set targetStat(value: string) {
     this.training.traingTask = this.trainingTaskHelper.getTrainingTask(value, this.targetQuality)
-    this.localStorageService.save(this.training)
+    this.localStorageService.saveTraining(this.training)
     this.updatePossibility()
   }
 
@@ -74,7 +82,7 @@ export class AppComponent implements OnInit {
 
   set targetQuality(value: string) {
     this.training.traingTask = this.trainingTaskHelper.getTrainingTask(this.targetStat.name, value)
-    this.localStorageService.save(this.training)
+    this.localStorageService.saveTraining(this.training)
     this.updatePossibility()
   }
 
@@ -83,12 +91,17 @@ export class AppComponent implements OnInit {
   }
 
   set trainingTask(task: TrainingTask) {
-    this.localStorageService.save(this.training)
     this.training.traingTask = task
+    this.localStorageService.saveTraining(this.training)
   }
 
   get currentTraining() {
     return this.training.currentTraining
+  }
+
+  set currentTraining(value: StatsSet) {
+    this.training.currentTraining = value
+    this.localStorageService.saveTraining(this.training)
   }
 
   get usedTp() {
@@ -98,13 +111,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.training = this.localStorageService.read()
+    this.training = this.localStorageService.readTraining()
     this.updatePossibility()
   }
 
   updateCurrentTraining(stat: Stat, value: number) {
     this.currentTraining.set(stat, value)
-    this.localStorageService.save(this.training)
+    this.localStorageService.saveTraining(this.training)
     this.updatePossibility()
   }
 
@@ -115,5 +128,13 @@ export class AppComponent implements OnInit {
       const max = this.training.maximumPossibleImprovement(stat)
       this.maximumPossibility.set(stat, max)
     }
+  }
+
+  resetStats() {
+    this.totalTrainingPoint = 110
+    this.fatiguee = 0
+    this.trainingTask = TrainingTask.HP_COMMON
+    this.currentTraining = new StatsSet()
+    this.updatePossibility()
   }
 }
