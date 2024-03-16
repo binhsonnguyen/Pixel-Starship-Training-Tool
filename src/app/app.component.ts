@@ -114,6 +114,7 @@ export class AppComponent implements OnInit {
     this.autoSave = this.localStorageService.readSaveOption()
     if (this.autoSave) {
       this.training = this.localStorageService.readTraining();
+      this.localStorageService.saveTraining(this.training)
     } else {
       this.training = new Training(110, 0, TrainingTask.HP_COMMON, new StatsSet());
     }
