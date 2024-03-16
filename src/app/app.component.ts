@@ -132,7 +132,7 @@ export class AppComponent implements OnInit {
   }
 
   saveStats() {
-    this.localStorageService.saveTraining(this.training)
+    this.localStorageService.saveTraining(this.training, true)
   }
 
   resetStats() {
