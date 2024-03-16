@@ -47,4 +47,13 @@ export class StatExplainComponent {
   }
 
   protected readonly TrainingQuality = TrainingQuality;
+
+  increaseCurrentTraining() {
+    this.currentTraining = this.currentTraining + 1
+    this.onCurrentTrainingChanged()
+  }
+  decreaseCurrentTraining() {
+    this.currentTraining = this.currentTraining - 1
+    this.onCurrentTrainingChanged()
+  }
 }

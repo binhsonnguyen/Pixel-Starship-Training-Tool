@@ -20,7 +20,7 @@
         </option>
       </select>
       <select class="form-select" style="width:auto;" [(ngModel)]="targetQuality">
-        <option *ngFor="let item of TrainingQuality.ALL" [value]="item">
+        <option *ngFor="let item of TrainingQuality.ALL" [value]="item.name">
           {{item.name}}
         </option>
       </select>

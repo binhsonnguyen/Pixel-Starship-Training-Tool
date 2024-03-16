@@ -63,11 +63,11 @@ export class AppComponent implements OnInit {
     this.updatePossibility()
   }
 
-  get targetQuality(): TrainingQuality {
-    return this.training.traingTask.quality
+  get targetQuality(): string {
+    return this.training.traingTask.quality.name
   }
 
-  set targetQuality(value: TrainingQuality) {
+  set targetQuality(value: string) {
     this.training.traingTask = this.getTrainingTask(this.targetStat, value)
     this.updatePossibility()
   }
@@ -89,10 +89,10 @@ export class AppComponent implements OnInit {
     this.updatePossibility()
   }
 
-  private getTrainingTask(mainStat: Stat, quality: TrainingQuality) {
+  private getTrainingTask(mainStat: Stat, qualityName: string) {
     const task = TrainingTask.ALL
       .filter(t => t.mainStat == mainStat)
-      .find(t => t.quality == quality)
+      .find(t => t.quality.name == qualityName)
     if (!task) {
       throw new Error("no any match")
     }

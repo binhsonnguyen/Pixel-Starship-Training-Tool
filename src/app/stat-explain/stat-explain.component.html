@@ -5,10 +5,9 @@
         <span *ngIf="hasEffect" class="text-primary">&nbsp;+{{trainingEffect}}</span>
       </span>
 
-    <span (click)="currentTraining = currentTraining - 1"
-          class="input-group-text d-inline text-center col-3">-</span>
-    <input [(ngModel)]="currentTraining" class="form-control text-center col-4" type="number">
-    <span (click)="currentTraining = currentTraining + 1" class="input-group-text d-inline text-center col-3">+</span>
+    <span (click)="decreaseCurrentTraining()" class="input-group-text d-inline text-center col-3">-</span>
+    <input [(ngModel)]="currentTraining" min=0 max="110" (change)="onCurrentTrainingChanged()" class="form-control text-center col-4" type="number">
+    <span (click)="increaseCurrentTraining()" class="input-group-text d-inline text-center col-3">+</span>
     <span [class.border-danger-subtle]="(!isMainStat) && hasSideEffect"
           [class.fw-bold]="isMainStat"
           [class.text-bg-danger]="(!isMainStat) && hasSideEffect"
