@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.training = this.localStorageService.inStorageTrainning
+    this.training = this.localStorageService.read()
     this.updatePossibility()
   }
 
@@ -46,6 +46,7 @@ export class AppComponent implements OnInit {
 
   set totalTrainingPoint(value: number) {
     this.training.totalTrainingPoint = value
+    this.localStorageService.save(this.training)
     this.updatePossibility()
   }
 
