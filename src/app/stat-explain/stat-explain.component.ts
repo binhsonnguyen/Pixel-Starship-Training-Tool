@@ -1,11 +1,13 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import Stat from "pss-training-lib/dist/Stat";
 import {FormsModule} from "@angular/forms";
+import TrainingQuality from "pss-training-lib/dist/TrainingQuality";
+import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-stat-explain',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, NgForOf, NgIf],
   templateUrl: './stat-explain.component.html',
   styleUrl: './stat-explain.component.sass'
 })
@@ -43,4 +45,6 @@ export class StatExplainComponent {
   onCurrentTrainingChanged() {
     this.currentTrainingChanged.emit(this.currentTraining)
   }
+
+  protected readonly TrainingQuality = TrainingQuality;
 }

@@ -1,21 +1,19 @@
-<div style="display: inline-flex; width: 100%">
-  <div style="flex-grow:1;" [class.mainstat]="isMainStat"
-                  [class.has_side_effect]="hasSideEffect"
-  >
-    <label>{{!!stat ? stat.name : ""}}, applied effect: {{trainingEffect}}, required effect: {{requiredEffect}}</label>
-    <input  type="number" (input)="onCurrentTrainingChanged()"
-           [(ngModel)]="currentTraining">
+<div class="row">
+  <div class="input-group input-group-sm mb-1">
+      <span [class.fw-bold]="isMainStat" class="input-group-text bg-white col-2">
+        {{!!stat ? stat.name : ""}}
+        <span *ngIf="hasEffect" class="text-primary">&nbsp;+{{trainingEffect}}</span>
+      </span>
+
+    <span (click)="currentTraining = currentTraining - 1"
+          class="input-group-text d-inline text-center col-3">-</span>
+    <input [(ngModel)]="currentTraining" class="form-control text-center col-4" type="number">
+    <span (click)="currentTraining = currentTraining + 1" class="input-group-text d-inline text-center col-3">+</span>
+    <span [class.border-danger-subtle]="(!isMainStat) && hasSideEffect"
+          [class.fw-bold]="isMainStat"
+          [class.text-bg-danger]="(!isMainStat) && hasSideEffect"
+          [class.text-bg-success]="hasEffect && isMainStat"
+          class="input-group-text d-inline text-center col-2"
+    >{{minimumPossibility || 0}} ~ {{maximumPossibility || 0}}</span>
   </div>
-
-
-  <div style="width: 90px"
-                  [class.has_side_effect]="hasSideEffect"
-                  [class.has_effect]="hasEffect"
-  >
-    <label>{{posibility}}</label>
-    <input  disabled
-           value="{{minimumPossibility || 0}} ~ {{maximumPossibility || 0}}">
-  </div>
-
-
 </div>

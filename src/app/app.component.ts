@@ -20,7 +20,7 @@ export interface Tile {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, CommonModule, FormsModule, StatExplainComponent, NgbModule],
+  imports: [RouterOutlet, FormsModule, CommonModule, StatExplainComponent, NgbModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })
@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
   defaultFatigue = this.training.fatigue
 
   ngOnInit(): void {
-    console.log("hello")
     this.updatePossibility()
   }
 
@@ -101,7 +100,6 @@ export class AppComponent implements OnInit {
   }
 
   updatePossibility() {
-    console.log("hello")
     for (const stat of Stat.ALL) {
       const min = this.training.minimumPossibleImprovement(stat)
       this.minimumPossibility.set(stat, min)
