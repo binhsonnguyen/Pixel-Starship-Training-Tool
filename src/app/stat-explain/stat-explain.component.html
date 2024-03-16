@@ -6,7 +6,7 @@
       </span>
 
     <button (click)="decreaseCurrentTraining()" class="btn btn-outline-secondary d-inline fw-bold text-center col-3">-</button>
-    <input [(ngModel)]="currentTraining" min=0 max="110" (change)="onCurrentTrainingChanged()" class="form-control text-center col-4" type="number">
+    <input [(ngModel)]="currentTraining" (change)="onCurrentTrainingChanged()" class="form-control text-center col-4" type="number">
     <button (click)="increaseCurrentTraining()" class="btn btn-outline-secondary d-inline fw-bold text-center col-3">+</button>
     <span [class.border-danger-subtle]="(!isMainStat) && hasSideEffect"
           [class.fw-bold]="isMainStat"
