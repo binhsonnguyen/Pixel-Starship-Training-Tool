@@ -130,6 +130,10 @@ export class AppComponent implements OnInit {
     }
   }
 
+  saveStats() {
+    this.localStorageService.saveTraining(this.training)
+  }
+
   resetStats() {
     this.totalTrainingPoint = 110
     this.fatiguee = 0
