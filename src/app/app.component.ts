@@ -9,6 +9,7 @@ import Stat from "pss-training-lib/dist/Stat";
 import {StatExplainComponent} from "./stat-explain/stat-explain.component";
 import TrainingQuality from "pss-training-lib/dist/TrainingQuality";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {LocalStorageService} from "./local-storage.service";
 
 export interface Tile {
   color: string;
@@ -30,9 +31,12 @@ export class AppComponent implements OnInit {
   training: Training = new Training(110, 0, TrainingTask.HP_COMMON, new StatsSet())
   minimumPossibility: StatsSet = new StatsSet()
   maximumPossibility: StatsSet = new StatsSet()
-  defaultFatigue = this.training.fatigue
+
+  constructor(private readonly localStorageService: LocalStorageService) {
+  }
 
   ngOnInit(): void {
+    this.training = this.localStorageService.inStorageTrainning
     this.updatePossibility()
   }
 
