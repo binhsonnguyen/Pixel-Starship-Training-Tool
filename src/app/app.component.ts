@@ -10,6 +10,7 @@ import {StatExplainComponent} from "./stat-explain/stat-explain.component";
 import TrainingQuality from "pss-training-lib/dist/TrainingQuality";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {LocalStorageService} from "./local-storage.service";
+import {TrainingTaskHelperService} from "./training-task-helper.service";
 
 export interface Tile {
   color: string;
@@ -32,7 +33,9 @@ export class AppComponent implements OnInit {
   minimumPossibility: StatsSet = new StatsSet()
   maximumPossibility: StatsSet = new StatsSet()
 
-  constructor(private readonly localStorageService: LocalStorageService) {
+  constructor(
+    private readonly localStorageService: LocalStorageService,
+    private readonly trainingTaskHelper: TrainingTaskHelperService) {
   }
 
   ngOnInit(): void {
@@ -56,6 +59,7 @@ export class AppComponent implements OnInit {
 
   set fatiguee(value: number) {
     this.training.fatigue = value
+    this.localStorageService.save(this.training)
     this.updatePossibility()
   }
 
@@ -63,8 +67,9 @@ export class AppComponent implements OnInit {
     return this.training.traingTask.mainStat
   }
 
-  set targetStat(value: Stat) {
-    this.training.traingTask = this.getTrainingTask(value, this.targetQuality)
+  set targetStat(value: string) {
+    this.training.traingTask = this.trainingTaskHelper.getTrainingTask(value, this.targetQuality)
+    this.localStorageService.save(this.training)
     this.updatePossibility()
   }
 
@@ -73,7 +78,8 @@ export class AppComponent implements OnInit {
   }
 
   set targetQuality(value: string) {
-    this.training.traingTask = this.getTrainingTask(this.targetStat, value)
+    this.training.traingTask = this.trainingTaskHelper.getTrainingTask(this.targetStat.name, value)
+    this.localStorageService.save(this.training)
     this.updatePossibility()
   }
 
@@ -82,6 +88,7 @@ export class AppComponent implements OnInit {
   }
 
   set trainingTask(task: TrainingTask) {
+    this.localStorageService.save(this.training)
     this.training.traingTask = task
   }
 
@@ -97,17 +104,8 @@ export class AppComponent implements OnInit {
 
   updateCurrentTraining(stat: Stat, value: number) {
     this.currentTraining.set(stat, value)
+    this.localStorageService.save(this.training)
     this.updatePossibility()
-  }
-
-  private getTrainingTask(mainStat: Stat, qualityName: string) {
-    const task = TrainingTask.ALL
-      .filter(t => t.mainStat == mainStat)
-      .find(t => t.quality.name == qualityName)
-    if (!task) {
-      throw new Error("no any match")
-    }
-    return task
   }
 
   updatePossibility() {

@@ -15,7 +15,7 @@
         <option value="200">200</option>
       </select>
       <select class="form-select" [(ngModel)]="targetStat">
-        <option *ngFor="let item of Stat.ALL" [value]="item">
+        <option *ngFor="let item of Stat.ALL" [value]="item.name">
           {{item.name}}
         </option>
       </select>
