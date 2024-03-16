@@ -28,7 +28,11 @@ export class LocalStorageService {
   }
 
   saveTraining(value: Training) {
-    localStorage.setItem("totalTp", value.totalTrainingPoint.toString())
+    const autoSaveMode = this.readSaveOption()
+    if (!autoSaveMode) {
+      return
+    }
+    localStorage.setItem("totalTp", value.totalTrainingPoint.toString());
     localStorage.setItem("fatigue", value.fatigue.toString())
     localStorage.setItem("mainStat", value.traingTask.mainStat.name)
     localStorage.setItem("quality", value.traingTask.quality.name)

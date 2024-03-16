@@ -66,8 +66,8 @@ export class AppComponent implements OnInit {
     this.updatePossibility()
   }
 
-  get targetStat(): Stat {
-    return this.training.traingTask.mainStat
+  get targetStat(): string {
+    return this.training.traingTask.mainStat.name
   }
 
   set targetStat(value: string) {
@@ -81,7 +81,7 @@ export class AppComponent implements OnInit {
   }
 
   set targetQuality(value: string) {
-    this.training.traingTask = this.trainingTaskHelper.getTrainingTask(this.targetStat.name, value)
+    this.training.traingTask = this.trainingTaskHelper.getTrainingTask(this.targetStat, value)
     this.localStorageService.saveTraining(this.training)
     this.updatePossibility()
   }
@@ -112,12 +112,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.autoSave = this.localStorageService.readSaveOption()
-    if (this.autoSave) {
-      this.training = this.localStorageService.readTraining();
-      this.localStorageService.saveTraining(this.training)
-    } else {
-      this.training = new Training(110, 0, TrainingTask.HP_COMMON, new StatsSet());
-    }
+    this.training = this.localStorageService.readTraining();
     this.updatePossibility();
   }
 
