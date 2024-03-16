@@ -5,7 +5,7 @@
   <div class="row">
     <div class="input-group input-group-sm mt-1 mb-1">
       <span class="input-group-text">TP</span>
-      <input class="form-control" readonly disabled type="number" [value]="currentTraining">
+      <input class="form-control text-center" readonly disabled type="number" [value]="usedTp">
       <span class="input-group-text">/</span>
       <select class="form-select fw-bold text-danger border-danger-subtle" [(ngModel)]="totalTrainingPoint">
         <option value="80">80</option>
@@ -28,24 +28,24 @@
     <div class="fatigue input-group input-group-sm mb-1">
       <span class="input-group-text">F</span>
       <input readonly class="form-control text-center border-danger-subtle text-danger fw-bold" type="number" [(ngModel)]="fatiguee">
-      <button class="fatigue btn btn-outline-primary" type="button" (click)="fatiguee=0">
+      <button class="fatigue btn btn-outline-primary" type="button" (click)="fatiguee=0" [class.bg-primary]="fatiguee == 0">
         <img src="assets/fatigue/Fatigue0.webp" alt="f0">
       </button>
-      <button class="fatigue btn btn-outline-secondary" type="button" (click)="fatiguee=1">
+      <button class="fatigue btn btn-outline-secondary" type="button" (click)="fatiguee=1" [class.bg-secondary]="fatiguee == 1">
         <img src="assets/fatigue/Fatigue1.webp" alt="f1">
         <img src="assets/fatigue/Fatigue2.webp" alt="f2">
         <img src="assets/fatigue/Fatigue3.webp" alt="f3">
         <img src="assets/fatigue/Fatigue4.webp" alt="f4">
         <img src="assets/fatigue/Fatigue5.webp" alt="f5">
       </button>
-      <button class="fatigue btn btn-outline-warning" type="button" (click)="fatiguee=51">
+      <button class="fatigue btn btn-outline-warning" type="button" (click)="fatiguee=51" [class.bg-warning]="fatiguee == 51">
         <img src="assets/fatigue/Fatigue6.webp" alt="f6">
         <img src="assets/fatigue/Fatigue7.webp" alt="f7">
         <img src="assets/fatigue/Fatigue8.webp" alt="f8">
         <img src="assets/fatigue/Fatigue9.webp" alt="f9">
         <img src="assets/fatigue/Fatigue10.webp" alt="f10">
       </button>
-      <button class="fatigue btn btn-outline-danger" type="button" (click)="fatiguee=100">
+      <button class="fatigue btn btn-outline-danger" type="button" (click)="fatiguee=100" [class.bg-danger]="fatiguee == 100">
         <img src="assets/fatigue/Fatigue10.webp" alt="f10">
       </button>
     </div>

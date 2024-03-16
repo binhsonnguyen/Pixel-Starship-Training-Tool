@@ -84,6 +84,12 @@ export class AppComponent implements OnInit {
     return this.training.currentTraining
   }
 
+  get usedTp() {
+    return Stat.ALL.reduce((previousValue, currentValue) => {
+      return previousValue + this.currentTraining.get(currentValue)
+    }, 0)
+  }
+
   updateCurrentTraining(stat: Stat, value: number) {
     this.currentTraining.set(stat, value)
     this.updatePossibility()

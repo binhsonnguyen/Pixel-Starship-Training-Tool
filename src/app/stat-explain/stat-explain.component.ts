@@ -53,7 +53,11 @@ export class StatExplainComponent {
     this.onCurrentTrainingChanged()
   }
   decreaseCurrentTraining() {
-    this.currentTraining = this.currentTraining - 1
+    if (this.currentTraining == 0) {
+      this.onCurrentTrainingChanged()
+      return
+    }
+    this.currentTraining = this.currentTraining - 1;
     this.onCurrentTrainingChanged()
   }
 }
