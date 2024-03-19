@@ -14,7 +14,7 @@ export class LocalStorageService {
   }
 
   readTraining(): Training {
-    const totalTp = Number(localStorage.getItem("totalTp"))
+    const totalTp = Number(localStorage.getItem("totalTp")) || 110
     const fatigue = Number(localStorage.getItem("fatigue"))
     let mainStat = localStorage.getItem("mainStat") || Stat.HP.name
     const quality = localStorage.getItem("quality") || TrainingQuality.COMMON.name
