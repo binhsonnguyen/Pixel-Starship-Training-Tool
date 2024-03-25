@@ -21,6 +21,7 @@ export class StatExplainComponent {
   @Input("minimum_possibility") minimumPossibility: number = 0;
   @Input("maximum_possibility") maximumPossibility: number = 0;
 
+  @Output("onSetTargetStat") onSetTargetStat = new EventEmitter<string>();
   @Output("onCurrentTrainingChanged") currentTrainingChanged = new EventEmitter<number>();
 
   get hasEffect(): boolean {
@@ -59,5 +60,9 @@ export class StatExplainComponent {
     }
     this.currentTraining = this.currentTraining - 1;
     this.onCurrentTrainingChanged()
+  }
+
+  setTargetStat() {
+    this.onSetTargetStat.emit(this.stat?.name);
   }
 }

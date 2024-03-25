@@ -1,6 +1,10 @@
 <div class="row">
   <div class="input-group input-group-sm mb-1">
-      <span [class.fw-bold]="isMainStat" class="input-group-text bg-white col-2">
+    <div class="input-group-text">
+      <input class="form-check-input mt-0" type="radio"
+             name="targetStat" [checked]="isMainStat" (click)="setTargetStat()" [value]="" >
+    </div>
+    <span [class.fw-bold]="isMainStat" class="input-group-text bg-white col-2">
         {{!!stat ? stat.name : ""}}
       <span *ngIf="hasEffect" class="text-primary">&nbsp;+{{trainingEffect}}</span>
     </span>

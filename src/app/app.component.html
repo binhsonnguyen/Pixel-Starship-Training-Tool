@@ -12,11 +12,7 @@
         <option selected value="110">110</option>
         <option value="200">200</option>
       </select>
-      <select [(ngModel)]="targetStat" class="form-select">
-        <option *ngFor="let item of Stat.ALL" [value]="item.name">
-          {{item.name}}
-        </option>
-      </select>
+      <span class="input-group-text">Quality</span>
       <select [(ngModel)]="targetQuality" class="form-select" style="width:auto;">
         <option *ngFor="let item of TrainingQuality.ALL" [value]="item.name">
           {{item.name}}
@@ -73,6 +69,7 @@
     </div>
 
     <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.HP, $event)" [current_training]="currentTraining.hp"
+                      (onSetTargetStat)="targetStat = $event"
                       [is_main_stat]="(trainingTask.mainStat == Stat.HP)"
                       [maximum_possibility]="maximumPossibility.hp"
                       [minimum_possibility]="minimumPossibility.hp"
@@ -81,6 +78,7 @@
                       [training_effect]="trainingTask.statsEffective.hp">
     </app-stat-explain>
     <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ATK, $event)" [current_training]="currentTraining.atk"
+                      (onSetTargetStat)="targetStat = $event"
                       [is_main_stat]="trainingTask.mainStat == Stat.ATK"
                       [maximum_possibility]="maximumPossibility.atk"
                       [minimum_possibility]="minimumPossibility.atk"
@@ -89,6 +87,7 @@
                       [training_effect]="trainingTask.statsEffective.atk">
     </app-stat-explain>
     <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.RPR, $event)" [current_training]="currentTraining.rpr"
+                      (onSetTargetStat)="targetStat = $event"
                       [is_main_stat]="trainingTask.mainStat == Stat.RPR"
                       [maximum_possibility]="maximumPossibility.rpr"
                       [minimum_possibility]="minimumPossibility.rpr"
@@ -97,6 +96,7 @@
                       [training_effect]="trainingTask.statsEffective.rpr">
     </app-stat-explain>
     <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ABL, $event)" [current_training]="currentTraining.abl"
+                      (onSetTargetStat)="targetStat = $event"
                       [is_main_stat]="trainingTask.mainStat == Stat.ABL"
                       [maximum_possibility]="maximumPossibility.abl"
                       [minimum_possibility]="minimumPossibility.abl"
@@ -105,6 +105,7 @@
                       [training_effect]="trainingTask.statsEffective.abl">
     </app-stat-explain>
     <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.STA, $event)" [current_training]="currentTraining.sta"
+                      (onSetTargetStat)="targetStat = $event"
                       [is_main_stat]="trainingTask.mainStat == Stat.STA"
                       [maximum_possibility]="maximumPossibility.sta"
                       [minimum_possibility]="minimumPossibility.sta"
@@ -113,6 +114,7 @@
                       [training_effect]="trainingTask.statsEffective.sta">
     </app-stat-explain>
     <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.PLT, $event)" [current_training]="currentTraining.plt"
+                      (onSetTargetStat)="targetStat = $event"
                       [is_main_stat]="trainingTask.mainStat == Stat.PLT"
                       [maximum_possibility]="maximumPossibility.plt"
                       [minimum_possibility]="minimumPossibility.plt"
@@ -121,6 +123,7 @@
                       [training_effect]="trainingTask.statsEffective.plt">
     </app-stat-explain>
     <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.SCI, $event)" [current_training]="currentTraining.sci"
+                      (onSetTargetStat)="targetStat = $event"
                       [is_main_stat]="trainingTask.mainStat == Stat.SCI"
                       [maximum_possibility]="maximumPossibility.sci"
                       [minimum_possibility]="minimumPossibility.sci"
@@ -129,6 +132,7 @@
                       [training_effect]="trainingTask.statsEffective.sci">
     </app-stat-explain>
     <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ENG, $event)" [current_training]="currentTraining.eng"
+                      (onSetTargetStat)="targetStat = $event"
                       [is_main_stat]="trainingTask.mainStat == Stat.ENG"
                       [maximum_possibility]="maximumPossibility.eng"
                       [minimum_possibility]="minimumPossibility.eng"
@@ -137,6 +141,7 @@
                       [training_effect]="trainingTask.statsEffective.eng">
     </app-stat-explain>
     <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.WPN, $event)" [current_training]="currentTraining.wpn"
+                      (onSetTargetStat)="targetStat = $event"
                       [is_main_stat]="trainingTask.mainStat == Stat.WPN"
                       [maximum_possibility]="maximumPossibility.wpn"
                       [minimum_possibility]="minimumPossibility.wpn"
