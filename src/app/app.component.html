@@ -5,21 +5,21 @@
   <div class="row">
     <div class="input-group input-group-sm mt-1 mb-1">
       <span class="input-group-text">TP</span>
-      <input class="form-control text-center" readonly disabled type="number" [value]="usedTp">
+      <input [value]="usedTp" class="form-control text-center" disabled readonly type="number">
       <span class="input-group-text">/</span>
-      <select class="form-select fw-bold text-danger border-danger-subtle" [(ngModel)]="totalTrainingPoint">
+      <select [(ngModel)]="totalTrainingPoint" class="form-select fw-bold text-danger border-danger-subtle">
         <option value="80">80</option>
         <option value="90">90</option>
         <option value="100">100</option>
         <option selected value="110">110</option>
         <option value="200">200</option>
       </select>
-      <select class="form-select" [(ngModel)]="targetStat">
+      <select [(ngModel)]="targetStat" class="form-select">
         <option *ngFor="let item of Stat.ALL" [value]="item.name">
           {{item.name}}
         </option>
       </select>
-      <select class="form-select" style="width:auto;" [(ngModel)]="targetQuality">
+      <select [(ngModel)]="targetQuality" class="form-select" style="width:auto;">
         <option *ngFor="let item of TrainingQuality.ALL" [value]="item.name">
           {{item.name}}
         </option>
@@ -27,117 +27,124 @@
     </div>
     <div class="fatigue input-group input-group-sm mb-1">
       <span class="input-group-text">F</span>
-      <input readonly class="form-control text-center border-danger-subtle text-danger fw-bold" type="number" [(ngModel)]="fatiguee">
-      <button class="fatigue btn btn-outline-primary" type="button" (click)="fatiguee=0" [class.bg-primary]="fatiguee == 0">
-        <img src="assets/fatigue/Fatigue0.webp" alt="f0">
+      <input [(ngModel)]="fatiguee" class="form-control text-center border-danger-subtle text-danger fw-bold" readonly
+             type="number">
+      <button (click)="fatiguee=0" [class.bg-primary]="fatiguee == 0" class="fatigue btn btn-outline-primary"
+              type="button">
+        <img alt="f0" src="assets/fatigue/Fatigue0.webp">
       </button>
-      <button class="fatigue btn btn-outline-secondary" type="button" (click)="fatiguee=1" [class.bg-secondary]="fatiguee == 1">
-        <img src="assets/fatigue/Fatigue1.webp" alt="f1">
-        <img src="assets/fatigue/Fatigue2.webp" alt="f2">
-        <img src="assets/fatigue/Fatigue3.webp" alt="f3">
-        <img src="assets/fatigue/Fatigue4.webp" alt="f4">
-        <img src="assets/fatigue/Fatigue5.webp" alt="f5">
+      <button (click)="fatiguee=1" [class.bg-secondary]="fatiguee == 1" class="fatigue btn btn-outline-secondary"
+              type="button">
+        <img alt="f1" src="assets/fatigue/Fatigue1.webp">
+        <img alt="f2" src="assets/fatigue/Fatigue2.webp">
+        <img alt="f3" src="assets/fatigue/Fatigue3.webp">
+        <img alt="f4" src="assets/fatigue/Fatigue4.webp">
+        <img alt="f5" src="assets/fatigue/Fatigue5.webp">
       </button>
-      <button class="fatigue btn btn-outline-warning" type="button" (click)="fatiguee=51" [class.bg-warning]="fatiguee == 51">
-        <img src="assets/fatigue/Fatigue6.webp" alt="f6">
-        <img src="assets/fatigue/Fatigue7.webp" alt="f7">
-        <img src="assets/fatigue/Fatigue8.webp" alt="f8">
-        <img src="assets/fatigue/Fatigue9.webp" alt="f9">
-        <img src="assets/fatigue/Fatigue10.webp" alt="f10">
+      <button (click)="fatiguee=51" [class.bg-warning]="fatiguee == 51" class="fatigue btn btn-outline-warning"
+              type="button">
+        <img alt="f6" src="assets/fatigue/Fatigue6.webp">
+        <img alt="f7" src="assets/fatigue/Fatigue7.webp">
+        <img alt="f8" src="assets/fatigue/Fatigue8.webp">
+        <img alt="f9" src="assets/fatigue/Fatigue9.webp">
+        <img alt="f10" src="assets/fatigue/Fatigue10.webp">
       </button>
-      <button class="fatigue btn btn-outline-danger" type="button" (click)="fatiguee=100" [class.bg-danger]="fatiguee == 100">
-        <img src="assets/fatigue/Fatigue10.webp" alt="f10">
+      <button (click)="fatiguee=100" [class.bg-danger]="fatiguee == 100" class="fatigue btn btn-outline-danger"
+              type="button">
+        <img alt="f10" src="assets/fatigue/Fatigue10.webp">
       </button>
     </div>
     <div class="input-group input-group-sm mb-1">
-      <input class="form-control text-primary bg-white border-primary-subtle text-center" readonly disabled type="text" [value]="trainingTask.name">
+      <input [value]="trainingTask.name" class="form-control text-primary bg-white border-primary-subtle text-center" disabled readonly
+             type="text">
     </div>
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.HP, $event)" [stat]="Stat.HP"
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.HP, $event)" [current_training]="currentTraining.hp"
                       [is_main_stat]="(trainingTask.mainStat == Stat.HP)"
-                      [current_training]="currentTraining.hp"
-                      [training_effect]="trainingTask.statsEffective.hp"
-                      [required_effect]="training.requiredStatEffect(Stat.HP)"
+                      [maximum_possibility]="maximumPossibility.hp"
                       [minimum_possibility]="minimumPossibility.hp"
-                      [maximum_possibility]="maximumPossibility.hp">
+                      [required_effect]="training.requiredStatEffect(Stat.HP)"
+                      [stat]="Stat.HP"
+                      [training_effect]="trainingTask.statsEffective.hp">
     </app-stat-explain>
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ATK, $event)" [stat]="Stat.ATK"
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ATK, $event)" [current_training]="currentTraining.atk"
                       [is_main_stat]="trainingTask.mainStat == Stat.ATK"
-                      [current_training]="currentTraining.atk"
-                      [training_effect]="trainingTask.statsEffective.atk"
-                      [required_effect]="training.requiredStatEffect(Stat.ATK)"
+                      [maximum_possibility]="maximumPossibility.atk"
                       [minimum_possibility]="minimumPossibility.atk"
-                      [maximum_possibility]="maximumPossibility.atk">
+                      [required_effect]="training.requiredStatEffect(Stat.ATK)"
+                      [stat]="Stat.ATK"
+                      [training_effect]="trainingTask.statsEffective.atk">
     </app-stat-explain>
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.RPR, $event)" [stat]="Stat.RPR"
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.RPR, $event)" [current_training]="currentTraining.rpr"
                       [is_main_stat]="trainingTask.mainStat == Stat.RPR"
-                      [current_training]="currentTraining.rpr"
-                      [training_effect]="trainingTask.statsEffective.rpr"
-                      [required_effect]="training.requiredStatEffect(Stat.RPR)"
+                      [maximum_possibility]="maximumPossibility.rpr"
                       [minimum_possibility]="minimumPossibility.rpr"
-                      [maximum_possibility]="maximumPossibility.rpr">
+                      [required_effect]="training.requiredStatEffect(Stat.RPR)"
+                      [stat]="Stat.RPR"
+                      [training_effect]="trainingTask.statsEffective.rpr">
     </app-stat-explain>
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ABL, $event)" [stat]="Stat.ABL"
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ABL, $event)" [current_training]="currentTraining.abl"
                       [is_main_stat]="trainingTask.mainStat == Stat.ABL"
-                      [current_training]="currentTraining.abl"
-                      [training_effect]="trainingTask.statsEffective.abl"
-                      [required_effect]="training.requiredStatEffect(Stat.ABL)"
+                      [maximum_possibility]="maximumPossibility.abl"
                       [minimum_possibility]="minimumPossibility.abl"
-                      [maximum_possibility]="maximumPossibility.abl">
+                      [required_effect]="training.requiredStatEffect(Stat.ABL)"
+                      [stat]="Stat.ABL"
+                      [training_effect]="trainingTask.statsEffective.abl">
     </app-stat-explain>
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.STA, $event)" [stat]="Stat.STA"
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.STA, $event)" [current_training]="currentTraining.sta"
                       [is_main_stat]="trainingTask.mainStat == Stat.STA"
-                      [current_training]="currentTraining.sta"
-                      [training_effect]="trainingTask.statsEffective.sta"
-                      [required_effect]="training.requiredStatEffect(Stat.STA)"
+                      [maximum_possibility]="maximumPossibility.sta"
                       [minimum_possibility]="minimumPossibility.sta"
-                      [maximum_possibility]="maximumPossibility.sta">
+                      [required_effect]="training.requiredStatEffect(Stat.STA)"
+                      [stat]="Stat.STA"
+                      [training_effect]="trainingTask.statsEffective.sta">
     </app-stat-explain>
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.PLT, $event)" [stat]="Stat.PLT"
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.PLT, $event)" [current_training]="currentTraining.plt"
                       [is_main_stat]="trainingTask.mainStat == Stat.PLT"
-                      [current_training]="currentTraining.plt"
-                      [training_effect]="trainingTask.statsEffective.plt"
-                      [required_effect]="training.requiredStatEffect(Stat.PLT)"
+                      [maximum_possibility]="maximumPossibility.plt"
                       [minimum_possibility]="minimumPossibility.plt"
-                      [maximum_possibility]="maximumPossibility.plt">
+                      [required_effect]="training.requiredStatEffect(Stat.PLT)"
+                      [stat]="Stat.PLT"
+                      [training_effect]="trainingTask.statsEffective.plt">
     </app-stat-explain>
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.SCI, $event)" [stat]="Stat.SCI"
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.SCI, $event)" [current_training]="currentTraining.sci"
                       [is_main_stat]="trainingTask.mainStat == Stat.SCI"
-                      [current_training]="currentTraining.sci"
-                      [training_effect]="trainingTask.statsEffective.sci"
-                      [required_effect]="training.requiredStatEffect(Stat.SCI)"
+                      [maximum_possibility]="maximumPossibility.sci"
                       [minimum_possibility]="minimumPossibility.sci"
-                      [maximum_possibility]="maximumPossibility.sci">
+                      [required_effect]="training.requiredStatEffect(Stat.SCI)"
+                      [stat]="Stat.SCI"
+                      [training_effect]="trainingTask.statsEffective.sci">
     </app-stat-explain>
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ENG, $event)" [stat]="Stat.ENG"
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ENG, $event)" [current_training]="currentTraining.eng"
                       [is_main_stat]="trainingTask.mainStat == Stat.ENG"
-                      [current_training]="currentTraining.eng"
-                      [training_effect]="trainingTask.statsEffective.eng"
-                      [required_effect]="training.requiredStatEffect(Stat.ENG)"
+                      [maximum_possibility]="maximumPossibility.eng"
                       [minimum_possibility]="minimumPossibility.eng"
-                      [maximum_possibility]="maximumPossibility.eng">
+                      [required_effect]="training.requiredStatEffect(Stat.ENG)"
+                      [stat]="Stat.ENG"
+                      [training_effect]="trainingTask.statsEffective.eng">
     </app-stat-explain>
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.WPN, $event)" [stat]="Stat.WPN"
+    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.WPN, $event)" [current_training]="currentTraining.wpn"
                       [is_main_stat]="trainingTask.mainStat == Stat.WPN"
-                      [current_training]="currentTraining.wpn"
-                      [training_effect]="trainingTask.statsEffective.wpn"
-                      [required_effect]="training.requiredStatEffect(Stat.WPN)"
+                      [maximum_possibility]="maximumPossibility.wpn"
                       [minimum_possibility]="minimumPossibility.wpn"
-                      [maximum_possibility]="maximumPossibility.wpn">
+                      [required_effect]="training.requiredStatEffect(Stat.WPN)"
+                      [stat]="Stat.WPN"
+                      [training_effect]="trainingTask.statsEffective.wpn">
     </app-stat-explain>
 
   </div>
   <div class="row align-items-center">
     <label class="form-check-label col-4">
-      <input type="checkbox" checked class="border-success text-success bg-success" [(ngModel)]="autoSave">
+      <input [(ngModel)]="autoSave" checked class="border-success text-success bg-success" type="checkbox">
       Auto Save
     </label>
     <div class="col-8">
       <div class="input-group input-group-sm mt-1 mb-1 align-items-center justify-content-end">
-        <button class="fatigue btn btn-outline-danger col-4" type="button" (click)="resetStats()">Reset</button>
-        <button class="fatigue btn btn-success col-5" type="button" (click)="saveStats()">Save</button>
+        <button (click)="resetStats()" class="fatigue btn btn-outline-danger col-4" type="button">Reset</button>
+        <button (click)="saveStats()" class="fatigue btn btn-success col-5" type="button">Save</button>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="text-center mt-1 small">2024 ~Kafka</div></div>
+    <div class="text-center mt-1 small">2024 ~Kafka</div>
+  </div>
 </div>
