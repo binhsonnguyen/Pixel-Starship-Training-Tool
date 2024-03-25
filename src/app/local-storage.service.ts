@@ -43,7 +43,7 @@ export class LocalStorageService {
 
   readSaveOption() {
     const autosaveConf = localStorage.getItem("autosave")
-    return autosaveConf == "true"
+    return autosaveConf != "false"
   }
 
   setSaveOption(value: boolean) {
