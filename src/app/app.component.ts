@@ -34,6 +34,8 @@ export class AppComponent implements OnInit {
   maximumPossibility: StatsSet = new StatsSet()
   protected readonly Stat = Stat;
   protected readonly TrainingQuality = TrainingQuality;
+  protected readonly Math = Math;
+  private minimumReachProgressBarWidthInPercent = 15;
 
   constructor(private readonly localStorageService: LocalStorageService, private readonly trainingTaskHelper: TrainingTaskHelperService) {
   }
@@ -108,6 +110,26 @@ export class AppComponent implements OnInit {
     return Stat.ALL.reduce((previousValue, currentValue) => {
       return previousValue + this.currentTraining.get(currentValue)
     }, 0)
+  }
+
+  get percentReach() {
+    let percent = 100 * this.currentTraining.total() / 200
+    if (percent < this.minimumReachProgressBarWidthInPercent) {
+      percent = this.minimumReachProgressBarWidthInPercent
+    }
+    return percent
+  }
+
+  get percentAvailable() {
+    return 100 * this.totalTrainingPoint / 200
+  }
+
+  get percentRemaining() {
+    return this.percentAvailable - this.percentReach
+  }
+
+  numberToWidthStyle(percent: number) {
+    return `width: ${percent}%`
   }
 
   ngOnInit(): void {
