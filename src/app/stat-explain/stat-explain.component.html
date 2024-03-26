@@ -1,14 +1,14 @@
 <div class="row">
   <div class="input-group input-group-sm mb-1">
     <div class="input-group-text">
-      <input class="form-check-input mt-0" type="radio"
-             name="targetStat" [checked]="isMainStat" (click)="setTargetStat()" [value]="" >
+      <input (click)="setTargetStat()" [checked]="isMainStat"
+             [value]="" class="form-check-input mt-0" name="targetStat" type="radio">
     </div>
     <span [class.fw-bold]="isMainStat" class="input-group-text bg-white col-2">
-        {{!!stat ? stat.name : ""}}
+      <img [alt]="stat?.name" [src]="image()">
+      <span class="ms-1">{{!!stat ? stat.name.toLowerCase() : ""}}</span>
       <span *ngIf="hasEffect" class="text-primary">&nbsp;+{{trainingEffect}}</span>
     </span>
-
     <button (click)="decreaseCurrentTraining()" class="btn btn-outline-secondary d-inline fw-bold text-center col-3">-
     </button>
     <input (change)="onCurrentTrainingChanged()" [(ngModel)]="currentTraining" class="form-control text-center col-4"

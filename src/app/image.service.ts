@@ -5,11 +5,11 @@ import Stat from "pss-training-lib/dist/Stat";
   providedIn: 'root'
 })
 export class ImageService {
-  private static dirPrefix = "assets/fatigue"
+  private static dirPrefix = "assets/stats"
 
   constructor() { }
 
-  getStatIcon(stat: Stat) {
+  public getStatIcon(stat?: Stat) {
     switch (stat) {
       case Stat.HP:
         return `${ImageService.dirPrefix}/HP.webp`

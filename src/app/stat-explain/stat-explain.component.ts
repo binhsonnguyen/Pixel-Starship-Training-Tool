@@ -2,12 +2,13 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import Stat from "pss-training-lib/dist/Stat";
 import {FormsModule} from "@angular/forms";
 import TrainingQuality from "pss-training-lib/dist/TrainingQuality";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
+import {ImageService} from "../image.service";
 
 @Component({
   selector: 'app-stat-explain',
   standalone: true,
-  imports: [FormsModule, NgForOf, NgIf],
+  imports: [FormsModule, NgForOf, NgIf, NgOptimizedImage],
   templateUrl: './stat-explain.component.html',
   styleUrl: './stat-explain.component.sass'
 })
@@ -23,6 +24,11 @@ export class StatExplainComponent {
 
   @Output("onSetTargetStat") onSetTargetStat = new EventEmitter<string>();
   @Output("onCurrentTrainingChanged") currentTrainingChanged = new EventEmitter<number>();
+  protected readonly TrainingQuality = TrainingQuality;
+
+  constructor(private imageService: ImageService) {
+
+  }
 
   get hasEffect(): boolean {
     return this.maximumPossibility > 0
@@ -43,16 +49,19 @@ export class StatExplainComponent {
     }
   }
 
+  image() {
+    return this.imageService.getStatIcon(this.stat);
+  }
+
   onCurrentTrainingChanged() {
     this.currentTrainingChanged.emit(this.currentTraining)
   }
-
-  protected readonly TrainingQuality = TrainingQuality;
 
   increaseCurrentTraining() {
     this.currentTraining = this.currentTraining + 1
     this.onCurrentTrainingChanged()
   }
+
   decreaseCurrentTraining() {
     if (this.currentTraining == 0) {
       this.onCurrentTrainingChanged()
