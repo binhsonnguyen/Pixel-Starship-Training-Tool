@@ -27,7 +27,13 @@
             (mousedown)="holdIncrease()"
             (mouseleave)="mouseup()"
             (mouseup)="mouseup()"
-            class="btn d-inline fw-bold text-center col-1">+
+            class="btn d-inline text-center col-1">+
+    </button>
+    <button (click)="decreaseCurrentTraining(10)"
+            class="btn d-inline text-center col-1"><<
+    </button>
+    <button (click)="increaseCurrentTraining(10)"
+            class="btn d-inline text-center col-1">>>
     </button>
   </div>
 </div>
