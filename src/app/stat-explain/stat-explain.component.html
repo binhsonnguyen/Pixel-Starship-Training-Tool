@@ -6,20 +6,21 @@
     </div>
     <span [class.fw-bold]="isMainStat" class="input-group-text bg-white col-2">
       <img [alt]="stat?.name" [src]="image()">
-      <span class="ms-1">{{!!stat ? stat.name.toLowerCase() : ""}}</span>
-      <span *ngIf="hasEffect" class="text-primary">&nbsp;+{{trainingEffect}}</span>
+<!--      <span *ngIf="hasEffect" class="text-primary">&nbsp;+{{trainingEffect}}</span>-->
+
+      <span *ngIf="hasEffect" class="ms-1" [class.border-danger-subtle]="(!isMainStat) && hasSideEffect"
+            [class.fw-bold]="isMainStat"
+            [class.text-danger]="(!isMainStat) && hasSideEffect"
+            [class.text-success]="hasEffect && isMainStat">
+        {{minimumPossibility || 0}} ~ {{maximumPossibility || 0}}
+      </span>
     </span>
-    <button (click)="decreaseCurrentTraining()" class="btn btn-outline-secondary d-inline fw-bold text-center col-3">-
+    <span class="col-6"></span>
+    <button (click)="decreaseCurrentTraining()" class="btn d-inline fw-bold text-center col-1">-
     </button>
-    <input (change)="onCurrentTrainingChanged()" [(ngModel)]="currentTraining" class="form-control text-center col-4"
+    <input (change)="onCurrentTrainingChanged()" [(ngModel)]="currentTraining" class="form-control border-bottom border-white text-center col-1"
            type="number">
-    <button (click)="increaseCurrentTraining()" class="btn btn-outline-secondary d-inline fw-bold text-center col-3">+
+    <button (click)="increaseCurrentTraining()" class="btn d-inline fw-bold text-center col-1">+
     </button>
-    <span [class.border-danger-subtle]="(!isMainStat) && hasSideEffect"
-          [class.fw-bold]="isMainStat"
-          [class.text-bg-danger]="(!isMainStat) && hasSideEffect"
-          [class.text-bg-success]="hasEffect && isMainStat"
-          class="input-group-text d-inline text-center col-2"
-    >{{minimumPossibility || 0}} ~ {{maximumPossibility || 0}}</span>
   </div>
 </div>
