@@ -25,6 +25,7 @@ export class StatExplainComponent {
   @Output("onSetTargetStat") onSetTargetStat = new EventEmitter<string>();
   @Output("onCurrentTrainingChanged") currentTrainingChanged = new EventEmitter<number>();
   protected readonly TrainingQuality = TrainingQuality;
+  private timeoutHandler?: number | null;
 
   constructor(private imageService: ImageService) {
 
@@ -57,21 +58,39 @@ export class StatExplainComponent {
     this.currentTrainingChanged.emit(this.currentTraining)
   }
 
-  increaseCurrentTraining() {
-    this.currentTraining = this.currentTraining + 1
+  increaseCurrentTraining(value = 1) {
+    this.currentTraining += value
     this.onCurrentTrainingChanged()
   }
 
-  decreaseCurrentTraining() {
+  decreaseCurrentTraining(value = 1) {
     if (this.currentTraining == 0) {
       this.onCurrentTrainingChanged()
       return
     }
-    this.currentTraining = this.currentTraining - 1;
+    this.currentTraining -= value;
     this.onCurrentTrainingChanged()
   }
 
   setTargetStat() {
     this.onSetTargetStat.emit(this.stat?.name);
+  }
+
+  public mouseup() {
+    if (this.timeoutHandler) {
+      clearInterval(this.timeoutHandler);
+      this.timeoutHandler = null;
+    }
+  }
+
+  public holdIncrease() {
+    this.timeoutHandler = setInterval(() => {
+      this.increaseCurrentTraining(10)
+    }, 500);
+  }
+  public holdDecrease() {
+    this.timeoutHandler = setInterval(() => {
+      this.decreaseCurrentTraining(10)
+    }, 500);
   }
 }

@@ -1,26 +1,33 @@
-<div class="row">
+<div class="">
   <div class="input-group input-group-sm mb-1">
     <div class="input-group-text">
       <input (click)="setTargetStat()" [checked]="isMainStat"
              [value]="" class="form-check-input mt-0" name="targetStat" type="radio">
     </div>
-    <span [class.fw-bold]="isMainStat" class="input-group-text bg-white col-2">
+    <span [class.fw-bold]="isMainStat" class="input-group-text bg-white col-4">
       <img [alt]="stat?.name" [src]="image()">
-<!--      <span *ngIf="hasEffect" class="text-primary">&nbsp;+{{trainingEffect}}</span>-->
+      <!--      <span *ngIf="hasEffect" class="text-primary">&nbsp;+{{trainingEffect}}</span>-->
 
-      <span *ngIf="hasEffect" class="ms-1" [class.border-danger-subtle]="(!isMainStat) && hasSideEffect"
-            [class.fw-bold]="isMainStat"
+      <span class="ms-2 me-1 text-primary">{{currentTraining}}</span>
+
+      <span *ngIf="hasEffect" [class.border-danger-subtle]="(!isMainStat) && hasSideEffect" [class.fw-bold]="isMainStat"
             [class.text-danger]="(!isMainStat) && hasSideEffect"
-            [class.text-success]="hasEffect && isMainStat">
+            [class.text-success]="hasEffect && isMainStat"
+            class="ms-1 me-1">
         {{minimumPossibility || 0}} ~ {{maximumPossibility || 0}}
       </span>
     </span>
-    <span class="col-6"></span>
-    <button (click)="decreaseCurrentTraining()" class="btn d-inline fw-bold text-center col-1">-
+    <button (click)="decreaseCurrentTraining()"
+            (mousedown)="holdDecrease()"
+            (mouseleave)="mouseup()"
+            (mouseup)="mouseup()"
+            class="btn d-inline fw-bold text-center col-1">-
     </button>
-    <input (change)="onCurrentTrainingChanged()" [(ngModel)]="currentTraining" class="form-control border-bottom border-white text-center col-1"
-           type="number">
-    <button (click)="increaseCurrentTraining()" class="btn d-inline fw-bold text-center col-1">+
+    <button (click)="increaseCurrentTraining()"
+            (mousedown)="holdIncrease()"
+            (mouseleave)="mouseup()"
+            (mouseup)="mouseup()"
+            class="btn d-inline fw-bold text-center col-1">+
     </button>
   </div>
 </div>
