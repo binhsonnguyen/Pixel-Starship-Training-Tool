@@ -4,7 +4,7 @@
       <input (click)="setTargetStat()" [checked]="isMainStat"
              [value]="" class="form-check-input mt-0" name="targetStat" type="radio">
     </div>
-    <span [class.fw-bold]="isMainStat" class="input-group-text bg-white col-4">
+    <span [class.fw-bold]="isMainStat" class="input-group-text bg-white col-4" (click)="setTargetStat()">
       <img [alt]="stat?.name" [src]="image()">
       <!--      <span *ngIf="hasEffect" class="text-primary">&nbsp;+{{trainingEffect}}</span>-->
 
