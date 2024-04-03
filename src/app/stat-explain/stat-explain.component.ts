@@ -64,11 +64,11 @@ export class StatExplainComponent {
   }
 
   decreaseCurrentTraining(value = 1) {
-    if (this.currentTraining == 0) {
-      this.onCurrentTrainingChanged()
-      return
+    let newValue = this.currentTraining - value
+    if (newValue < 0) {
+      newValue = 0
     }
-    this.currentTraining -= value;
+    this.currentTraining = newValue;
     this.onCurrentTrainingChanged()
   }
 

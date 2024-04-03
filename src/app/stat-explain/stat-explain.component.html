@@ -8,8 +8,8 @@
       <img [alt]="stat?.name" [src]="image()">
       <!--      <span *ngIf="hasEffect" class="text-primary">&nbsp;+{{trainingEffect}}</span>-->
 
-      <span [class.text-light]="currentTraining == 0"
-            [class.text-secondary]="currentTraining > 0"
+      <span [class.zero-substat]="currentTraining == 0"
+            [class.nonzero-substat]="currentTraining > 0"
             class="ms-2 me-1">{{currentTraining}}</span>
 
       <span *ngIf="hasEffect" [class.border-danger-subtle]="(!isMainStat) && hasSideEffect" [class.fw-bold]="isMainStat"
