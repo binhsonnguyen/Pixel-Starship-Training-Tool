@@ -4,15 +4,24 @@ import {FormsModule} from "@angular/forms";
 import TrainingQuality from "pss-training-lib/dist/TrainingQuality";
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {ImageService} from "../image.service";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {faCirclePlus} from "@fortawesome/free-solid-svg-icons";
+import {faCircleMinus} from "@fortawesome/free-solid-svg-icons";
+import {faCircleRight} from "@fortawesome/free-solid-svg-icons";
+import {faCircleLeft} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-stat-explain',
   standalone: true,
-  imports: [FormsModule, NgForOf, NgIf, NgOptimizedImage],
+  imports: [FormsModule, NgForOf, NgIf, NgOptimizedImage, FontAwesomeModule],
   templateUrl: './stat-explain.component.html',
   styleUrl: './stat-explain.component.sass'
 })
 export class StatExplainComponent {
+  faPlus = faCirclePlus;
+  faMinus = faCircleMinus;
+  faRight = faCircleRight;
+  faLeft = faCircleLeft;
 
   @Input("stat") stat?: Stat;
   @Input("is_main_stat") isMainStat: boolean = false
