@@ -23,8 +23,9 @@
       <fa-icon (click)="decreaseCurrentTraining()" [icon]="faMinus"></fa-icon>
     </span>
     <span class="input-group-text border-0 bg-white col-1">
-      <span [class.zero-substat]="currentTraining == 0"
-            [class.nonzero-substat]="currentTraining > 0"
+      <span [class.zero-stat]="currentTraining == 0"
+            [class.nonzero-stat]="currentTraining > 0"
+            [class.main-stat]="isMainStat"
             class="ms-2 me-1">{{currentTraining}}</span>
     </span>
     <span class="btn d-inline text-center">
