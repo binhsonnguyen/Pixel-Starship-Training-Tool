@@ -9,10 +9,6 @@
       <img [alt]="stat?.name" [src]="image()">
       <!--      <span *ngIf="hasEffect" class="text-primary">&nbsp;+{{trainingEffect}}</span>-->
 
-      <span [class.zero-substat]="currentTraining == 0"
-            [class.nonzero-substat]="currentTraining > 0"
-            class="ms-2 me-1">{{currentTraining}}</span>
-
       <span *ngIf="hasEffect" [class.border-danger-subtle]="(!isMainStat) && hasSideEffect" [class.fw-bold]="isMainStat"
             [class.text-danger]="(!isMainStat) && hasSideEffect"
             [class.text-success]="hasEffect && isMainStat"
@@ -20,17 +16,22 @@
         {{minimumPossibility || 0}} ~ {{maximumPossibility || 0}}
       </span>
     </span>
-    <button (click)="decreaseCurrentTraining()"
-            class="btn d-inline fw-bold text-center col-1">-
-    </button>
-    <button (click)="increaseCurrentTraining()"
-            class="btn d-inline text-center col-1">+
-    </button>
-    <button (click)="decreaseCurrentTraining(10)"
-            class="btn d-inline text-center col-1"><<
-    </button>
-    <button (click)="increaseCurrentTraining(10)"
-            class="btn d-inline text-center col-1">>>
-    </button>
+    <span class="btn d-inline text-center">
+      <fa-icon (click)="decreaseCurrentTraining(10)" [icon]="faLeft"></fa-icon>
+    </span>
+    <span class="btn d-inline text-center">
+      <fa-icon (click)="decreaseCurrentTraining()" [icon]="faMinus"></fa-icon>
+    </span>
+    <span class="input-group-text border-0 bg-white col-1">
+      <span [class.zero-substat]="currentTraining == 0"
+            [class.nonzero-substat]="currentTraining > 0"
+            class="ms-2 me-1">{{currentTraining}}</span>
+    </span>
+    <span class="btn d-inline text-center">
+      <fa-icon (click)="increaseCurrentTraining()" [icon]="faPlus"></fa-icon>
+    </span>
+    <span class="btn d-inline text-center">
+      <fa-icon (click)="increaseCurrentTraining(10)" [icon]="faRight"></fa-icon>
+    </span>
   </div>
 </div>
