@@ -22,12 +22,12 @@
     <span class="btn d-inline text-center">
       <fa-icon (click)="decreaseCurrentTraining()" [icon]="faMinus"></fa-icon>
     </span>
-    <span class="input-group-text border-0 bg-white col-1">
+    <div class="input-group-text border-0 bg-white col-1 justify-content-center">
       <span [class.zero-stat]="currentTraining == 0"
             [class.nonzero-stat]="currentTraining > 0"
             [class.main-stat]="isMainStat"
             class="ms-2 me-1">{{currentTraining}}</span>
-    </span>
+    </div>
     <span class="btn d-inline text-center">
       <fa-icon (click)="increaseCurrentTraining()" [icon]="faPlus"></fa-icon>
     </span>
