@@ -20,8 +20,12 @@
       </select>
     </div>
     <div class="fatigue input-group input-group-sm mb-1">
-      <span class="input-group-text">F</span>
-      <input [(ngModel)]="fatiguee" class="form-control text-center border-danger-subtle text-danger fw-bold" readonly
+      <input
+        [class.text-primary]="fatiguee == 0"
+        [class.text-secondary]="fatiguee == 1"
+        [class.text-warning]="fatiguee == 51"
+        [class.text-danger]="fatiguee == 100"
+        [(ngModel)]="fatiguee" class="form-control text-center fw-bold" readonly
              type="number">
       <button (click)="fatiguee=0" [class.bg-primary]="fatiguee == 0" class="fatigue btn btn-outline-primary"
               type="button">
@@ -45,6 +49,7 @@
       </button>
       <button (click)="fatiguee=100" [class.bg-danger]="fatiguee == 100" class="fatigue btn btn-outline-danger"
               type="button">
+        <img alt="f10" src="assets/fatigue/Fatigue10.webp">
         <img alt="f10" src="assets/fatigue/Fatigue10.webp">
       </button>
     </div>
