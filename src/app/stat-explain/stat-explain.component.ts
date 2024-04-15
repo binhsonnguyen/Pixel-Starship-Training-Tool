@@ -75,22 +75,4 @@ export class StatExplainComponent {
   setTargetStat() {
     this.onSetTargetStat.emit(this.stat?.name);
   }
-
-  public mouseup() {
-    if (this.timeoutHandler) {
-      clearInterval(this.timeoutHandler);
-      this.timeoutHandler = null;
-    }
-  }
-
-  public holdIncrease() {
-    this.timeoutHandler = setInterval(() => {
-      this.increaseCurrentTraining(10)
-    }, 500);
-  }
-  public holdDecrease() {
-    this.timeoutHandler = setInterval(() => {
-      this.decreaseCurrentTraining(10)
-    }, 500);
-  }
 }

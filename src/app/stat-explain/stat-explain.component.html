@@ -4,7 +4,8 @@
       <input (click)="setTargetStat()" [checked]="isMainStat"
              [value]="" class="form-check-input mt-0" name="targetStat" type="radio">
     </div>
-    <span [class.fw-bold]="isMainStat" class="input-group-text bg-white col-4" (click)="setTargetStat()">
+    <span (click)="setTargetStat()" [class.fw-bold]="isMainStat"
+          class="input-group-text bg-white col-4">
       <img [alt]="stat?.name" [src]="image()">
       <!--      <span *ngIf="hasEffect" class="text-primary">&nbsp;+{{trainingEffect}}</span>-->
 
@@ -20,15 +21,9 @@
       </span>
     </span>
     <button (click)="decreaseCurrentTraining()"
-            (mousedown)="holdDecrease()"
-            (mouseleave)="mouseup()"
-            (mouseup)="mouseup()"
             class="btn d-inline fw-bold text-center col-1">-
     </button>
     <button (click)="increaseCurrentTraining()"
-            (mousedown)="holdIncrease()"
-            (mouseleave)="mouseup()"
-            (mouseup)="mouseup()"
             class="btn d-inline text-center col-1">+
     </button>
     <button (click)="decreaseCurrentTraining(10)"
