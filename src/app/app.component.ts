@@ -11,7 +11,7 @@ import TrainingQuality from "pss-training-lib/dist/TrainingQuality";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {LocalStorageService} from "./local-storage.service";
 import {TrainingTaskHelperService} from "./training-task-helper.service";
-import {faCirclePlus, faCircleRight} from "@fortawesome/free-solid-svg-icons";
+import {faCircleMinus, faCirclePlus, faCircleRight} from "@fortawesome/free-solid-svg-icons";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 
 export interface Tile {
@@ -38,6 +38,8 @@ export class AppComponent implements OnInit {
   protected readonly TrainingQuality = TrainingQuality;
   private minimumReachProgressBarWidthInPercent = 15;
   baseHpForBreakpoints = 10;
+  protected readonly faPlus = faCirclePlus;
+  protected readonly faMinus = faCircleMinus;
 
   constructor(private readonly localStorageService: LocalStorageService, private readonly trainingTaskHelper: TrainingTaskHelperService) {
   }
@@ -167,6 +169,4 @@ export class AppComponent implements OnInit {
     this.updatePossibility()
   }
 
-    protected readonly faRight = faCircleRight;
-    protected readonly faPlus = faCirclePlus;
 }
