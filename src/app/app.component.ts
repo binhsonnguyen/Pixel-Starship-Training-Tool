@@ -11,6 +11,8 @@ import TrainingQuality from "pss-training-lib/dist/TrainingQuality";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {LocalStorageService} from "./local-storage.service";
 import {TrainingTaskHelperService} from "./training-task-helper.service";
+import {faCirclePlus, faCircleRight} from "@fortawesome/free-solid-svg-icons";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 
 export interface Tile {
   color: string;
@@ -22,7 +24,7 @@ export interface Tile {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, CommonModule, StatExplainComponent, NgbModule],
+  imports: [RouterOutlet, FormsModule, CommonModule, StatExplainComponent, NgbModule, FaIconComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })
@@ -34,8 +36,8 @@ export class AppComponent implements OnInit {
   maximumPossibility: StatsSet = new StatsSet()
   protected readonly Stat = Stat;
   protected readonly TrainingQuality = TrainingQuality;
-  protected readonly Math = Math;
   private minimumReachProgressBarWidthInPercent = 15;
+  baseHpForBreakpoints = 10;
 
   constructor(private readonly localStorageService: LocalStorageService, private readonly trainingTaskHelper: TrainingTaskHelperService) {
   }
@@ -164,4 +166,7 @@ export class AppComponent implements OnInit {
     this.currentTraining = new StatsSet()
     this.updatePossibility()
   }
+
+    protected readonly faRight = faCircleRight;
+    protected readonly faPlus = faCirclePlus;
 }
