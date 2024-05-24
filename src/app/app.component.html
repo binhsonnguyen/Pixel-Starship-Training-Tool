@@ -54,12 +54,9 @@
               <div class="progress-bar bg-success progress-bar-striped"
                    [class.progress-bar-striped]="currentTraining.total() != totalTrainingPoint"
                    [class.progress-bar-animated]="currentTraining.total() != totalTrainingPoint">
-                {{ currentTraining.total() }} / {{ totalTrainingPoint }}
+                <span *ngIf="crispr == Crispr.NONE">{{ currentTraining.total() }} / {{ baseTrainingPoint }}</span>
+                <span *ngIf="crispr != Crispr.NONE">{{ currentTraining.total() }} / {{ baseTrainingPoint }}+{{crispr.additionTp}}</span>
               </div>
-            </div>
-            <div aria-label="Available TP" aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" class="progress"
-                 role="progressbar" [style]="numberToWidthStyle(percentRemaining)">
-              <div class="progress-bar bg-success-subtle"></div>
             </div>
           </div>
           <div class="progress-stacked ms-2">
@@ -77,7 +74,7 @@
                    [class.bg-success-subtle]="crispr != Crispr.BRONZE"
                    [class.bg-success]="crispr == Crispr.BRONZE"
                    [class.text-black]="crispr != Crispr.BRONZE">
-                +{{Crispr.BRONZE.additionTp}}
+                {{Crispr.BRONZE.name}}
               </div>
             </div>
             <div class="progress" role="progressbar" style="width: 80%" (click)="setCrisprSilver()">
@@ -85,7 +82,7 @@
                    [class.bg-warning-subtle]="crispr != Crispr.SILVER"
                    [class.bg-warning]="crispr == Crispr.SILVER"
                    [class.text-black]="crispr != Crispr.SILVER">
-                +{{Crispr.SILVER.additionTp}}
+                {{Crispr.SILVER.name}}
               </div>
             </div>
           </div>

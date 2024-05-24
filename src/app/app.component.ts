@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
   protected readonly TrainingQuality = TrainingQuality;
   private minimumReachProgressBarWidthInPercent = 15;
   private _crispr = Crispr.NONE
+  private _baseTrainingPoint = 110
   baseHpForBreakpoints = 10;
   protected readonly faPlus = faCirclePlus;
   protected readonly faMinus = faCircleMinus;
@@ -55,15 +56,25 @@ export class AppComponent implements OnInit {
     this.localStorageService.setSaveOption(value);
   }
 
-  get totalTrainingPoint() {
-    return this.training.totalTrainingPoint
+  get baseTrainingPoint(): number {
+    return this._baseTrainingPoint;
   }
 
-  set totalTrainingPoint(value: number) {
-    this.training.totalTrainingPoint = value
-    this.localStorageService.saveTraining(this.training)
-    this.updatePossibility()
+  set baseTrainingPoint(value: number) {
+    this._baseTrainingPoint = value;
+    this.training.totalTrainingPoint = this.totalTrainingPoint
+    this.updatePossibility();
   }
+
+  get totalTrainingPoint() {
+    return this.baseTrainingPoint + this.crispr.additionTp
+  }
+
+  // set totalTrainingPoint(value: number) {
+  //   this.training.totalTrainingPoint = value
+  //   this.localStorageService.saveTraining(this.training)
+  //   this.updatePossibility()
+  // }
 
   get fatiguee(): number {
     return this.training.fatigue
@@ -120,7 +131,7 @@ export class AppComponent implements OnInit {
   }
 
   get percentReach() {
-    let percent = 100 * this.currentTraining.total() / 200
+    let percent = 100 * this.currentTraining.total() / this.totalTrainingPoint
     if (percent < this.minimumReachProgressBarWidthInPercent) {
       percent = this.minimumReachProgressBarWidthInPercent
     }
@@ -164,6 +175,12 @@ export class AppComponent implements OnInit {
     return this._crispr;
   }
 
+  set crispr(value: Crispr) {
+    this._crispr = value;
+    this.training.totalTrainingPoint = this.totalTrainingPoint
+    this.updatePossibility()
+  }
+
   numberToWidthStyle(percent: number) {
     return `width: ${percent}%`
   }
@@ -194,8 +211,10 @@ export class AppComponent implements OnInit {
   }
 
   resetStats() {
-    this.totalTrainingPoint = 110
+    this.baseTrainingPoint = 100
+    this.crispr = Crispr.NONE
     this.fatiguee = 0
+    this.training.totalTrainingPoint = this.totalTrainingPoint
     this.trainingTask = TrainingTask.HP_COMMON
     this.currentTraining = new StatsSet()
     this.updatePossibility()
@@ -210,41 +229,41 @@ export class AppComponent implements OnInit {
   }
 
   toPreviousRarity() {
-    switch (this.totalTrainingPoint) {
+    switch (this.baseTrainingPoint) {
       case 80:
-        this.totalTrainingPoint = 80
+        this.baseTrainingPoint = 80
         break
       case 90:
-        this.totalTrainingPoint = 80
+        this.baseTrainingPoint = 80
         break
       case 100:
-        this.totalTrainingPoint = 90
+        this.baseTrainingPoint = 90
         break
       case 110:
-        this.totalTrainingPoint = 100
+        this.baseTrainingPoint = 100
         break
       case 200:
-        this.totalTrainingPoint = 110
+        this.baseTrainingPoint = 110
         break
     }
   }
 
   toNextRarity() {
-    switch (this.totalTrainingPoint) {
+    switch (this.baseTrainingPoint) {
       case 80:
-        this.totalTrainingPoint = 90
+        this.baseTrainingPoint = 90
         break
       case 90:
-        this.totalTrainingPoint = 100
+        this.baseTrainingPoint = 100
         break
       case 100:
-        this.totalTrainingPoint = 110
+        this.baseTrainingPoint = 110
         break
       case 110:
-        this.totalTrainingPoint = 200
+        this.baseTrainingPoint = 200
         break
       case 200:
-        this.totalTrainingPoint = 200
+        this.baseTrainingPoint = 200
         break
     }
   }
