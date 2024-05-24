@@ -13,6 +13,7 @@ import {LocalStorageService} from "./local-storage.service";
 import {TrainingTaskHelperService} from "./training-task-helper.service";
 import {faCircleMinus, faCirclePlus, faCircleRight} from "@fortawesome/free-solid-svg-icons";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {HpBreakPoint} from "pss-training-lib/dist/HpBreakPoint";
 
 export interface Tile {
   color: string;
@@ -132,6 +133,32 @@ export class AppComponent implements OnInit {
     return this.percentAvailable - this.percentReach
   }
 
+  get hpBreakpoints() {
+    const breakpoints: {hpAddition: number, tpAddition: number}[] = []
+    // return breakpoints
+
+    console.log("total" ,this.totalTrainingPoint)
+    let hp = 1
+    do {
+      const tp = HpBreakPoint
+        .withBase(this.baseHpForBreakpoints)
+        .withAdditionHp(hp)
+        .getValue()
+      console.log("tp", tp)
+      if (tp > this.totalTrainingPoint) {
+        break
+      }
+      breakpoints.push({
+        hpAddition: hp,
+        tpAddition: tp
+      })
+
+      hp++
+    } while (true)
+
+    return breakpoints
+  }
+
   numberToWidthStyle(percent: number) {
     return `width: ${percent}%`
   }
@@ -167,6 +194,14 @@ export class AppComponent implements OnInit {
     this.trainingTask = TrainingTask.HP_COMMON
     this.currentTraining = new StatsSet()
     this.updatePossibility()
+  }
+
+  increaseBaseHp() {
+    this.baseHpForBreakpoints++
+  }
+
+  decreaseBaseHp() {
+    this.baseHpForBreakpoints--
   }
 
 }
