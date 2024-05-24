@@ -137,10 +137,8 @@ export class LocalStorageService {
     return stats
   }
 
-  setStats(stats: StatsSet) {
-    for (const stat of Stat.ALL) {
-      localStorage.setItem(stat.name, String(stats.get(stat)))
-    }
+  setStat(stat: Stat, value: number) {
+    localStorage.setItem(stat.name, String(value))
   }
 
   getBaseHp(): number {

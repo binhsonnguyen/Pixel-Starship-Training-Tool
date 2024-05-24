@@ -34,7 +34,16 @@ export class AppComponent implements OnInit {
   private readonly MINIMAL_PROGRESSION = 20
 
   constructor(private readonly localStorageService: LocalStorageService, private readonly trainingTaskHelper: TrainingTaskHelperService) {
+    this._baseTrainingPoint = this.localStorageService.getBaseTp()
+    this._fatiguee = this.localStorageService.getFatigue()
 
+    const targetStat = this.localStorageService.getMainStat()
+    const trainingQuality = this.localStorageService.getQuality()
+    this._trainingTask = this.trainingTaskHelper.getTrainingTask(targetStat.name, trainingQuality.name)
+
+    this._statsSet = this.localStorageService.getStats()
+    this._baseHp = this.localStorageService.getBaseHp()
+    this._crispr = this.localStorageService.getCrispr()
   }
 
   private _minimumPossibility: StatsSet = new StatsSet()
@@ -53,83 +62,81 @@ export class AppComponent implements OnInit {
     return this.baseTrainingPoint + this.crispr.additionTp
   }
 
+  private _baseTrainingPoint: number
+
   get baseTrainingPoint(): number {
-    return this.localStorageService.getBaseTp()
+    return this._baseTrainingPoint
   }
 
   set baseTrainingPoint(value: number) {
+    this._baseTrainingPoint = value
     this.localStorageService.setBaseTp(value)
     this.updatePossibility()
   }
 
-  get traingTask(): TrainingTask {
-    return this.localStorageService.getTrainingTask()
-  }
-
-  set traingTask(value: TrainingTask) {
-    this.localStorageService.setTrainingTask(value)
-  }
+  private _fatiguee: number
 
   get fatiguee(): number {
-    return this.localStorageService.getFatigue()
+    return this._fatiguee
   }
 
   set fatiguee(value: number) {
+    this._fatiguee = value
     this.localStorageService.setFatigue(value)
     this.updatePossibility()
   }
 
+  private _trainingTask: TrainingTask
+
   get targetStat(): Stat {
-    return this.localStorageService.getMainStat()
+    return this._trainingTask.mainStat
   }
 
   set targetStat(value: Stat) {
+    this._trainingTask = this.trainingTaskHelper.getTrainingTask(value.name, this.trainingQuality.name)
     this.localStorageService.setMainStat(value)
     this.updatePossibility()
   }
 
-  get targetQuality(): TrainingQuality {
-    return this.localStorageService.getQuality()
+  get trainingQuality(): TrainingQuality {
+    return this._trainingTask.quality
   }
 
-  set targetQuality(value: TrainingQuality) {
+  set trainingQuality(value: TrainingQuality) {
+    this._trainingTask = this.trainingTaskHelper.getTrainingTask(this.targetStat.name, value.name)
     this.localStorageService.setQuality(value)
     this.updatePossibility()
   }
 
-  get statsSet() {
-    return this.localStorageService.getStats()
-  }
-
-  set statsSet(value: StatsSet) {
-    this.localStorageService.setStats(value)
-  }
-
-  get usedTp() {
-    return this.statsSet.total()
-  }
+  private _statsSet: StatsSet
 
   get percentReach() {
-    let percent = 100 * this.statsSet.total() / this.totalTrainingPoint
+    let percent = 100 * this.getTotalStatUsed() / this.totalTrainingPoint
     if (percent < this.MINIMAL_PROGRESSION) {
       percent = this.MINIMAL_PROGRESSION
     }
     return percent
   }
 
-  get baseHpForBreakpoints(): number {
-    return this.localStorageService.getBaseHp()
+  private _baseHp: number
+
+  get baseHp(): number {
+    return this._baseHp
   }
 
-  set baseHpForBreakpoints(value: number) {
+  set baseHp(value: number) {
+    this._baseHp = value
     this.localStorageService.setBaseHp(value)
   }
 
+  private _crispr: Crispr
+
   get crispr(): Crispr {
-    return this.localStorageService.getCrispr()
+    return this._crispr
   }
 
   set crispr(value: Crispr) {
+    this._crispr = value
     this.localStorageService.setCrispr(value)
     this.updatePossibility()
   }
@@ -141,7 +148,7 @@ export class AppComponent implements OnInit {
     let hp = 1
     do {
       const tp = HpBreakPoint
-        .withBase(this.baseHpForBreakpoints)
+        .withBase(this.baseHp)
         .withAdditionHp(hp)
         .getValue()
       console.log("tp", tp)
@@ -162,6 +169,19 @@ export class AppComponent implements OnInit {
     return this.localStorageService.getTrainingTask()
   }
 
+  getTotalStatUsed(): number {
+    return this._statsSet.total()
+  }
+
+  getStat(stat: Stat): number {
+    return this._statsSet.get(stat)
+  }
+
+  setStat(stat: Stat, value: number) {
+    this._statsSet.set(stat, value)
+    this.localStorageService.setStat(stat, value)
+  }
+
   ngOnInit(): void {
     this.updatePossibility()
   }
@@ -171,8 +191,8 @@ export class AppComponent implements OnInit {
   }
 
   changeCurrentTraining(stat: Stat, value: number) {
-    const currentPoint = this.statsSet.get(stat)
-    const availablePoint = this.totalTrainingPoint - this.statsSet.total()
+    const currentPoint = this.getStat(stat)
+    const availablePoint = this.totalTrainingPoint - this.getTotalStatUsed()
     let maximumPoint = currentPoint + availablePoint
     let afterChange = currentPoint + value
     if (afterChange <= 0) {
@@ -181,13 +201,12 @@ export class AppComponent implements OnInit {
       afterChange = maximumPoint
     }
 
-    this.statsSet.set(stat, afterChange)
-    this.localStorageService.setStats(this.statsSet)
+    this.setStat(stat, afterChange)
     this.updatePossibility()
   }
 
   updatePossibility() {
-    const training = new Training(this.totalTrainingPoint, this.fatiguee, this.traingTask, this.statsSet)
+    const training = new Training(this.totalTrainingPoint, this.fatiguee, this.trainingTask, this._statsSet)
     for (const stat of Stat.ALL) {
       const min = training.minimumPossibleImprovement(stat)
       this.minimumPossibility.set(stat, min)
@@ -201,17 +220,19 @@ export class AppComponent implements OnInit {
     this.crispr = Crispr.NONE
     this.fatiguee = 0
     this.targetStat = Stat.HP
-    this.targetQuality = TrainingQuality.COMMON
-    this.statsSet = new StatsSet()
+    this.trainingQuality = TrainingQuality.COMMON
+    Stat.ALL.forEach(value => {
+      this.setStat(value, 0)
+    });
     this.updatePossibility()
   }
 
   increaseBaseHp() {
-    this.baseHpForBreakpoints++
+    this.baseHp++
   }
 
   decreaseBaseHp() {
-    this.baseHpForBreakpoints--
+    this.baseHp--
   }
 
   toPreviousRarity() {
