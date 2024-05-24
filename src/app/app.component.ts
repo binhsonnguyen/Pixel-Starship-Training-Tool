@@ -136,10 +136,9 @@ export class AppComponent implements OnInit {
   }
 
   get hpBreakpoints() {
-    const breakpoints: {hpAddition: number, tpAddition: number}[] = []
-    // return breakpoints
+    const breakpoints: { hpAddition: number, tpAddition: number }[] = []
 
-    console.log("total" ,this.totalTrainingPoint)
+    console.log("total", this.totalTrainingPoint)
     let hp = 1
     do {
       const tp = HpBreakPoint
@@ -159,6 +158,10 @@ export class AppComponent implements OnInit {
     } while (true)
 
     return breakpoints
+  }
+
+  get crispr(): Crispr {
+    return this._crispr;
   }
 
   numberToWidthStyle(percent: number) {
