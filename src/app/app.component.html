@@ -1,169 +1,172 @@
 <div class="container">
-  <div class="row">
-    <h4 class=" mt-2 text-center">Training Possibility</h4>
-  </div>
-  <div class="row">
-    <div class="input-group input-group-sm mt-1 mb-1">
-      <span class="input-group-text">TP</span>
-      <select [(ngModel)]="totalTrainingPoint" class="form-select fw-bold text-danger border-danger-subtle">
-        <option value="80">80</option>
-        <option value="90">90</option>
-        <option value="100">100</option>
-        <option selected value="110">110</option>
-        <option value="200">200</option>
-      </select>
-      <span class="input-group-text">Quality</span>
-      <select [(ngModel)]="targetQuality" class="form-select" style="width:auto;">
-        <option *ngFor="let item of TrainingQuality.ALL" [value]="item.name">
-          {{item.name}}
-        </option>
-      </select>
-    </div>
-    <div class="fatigue input-group input-group-sm mb-1">
-      <input
-        [class.text-primary]="fatiguee == 0"
-        [class.text-secondary]="fatiguee == 1"
-        [class.text-warning]="fatiguee == 51"
-        [class.text-danger]="fatiguee == 100"
-        [(ngModel)]="fatiguee" class="form-control text-center fw-bold" readonly
-             type="number">
-      <button (click)="fatiguee=0" [class.bg-primary]="fatiguee == 0" class="fatigue btn btn-outline-primary"
-              type="button">
-        <img alt="f0" src="assets/fatigue/Fatigue0.webp">
-      </button>
-      <button (click)="fatiguee=1" [class.bg-secondary]="fatiguee == 1" class="fatigue btn btn-outline-secondary"
-              type="button">
-        <img alt="f1" src="assets/fatigue/Fatigue1.webp">
-        <img alt="f2" src="assets/fatigue/Fatigue2.webp">
-        <img alt="f3" src="assets/fatigue/Fatigue3.webp">
-        <img alt="f4" src="assets/fatigue/Fatigue4.webp">
-        <img alt="f5" src="assets/fatigue/Fatigue5.webp">
-      </button>
-      <button (click)="fatiguee=51" [class.bg-warning]="fatiguee == 51" class="fatigue btn btn-outline-warning"
-              type="button">
-        <img alt="f6" src="assets/fatigue/Fatigue6.webp">
-        <img alt="f7" src="assets/fatigue/Fatigue7.webp">
-        <img alt="f8" src="assets/fatigue/Fatigue8.webp">
-        <img alt="f9" src="assets/fatigue/Fatigue9.webp">
-        <img alt="f10" src="assets/fatigue/Fatigue10.webp">
-      </button>
-      <button (click)="fatiguee=100" [class.bg-danger]="fatiguee == 100" class="fatigue btn btn-outline-danger"
-              type="button">
-        <img alt="f10" src="assets/fatigue/Fatigue10.webp">
-      </button>
-    </div>
-    <div class="input-group input-group-sm mb-1">
-      <input [value]="trainingTask.name" class="form-control text-primary bg-white border-primary-subtle text-center" disabled readonly
-             type="text">
-    </div>
+  <div class="card my-2">
+    <div class="card-body">
+      <h5 class="card-title small">Training Possibility</h5>
 
-    <div class="progress-stacked mt-2 mb-3">
-      <div aria-label="Current TP" class="progress"
-           role="progressbar" [style]="numberToWidthStyle(percentReach)">
-        <div class="progress-bar bg-success progress-bar-striped"
-             [class.progress-bar-striped]="currentTraining.total() != totalTrainingPoint"
-             [class.progress-bar-animated]="currentTraining.total() != totalTrainingPoint">
-          {{currentTraining.total()}} / {{totalTrainingPoint}}
+      <div class="row">
+        <div class="input-group input-group-sm mt-1 mb-1">
+          <span class="input-group-text">TP</span>
+          <select [(ngModel)]="totalTrainingPoint" class="form-select fw-bold text-danger border-danger-subtle">
+            <option value="80">80</option>
+            <option value="90">90</option>
+            <option value="100">100</option>
+            <option selected value="110">110</option>
+            <option value="200">200</option>
+          </select>
+          <span class="input-group-text">Quality</span>
+          <select [(ngModel)]="targetQuality" class="form-select" style="width:auto;">
+            <option *ngFor="let item of TrainingQuality.ALL" [value]="item.name">
+              {{item.name}}
+            </option>
+          </select>
         </div>
-      </div>
-      <div aria-label="Available TP" aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" class="progress"
-           role="progressbar" [style]="numberToWidthStyle(percentRemaining)">
-        <div class="progress-bar bg-success-subtle"></div>
-      </div>
-    </div>
+        <div class="fatigue input-group input-group-sm mb-1">
+          <input
+            [class.text-primary]="fatiguee == 0"
+            [class.text-secondary]="fatiguee == 1"
+            [class.text-warning]="fatiguee == 51"
+            [class.text-danger]="fatiguee == 100"
+            [(ngModel)]="fatiguee" class="form-control text-center fw-bold" readonly
+            type="number">
+          <button (click)="fatiguee=0" [class.bg-primary]="fatiguee == 0" class="fatigue btn btn-outline-primary"
+                  type="button">
+            <img alt="f0" src="assets/fatigue/Fatigue0.webp">
+          </button>
+          <button (click)="fatiguee=1" [class.bg-secondary]="fatiguee == 1" class="fatigue btn btn-outline-secondary"
+                  type="button">
+            <img alt="f1" src="assets/fatigue/Fatigue1.webp">
+            <img alt="f2" src="assets/fatigue/Fatigue2.webp">
+            <img alt="f3" src="assets/fatigue/Fatigue3.webp">
+            <img alt="f4" src="assets/fatigue/Fatigue4.webp">
+            <img alt="f5" src="assets/fatigue/Fatigue5.webp">
+          </button>
+          <button (click)="fatiguee=51" [class.bg-warning]="fatiguee == 51" class="fatigue btn btn-outline-warning"
+                  type="button">
+            <img alt="f6" src="assets/fatigue/Fatigue6.webp">
+            <img alt="f7" src="assets/fatigue/Fatigue7.webp">
+            <img alt="f8" src="assets/fatigue/Fatigue8.webp">
+            <img alt="f9" src="assets/fatigue/Fatigue9.webp">
+            <img alt="f10" src="assets/fatigue/Fatigue10.webp">
+          </button>
+          <button (click)="fatiguee=100" [class.bg-danger]="fatiguee == 100" class="fatigue btn btn-outline-danger"
+                  type="button">
+            <img alt="f10" src="assets/fatigue/Fatigue10.webp">
+          </button>
+        </div>
+        <div class="input-group input-group-sm mb-1">
+          <input [value]="trainingTask.name" class="form-control text-primary bg-white border-primary-subtle text-center" disabled readonly
+                 type="text">
+        </div>
 
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.HP, $event)" [current_training]="currentTraining.hp"
-                      (onSetTargetStat)="targetStat = $event"
-                      [is_main_stat]="(trainingTask.mainStat == Stat.HP)"
-                      [maximum_possibility]="maximumPossibility.hp"
-                      [minimum_possibility]="minimumPossibility.hp"
-                      [required_effect]="training.requiredStatEffect(Stat.HP)"
-                      [stat]="Stat.HP"
-                      [training_effect]="trainingTask.statsEffective.hp">
-    </app-stat-explain>
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ATK, $event)" [current_training]="currentTraining.atk"
-                      (onSetTargetStat)="targetStat = $event"
-                      [is_main_stat]="trainingTask.mainStat == Stat.ATK"
-                      [maximum_possibility]="maximumPossibility.atk"
-                      [minimum_possibility]="minimumPossibility.atk"
-                      [required_effect]="training.requiredStatEffect(Stat.ATK)"
-                      [stat]="Stat.ATK"
-                      [training_effect]="trainingTask.statsEffective.atk">
-    </app-stat-explain>
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.RPR, $event)" [current_training]="currentTraining.rpr"
-                      (onSetTargetStat)="targetStat = $event"
-                      [is_main_stat]="trainingTask.mainStat == Stat.RPR"
-                      [maximum_possibility]="maximumPossibility.rpr"
-                      [minimum_possibility]="minimumPossibility.rpr"
-                      [required_effect]="training.requiredStatEffect(Stat.RPR)"
-                      [stat]="Stat.RPR"
-                      [training_effect]="trainingTask.statsEffective.rpr">
-    </app-stat-explain>
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ABL, $event)" [current_training]="currentTraining.abl"
-                      (onSetTargetStat)="targetStat = $event"
-                      [is_main_stat]="trainingTask.mainStat == Stat.ABL"
-                      [maximum_possibility]="maximumPossibility.abl"
-                      [minimum_possibility]="minimumPossibility.abl"
-                      [required_effect]="training.requiredStatEffect(Stat.ABL)"
-                      [stat]="Stat.ABL"
-                      [training_effect]="trainingTask.statsEffective.abl">
-    </app-stat-explain>
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.STA, $event)" [current_training]="currentTraining.sta"
-                      (onSetTargetStat)="targetStat = $event"
-                      [is_main_stat]="trainingTask.mainStat == Stat.STA"
-                      [maximum_possibility]="maximumPossibility.sta"
-                      [minimum_possibility]="minimumPossibility.sta"
-                      [required_effect]="training.requiredStatEffect(Stat.STA)"
-                      [stat]="Stat.STA"
-                      [training_effect]="trainingTask.statsEffective.sta">
-    </app-stat-explain>
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.PLT, $event)" [current_training]="currentTraining.plt"
-                      (onSetTargetStat)="targetStat = $event"
-                      [is_main_stat]="trainingTask.mainStat == Stat.PLT"
-                      [maximum_possibility]="maximumPossibility.plt"
-                      [minimum_possibility]="minimumPossibility.plt"
-                      [required_effect]="training.requiredStatEffect(Stat.PLT)"
-                      [stat]="Stat.PLT"
-                      [training_effect]="trainingTask.statsEffective.plt">
-    </app-stat-explain>
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.SCI, $event)" [current_training]="currentTraining.sci"
-                      (onSetTargetStat)="targetStat = $event"
-                      [is_main_stat]="trainingTask.mainStat == Stat.SCI"
-                      [maximum_possibility]="maximumPossibility.sci"
-                      [minimum_possibility]="minimumPossibility.sci"
-                      [required_effect]="training.requiredStatEffect(Stat.SCI)"
-                      [stat]="Stat.SCI"
-                      [training_effect]="trainingTask.statsEffective.sci">
-    </app-stat-explain>
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ENG, $event)" [current_training]="currentTraining.eng"
-                      (onSetTargetStat)="targetStat = $event"
-                      [is_main_stat]="trainingTask.mainStat == Stat.ENG"
-                      [maximum_possibility]="maximumPossibility.eng"
-                      [minimum_possibility]="minimumPossibility.eng"
-                      [required_effect]="training.requiredStatEffect(Stat.ENG)"
-                      [stat]="Stat.ENG"
-                      [training_effect]="trainingTask.statsEffective.eng">
-    </app-stat-explain>
-    <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.WPN, $event)" [current_training]="currentTraining.wpn"
-                      (onSetTargetStat)="targetStat = $event"
-                      [is_main_stat]="trainingTask.mainStat == Stat.WPN"
-                      [maximum_possibility]="maximumPossibility.wpn"
-                      [minimum_possibility]="minimumPossibility.wpn"
-                      [required_effect]="training.requiredStatEffect(Stat.WPN)"
-                      [stat]="Stat.WPN"
-                      [training_effect]="trainingTask.statsEffective.wpn">
-    </app-stat-explain>
+        <div class="progress-stacked mt-2 mb-3">
+          <div aria-label="Current TP" class="progress"
+               role="progressbar" [style]="numberToWidthStyle(percentReach)">
+            <div class="progress-bar bg-success progress-bar-striped"
+                 [class.progress-bar-striped]="currentTraining.total() != totalTrainingPoint"
+                 [class.progress-bar-animated]="currentTraining.total() != totalTrainingPoint">
+              {{currentTraining.total()}} / {{totalTrainingPoint}}
+            </div>
+          </div>
+          <div aria-label="Available TP" aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" class="progress"
+               role="progressbar" [style]="numberToWidthStyle(percentRemaining)">
+            <div class="progress-bar bg-success-subtle"></div>
+          </div>
+        </div>
 
-  </div>
-  <div class="row align-items-center">
-    <label class="form-check-label col-6">
-      <input [(ngModel)]="autoSave" checked class="border-success text-success bg-success" type="checkbox">
-      Auto Save
-    </label>
-    <div class="col-6">
-      <div class=" input-group-sm mt-1 mb-1 align-items-center justify-content-end">
-        <button (click)="resetStats()" class="fatigue mx-1 btn btn-outline-danger col-5" type="button">Reset</button>
-        <button (click)="saveStats()" class="fatigue mx-1 btn btn-success col-5" type="button">Save</button>
+        <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.HP, $event)" [current_training]="currentTraining.hp"
+                          (onSetTargetStat)="targetStat = $event"
+                          [is_main_stat]="(trainingTask.mainStat == Stat.HP)"
+                          [maximum_possibility]="maximumPossibility.hp"
+                          [minimum_possibility]="minimumPossibility.hp"
+                          [required_effect]="training.requiredStatEffect(Stat.HP)"
+                          [stat]="Stat.HP"
+                          [training_effect]="trainingTask.statsEffective.hp">
+        </app-stat-explain>
+        <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ATK, $event)" [current_training]="currentTraining.atk"
+                          (onSetTargetStat)="targetStat = $event"
+                          [is_main_stat]="trainingTask.mainStat == Stat.ATK"
+                          [maximum_possibility]="maximumPossibility.atk"
+                          [minimum_possibility]="minimumPossibility.atk"
+                          [required_effect]="training.requiredStatEffect(Stat.ATK)"
+                          [stat]="Stat.ATK"
+                          [training_effect]="trainingTask.statsEffective.atk">
+        </app-stat-explain>
+        <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.RPR, $event)" [current_training]="currentTraining.rpr"
+                          (onSetTargetStat)="targetStat = $event"
+                          [is_main_stat]="trainingTask.mainStat == Stat.RPR"
+                          [maximum_possibility]="maximumPossibility.rpr"
+                          [minimum_possibility]="minimumPossibility.rpr"
+                          [required_effect]="training.requiredStatEffect(Stat.RPR)"
+                          [stat]="Stat.RPR"
+                          [training_effect]="trainingTask.statsEffective.rpr">
+        </app-stat-explain>
+        <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ABL, $event)" [current_training]="currentTraining.abl"
+                          (onSetTargetStat)="targetStat = $event"
+                          [is_main_stat]="trainingTask.mainStat == Stat.ABL"
+                          [maximum_possibility]="maximumPossibility.abl"
+                          [minimum_possibility]="minimumPossibility.abl"
+                          [required_effect]="training.requiredStatEffect(Stat.ABL)"
+                          [stat]="Stat.ABL"
+                          [training_effect]="trainingTask.statsEffective.abl">
+        </app-stat-explain>
+        <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.STA, $event)" [current_training]="currentTraining.sta"
+                          (onSetTargetStat)="targetStat = $event"
+                          [is_main_stat]="trainingTask.mainStat == Stat.STA"
+                          [maximum_possibility]="maximumPossibility.sta"
+                          [minimum_possibility]="minimumPossibility.sta"
+                          [required_effect]="training.requiredStatEffect(Stat.STA)"
+                          [stat]="Stat.STA"
+                          [training_effect]="trainingTask.statsEffective.sta">
+        </app-stat-explain>
+        <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.PLT, $event)" [current_training]="currentTraining.plt"
+                          (onSetTargetStat)="targetStat = $event"
+                          [is_main_stat]="trainingTask.mainStat == Stat.PLT"
+                          [maximum_possibility]="maximumPossibility.plt"
+                          [minimum_possibility]="minimumPossibility.plt"
+                          [required_effect]="training.requiredStatEffect(Stat.PLT)"
+                          [stat]="Stat.PLT"
+                          [training_effect]="trainingTask.statsEffective.plt">
+        </app-stat-explain>
+        <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.SCI, $event)" [current_training]="currentTraining.sci"
+                          (onSetTargetStat)="targetStat = $event"
+                          [is_main_stat]="trainingTask.mainStat == Stat.SCI"
+                          [maximum_possibility]="maximumPossibility.sci"
+                          [minimum_possibility]="minimumPossibility.sci"
+                          [required_effect]="training.requiredStatEffect(Stat.SCI)"
+                          [stat]="Stat.SCI"
+                          [training_effect]="trainingTask.statsEffective.sci">
+        </app-stat-explain>
+        <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.ENG, $event)" [current_training]="currentTraining.eng"
+                          (onSetTargetStat)="targetStat = $event"
+                          [is_main_stat]="trainingTask.mainStat == Stat.ENG"
+                          [maximum_possibility]="maximumPossibility.eng"
+                          [minimum_possibility]="minimumPossibility.eng"
+                          [required_effect]="training.requiredStatEffect(Stat.ENG)"
+                          [stat]="Stat.ENG"
+                          [training_effect]="trainingTask.statsEffective.eng">
+        </app-stat-explain>
+        <app-stat-explain (onCurrentTrainingChanged)="updateCurrentTraining(Stat.WPN, $event)" [current_training]="currentTraining.wpn"
+                          (onSetTargetStat)="targetStat = $event"
+                          [is_main_stat]="trainingTask.mainStat == Stat.WPN"
+                          [maximum_possibility]="maximumPossibility.wpn"
+                          [minimum_possibility]="minimumPossibility.wpn"
+                          [required_effect]="training.requiredStatEffect(Stat.WPN)"
+                          [stat]="Stat.WPN"
+                          [training_effect]="trainingTask.statsEffective.wpn">
+        </app-stat-explain>
+
+      </div>
+      <div class="row align-items-center">
+        <label class="form-check-label small col-6">
+          <input [(ngModel)]="autoSave" checked class="border-success text-success bg-success" type="checkbox">
+          Auto Save
+        </label>
+        <div class="col-6">
+          <div class=" input-group-sm mt-1 mb-1 align-items-center justify-content-end">
+            <button (click)="resetStats()" class="fatigue mx-1 btn btn-outline-danger col-5" type="button">Reset</button>
+            <button (click)="saveStats()" class="fatigue mx-1 btn btn-success col-5" type="button">Save</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
