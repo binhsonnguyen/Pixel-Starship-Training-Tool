@@ -16,4 +16,5 @@ export class Crispr {
   public static readonly NONE: Crispr = new Crispr("NONE", 0);
   public static readonly BRONZE: Crispr = new Crispr("Bronze", 6);
   public static readonly SILVER: Crispr = new Crispr("Silver", 10);
+  public static readonly GOLDEN: Crispr = new Crispr("Golden", 10);
 }
