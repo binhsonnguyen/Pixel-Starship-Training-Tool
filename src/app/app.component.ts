@@ -204,4 +204,43 @@ export class AppComponent implements OnInit {
     this.baseHpForBreakpoints--
   }
 
+  toPreviousRarity() {
+    switch (this.totalTrainingPoint) {
+      case 80:
+        this.totalTrainingPoint = 80
+        break
+      case 90:
+        this.totalTrainingPoint = 80
+        break
+      case 100:
+        this.totalTrainingPoint = 90
+        break
+      case 110:
+        this.totalTrainingPoint = 100
+        break
+      case 200:
+        this.totalTrainingPoint = 110
+        break
+    }
+  }
+
+  toNextRarity() {
+    switch (this.totalTrainingPoint) {
+      case 80:
+        this.totalTrainingPoint = 90
+        break
+      case 90:
+        this.totalTrainingPoint = 100
+        break
+      case 100:
+        this.totalTrainingPoint = 110
+        break
+      case 110:
+        this.totalTrainingPoint = 200
+        break
+      case 200:
+        this.totalTrainingPoint = 200
+        break
+    }
+  }
 }
