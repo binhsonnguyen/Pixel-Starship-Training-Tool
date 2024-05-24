@@ -21,13 +21,6 @@
           </select>
         </div>
         <div class="fatigue input-group input-group-sm mb-1">
-          <input
-            [class.text-primary]="fatiguee == 0"
-            [class.text-secondary]="fatiguee == 1"
-            [class.text-warning]="fatiguee == 51"
-            [class.text-danger]="fatiguee == 100"
-            [(ngModel)]="fatiguee" class="form-control text-center fw-bold" readonly
-            type="number">
           <button (click)="fatiguee=0" [class.bg-primary]="fatiguee == 0" class="fatigue btn btn-outline-primary"
                   type="button">
             <img alt="f0" src="assets/fatigue/Fatigue0.webp">
