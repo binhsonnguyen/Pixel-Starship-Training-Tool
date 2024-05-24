@@ -44,11 +44,11 @@
         </div>
 
 
-        <div class="input-group input-group-sm mt-1 mb-1">
+        <div class="btn-group-sm flex-container mt-2 mb-3">
           <span class="btn d-inline-block text-center">
             <fa-icon (click)="toPreviousRarity()" [icon]="faMinus"></fa-icon>
           </span>
-          <div class="progress-stacked mt-2 mb-3 flex-fill">
+          <div class="progress-stacked flex-fill">
             <div aria-label="Current TP" class="progress"
                  role="progressbar" [style]="numberToWidthStyle(percentReach)">
               <div class="progress-bar bg-success progress-bar-striped"
@@ -62,8 +62,25 @@
               <div class="progress-bar bg-success-subtle"></div>
             </div>
           </div>
+          <div class="progress-stacked ms-2">
+            <div class="progress" role="" style="width: 80%">
+              <div class="progress-bar progress-bar-striped bg-secondary-subtle text-black ps-2 pe-1">
+                No CRISPR
+              </div>
+            </div>
+            <div class="progress" role="progressbar" style="width: 80%">
+              <div class="progress-bar bg-success-subtle text-black ps-1 pe-1">
+                +6
+              </div>
+            </div>
+            <div class="progress" role="progressbar" style="width: 33%">
+              <div class="progress-bar bg-warning-subtle text-black ps-1 pe-2">
+                +4
+              </div>
+            </div>
+          </div>
 
-          <span class="btn d-inline-block text-center">
+          <span class="input-group-text btn d-inline-block text-center">
             <fa-icon (click)="toNextRarity()" [icon]="faPlus"></fa-icon>
           </span>
         </div>
