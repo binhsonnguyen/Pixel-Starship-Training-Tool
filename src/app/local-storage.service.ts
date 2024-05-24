@@ -4,13 +4,14 @@ import {TrainingTaskHelperService} from "./training-task-helper.service";
 import Stat from "pss-training-lib/dist/Stat";
 import TrainingQuality from "pss-training-lib/dist/TrainingQuality";
 import TrainingTask from "pss-training-lib/dist/TrainingTask";
+import {Crispr} from "./Crispr";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
   private readonly BASE_TP = "base_tp"
-  private readonly ADDITION_TP = "addition_tp"
+  private readonly CRISPR = "crispr"
   private readonly FATIGUE = "fatigue";
   private readonly MAIN_STAT = "main_stat";
   private readonly QUALITY = "quality";
@@ -28,12 +29,24 @@ export class LocalStorageService {
     localStorage.setItem(this.BASE_TP, String(value))
   }
 
-  getAdditionTp(): number {
-    return Number(localStorage.getItem(this.ADDITION_TP)) || 0
+  getCrispr(): Crispr {
+    const crisprName = localStorage.getItem(this.CRISPR)
+    switch (crisprName) {
+      case "None":
+        return Crispr.NONE
+      case "Bronze":
+        return Crispr.BRONZE
+      case "Silver":
+        return Crispr.SILVER
+      case "Golden":
+        return Crispr.GOLDEN
+      default:
+        return Crispr.NONE
+    }
   }
 
-  setAdditionTp(value: number) {
-    localStorage.setItem(this.ADDITION_TP, String(value))
+  setCrispr(value: Crispr) {
+    localStorage.setItem(this.CRISPR, value.name)
   }
 
   getFatigue(): number {

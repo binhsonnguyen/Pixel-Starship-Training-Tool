@@ -8,7 +8,7 @@
           <span class="input-group-text">Quality</span>
           <select [(ngModel)]="targetQuality" class="form-select" style="width:auto;">
             <option *ngFor="let item of TrainingQuality.ALL" [value]="item.name">
-              {{item.name}}
+              {{ item.name }}
             </option>
           </select>
         </div>
@@ -39,7 +39,8 @@
           </button>
         </div>
         <div class="input-group input-group-sm mb-1">
-          <input [value]="trainingTask.name" class="form-control text-primary bg-white border-primary-subtle text-center" disabled readonly
+          <input [value]="trainingTask.name"
+                 class="form-control text-primary bg-white border-primary-subtle text-center" disabled readonly
                  type="text">
         </div>
 
@@ -49,40 +50,41 @@
             <fa-icon (click)="toPreviousRarity()" [icon]="faMinus"></fa-icon>
           </span>
           <div class="progress-stacked flex-fill">
-            <div aria-label="Current TP" class="progress"
-                 role="progressbar" [style]="numberToWidthStyle(percentReach)">
-              <div class="progress-bar bg-success progress-bar-striped"
-                   [class.progress-bar-striped]="currentTraining.total() != totalTrainingPoint"
-                   [class.progress-bar-animated]="currentTraining.total() != totalTrainingPoint">
-                <span *ngIf="crispr == Crispr.NONE">{{ currentTraining.total() }} / {{ baseTrainingPoint }}</span>
-                <span *ngIf="crispr != Crispr.NONE">{{ currentTraining.total() }} / {{ baseTrainingPoint }}+{{crispr.additionTp}}</span>
+            <div [style]="numberToWidthStyle(percentReach)" aria-label="Current TP"
+                 class="progress" role="progressbar">
+              <div [class.progress-bar-animated]="statsSet.total() != totalTrainingPoint"
+                   [class.progress-bar-striped]="statsSet.total() != totalTrainingPoint"
+                   class="progress-bar bg-success progress-bar-striped">
+                <span *ngIf="crispr == Crispr.NONE">{{ statsSet.total() }} / {{ baseTrainingPoint }}</span>
+                <span *ngIf="crispr != Crispr.NONE">{{ statsSet.total() }} / {{ baseTrainingPoint }}
+                  +{{ crispr.additionTp }}</span>
               </div>
             </div>
           </div>
           <div class="progress-stacked ms-2">
-            <div class="progress" role="" style="width: 80%" (click)="setCrisprNone()">
-              <div class="progress-bar ps-2 pe-1"
+            <div (click)="setCrispr(Crispr.NONE)" class="progress" role="" style="width: 80%">
+              <div [class.bg-primary]="crispr == Crispr.NONE"
                    [class.bg-secondary-subtle]="crispr != Crispr.NONE"
-                   [class.bg-primary]="crispr == Crispr.NONE"
                    [class.text-black]="crispr != Crispr.NONE"
+                   class="progress-bar ps-2 pe-1"
               >
-                {{Crispr.NONE.name}}
+                {{ Crispr.NONE.name }}
               </div>
             </div>
-            <div class="progress" role="progressbar" style="width: 80%" (click)="setCrisprBronze()">
-              <div class="progress-bar bg-success-subtle text-black ps-1 pe-1"
-                   [class.bg-success-subtle]="crispr != Crispr.BRONZE"
+            <div (click)="setCrispr(Crispr.BRONZE)" class="progress" role="progressbar" style="width: 80%">
+              <div [class.bg-success-subtle]="crispr != Crispr.BRONZE"
                    [class.bg-success]="crispr == Crispr.BRONZE"
-                   [class.text-black]="crispr != Crispr.BRONZE">
-                {{Crispr.BRONZE.name}}
+                   [class.text-black]="crispr != Crispr.BRONZE"
+                   class="progress-bar bg-success-subtle text-black ps-1 pe-1">
+                {{ Crispr.BRONZE.name }}
               </div>
             </div>
-            <div class="progress" role="progressbar" style="width: 80%" (click)="setCrisprSilver()">
-              <div class="progress-bar  text-black ps-1 pe-2"
-                   [class.bg-warning-subtle]="crispr != Crispr.SILVER"
+            <div (click)="setCrispr(Crispr.SILVER)" class="progress" role="progressbar" style="width: 80%">
+              <div [class.bg-warning-subtle]="crispr != Crispr.SILVER"
                    [class.bg-warning]="crispr == Crispr.SILVER"
-                   [class.text-black]="crispr != Crispr.SILVER">
-                {{Crispr.SILVER.name}}
+                   [class.text-black]="crispr != Crispr.SILVER"
+                   class="progress-bar  text-black ps-1 pe-2">
+                {{ Crispr.SILVER.name }}
               </div>
             </div>
           </div>
@@ -92,100 +94,87 @@
           </span>
         </div>
 
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.HP, $event)" [current_training]="currentTraining.hp"
+        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.HP, $event)"
                           (setTargetStatRequested)="targetStat = $event"
+                          [current_training]="statsSet.hp"
                           [is_main_stat]="(trainingTask.mainStat == Stat.HP)"
                           [maximum_possibility]="maximumPossibility.hp"
                           [minimum_possibility]="minimumPossibility.hp"
-                          [required_effect]="training.requiredStatEffect(Stat.HP)"
                           [stat]="Stat.HP"
                           [training_effect]="trainingTask.statsEffective.hp">
         </app-stat-explain>
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.ATK, $event)" [current_training]="currentTraining.atk"
+        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.ATK, $event)"
                           (setTargetStatRequested)="targetStat = $event"
+                          [current_training]="statsSet.atk"
                           [is_main_stat]="trainingTask.mainStat == Stat.ATK"
                           [maximum_possibility]="maximumPossibility.atk"
                           [minimum_possibility]="minimumPossibility.atk"
-                          [required_effect]="training.requiredStatEffect(Stat.ATK)"
                           [stat]="Stat.ATK"
                           [training_effect]="trainingTask.statsEffective.atk">
         </app-stat-explain>
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.RPR, $event)" [current_training]="currentTraining.rpr"
+        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.RPR, $event)"
                           (setTargetStatRequested)="targetStat = $event"
+                          [current_training]="statsSet.rpr"
                           [is_main_stat]="trainingTask.mainStat == Stat.RPR"
                           [maximum_possibility]="maximumPossibility.rpr"
                           [minimum_possibility]="minimumPossibility.rpr"
-                          [required_effect]="training.requiredStatEffect(Stat.RPR)"
                           [stat]="Stat.RPR"
                           [training_effect]="trainingTask.statsEffective.rpr">
         </app-stat-explain>
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.ABL, $event)" [current_training]="currentTraining.abl"
+        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.ABL, $event)"
                           (setTargetStatRequested)="targetStat = $event"
+                          [current_training]="statsSet.abl"
                           [is_main_stat]="trainingTask.mainStat == Stat.ABL"
                           [maximum_possibility]="maximumPossibility.abl"
                           [minimum_possibility]="minimumPossibility.abl"
-                          [required_effect]="training.requiredStatEffect(Stat.ABL)"
                           [stat]="Stat.ABL"
                           [training_effect]="trainingTask.statsEffective.abl">
         </app-stat-explain>
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.STA, $event)" [current_training]="currentTraining.sta"
+        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.STA, $event)"
                           (setTargetStatRequested)="targetStat = $event"
+                          [current_training]="statsSet.sta"
                           [is_main_stat]="trainingTask.mainStat == Stat.STA"
                           [maximum_possibility]="maximumPossibility.sta"
                           [minimum_possibility]="minimumPossibility.sta"
-                          [required_effect]="training.requiredStatEffect(Stat.STA)"
                           [stat]="Stat.STA"
                           [training_effect]="trainingTask.statsEffective.sta">
         </app-stat-explain>
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.PLT, $event)" [current_training]="currentTraining.plt"
+        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.PLT, $event)"
                           (setTargetStatRequested)="targetStat = $event"
+                          [current_training]="statsSet.plt"
                           [is_main_stat]="trainingTask.mainStat == Stat.PLT"
                           [maximum_possibility]="maximumPossibility.plt"
                           [minimum_possibility]="minimumPossibility.plt"
-                          [required_effect]="training.requiredStatEffect(Stat.PLT)"
                           [stat]="Stat.PLT"
                           [training_effect]="trainingTask.statsEffective.plt">
         </app-stat-explain>
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.SCI, $event)" [current_training]="currentTraining.sci"
+        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.SCI, $event)"
                           (setTargetStatRequested)="targetStat = $event"
+                          [current_training]="statsSet.sci"
                           [is_main_stat]="trainingTask.mainStat == Stat.SCI"
                           [maximum_possibility]="maximumPossibility.sci"
                           [minimum_possibility]="minimumPossibility.sci"
-                          [required_effect]="training.requiredStatEffect(Stat.SCI)"
                           [stat]="Stat.SCI"
                           [training_effect]="trainingTask.statsEffective.sci">
         </app-stat-explain>
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.ENG, $event)" [current_training]="currentTraining.eng"
+        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.ENG, $event)"
                           (setTargetStatRequested)="targetStat = $event"
+                          [current_training]="statsSet.eng"
                           [is_main_stat]="trainingTask.mainStat == Stat.ENG"
                           [maximum_possibility]="maximumPossibility.eng"
                           [minimum_possibility]="minimumPossibility.eng"
-                          [required_effect]="training.requiredStatEffect(Stat.ENG)"
                           [stat]="Stat.ENG"
                           [training_effect]="trainingTask.statsEffective.eng">
         </app-stat-explain>
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.WPN, $event)" [current_training]="currentTraining.wpn"
+        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.WPN, $event)"
                           (setTargetStatRequested)="targetStat = $event"
+                          [current_training]="statsSet.wpn"
                           [is_main_stat]="trainingTask.mainStat == Stat.WPN"
                           [maximum_possibility]="maximumPossibility.wpn"
                           [minimum_possibility]="minimumPossibility.wpn"
-                          [required_effect]="training.requiredStatEffect(Stat.WPN)"
                           [stat]="Stat.WPN"
                           [training_effect]="trainingTask.statsEffective.wpn">
         </app-stat-explain>
-
-      </div>
-      <div class="row align-items-center">
-        <label class="form-check-label small col-6">
-          <input [(ngModel)]="autoSave" checked class="border-success text-success bg-success" type="checkbox">
-          Auto Save
-        </label>
-        <div class="col-6">
-          <div class=" input-group-sm mt-1 mb-1 align-items-center justify-content-end">
-            <button (click)="resetStats()" class="fatigue mx-1 btn btn-outline-danger col-5" type="button">Reset</button>
-            <button (click)="saveStats()" class="fatigue mx-1 btn btn-success col-5" type="button">Save</button>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -216,19 +205,23 @@
         </div>
       </div>
     </div>
-
   </div>
   <div class="row">
     <div class="text-center mt-1 small">2024 ~Kafka</div>
   </div>
   <div class="row">
-    <div class="text-center mt-1 small"><a href="https://docs.google.com/spreadsheets/d/17CXjmTTv3ZveNqDIEaJ8zN9TUqpD4_tYipAsS2-OcR0/">Excel version</a> (upgraded, no bug).</div>
+    <div class="text-center mt-1 small"><a
+      href="https://docs.google.com/spreadsheets/d/17CXjmTTv3ZveNqDIEaJ8zN9TUqpD4_tYipAsS2-OcR0/">Excel version</a>
+      (upgraded, no bug).
+    </div>
   </div>
   <div class="row">
     <div class="text-center mt-1 small">Thank you so much &#64;Tikkity for the original tool.</div>
   </div>
   <div class="row">
-    <div class="text-center mt-1 small">Thank you &#64;HSol the greatly <a href="https://youtu.be/7dG9xfpXZVQ">how to use</a>.</div>
+    <div class="text-center mt-1 small">Thank you &#64;HSol the greatly <a href="https://youtu.be/7dG9xfpXZVQ">how to
+      use</a>.
+    </div>
   </div>
   <div class="row">
     <div class="text-center mt-1 small">Deeply cheer &#64;TuVuong for whole dummy time that we shared.</div>

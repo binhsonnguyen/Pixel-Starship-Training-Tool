@@ -5,10 +5,7 @@ import TrainingQuality from "pss-training-lib/dist/TrainingQuality";
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {ImageService} from "../image.service";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {faCirclePlus} from "@fortawesome/free-solid-svg-icons";
-import {faCircleMinus} from "@fortawesome/free-solid-svg-icons";
-import {faCircleRight} from "@fortawesome/free-solid-svg-icons";
-import {faCircleLeft} from "@fortawesome/free-solid-svg-icons";
+import {faCircleLeft, faCircleMinus, faCirclePlus, faCircleRight} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-stat-explain',
@@ -27,11 +24,10 @@ export class StatExplainComponent {
   @Input("is_main_stat") isMainStat: boolean = false
   @Input("current_training") currentTraining: number = 0;
   @Input("training_effect") trainingEffect: number = 0;
-  @Input("required_effect") requiredEffect: number = 0;
   @Input("minimum_possibility") minimumPossibility: number = 0;
   @Input("maximum_possibility") maximumPossibility: number = 0;
 
-  @Output("setTargetStatRequested") setTargetStatRequested = new EventEmitter<string>();
+  @Output("setTargetStatRequested") setTargetStatRequested = new EventEmitter<Stat>();
   @Output("currentTrainingChangeRequested") currentTrainingChangeRequested = new EventEmitter<number>();
   protected readonly TrainingQuality = TrainingQuality;
   private timeoutHandler?: number | null;
@@ -46,17 +42,6 @@ export class StatExplainComponent {
 
   get hasSideEffect() {
     return !this.isMainStat && this.maximumPossibility > 0
-  }
-
-  get posibility() {
-    if (this.maximumPossibility <= 0) {
-      return "0%"
-    } else {
-      const roundedRequireEffect = Math.floor(this.requiredEffect)
-      const effectivenessPoints = this.trainingEffect - roundedRequireEffect + 1
-      const rate = Math.round(effectivenessPoints * 100 / (this.trainingEffect + 1))
-      return rate + "%"
-    }
   }
 
   image() {
@@ -76,6 +61,6 @@ export class StatExplainComponent {
   }
 
   protected requestSetTargetStat() {
-    this.setTargetStatRequested.emit(this.stat?.name);
+    this.setTargetStatRequested.emit(this.stat);
   }
 }

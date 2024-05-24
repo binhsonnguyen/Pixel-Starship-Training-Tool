@@ -7,13 +7,12 @@
     <span (click)="requestSetTargetStat()" [class.fw-bold]="isMainStat"
           class="input-group-text border-white bg-white col-3 col-sm-2">
       <img [alt]="stat?.name" [src]="image()">
-      <!--      <span *ngIf="hasEffect" class="text-primary">&nbsp;+{{trainingEffect}}</span>-->
 
       <span *ngIf="hasEffect" [class.border-danger-subtle]="(!isMainStat) && hasSideEffect" [class.fw-bold]="isMainStat"
             [class.text-danger]="(!isMainStat) && hasSideEffect"
             [class.text-success]="hasEffect && isMainStat"
             class="ms-1 me-1">
-        {{minimumPossibility || 0}} ~ {{maximumPossibility || 0}}
+        {{ minimumPossibility || 0 }} ~ {{ maximumPossibility || 0 }}
       </span>
     </span>
     <span class="btn d-inline text-center">
@@ -23,10 +22,10 @@
       <fa-icon (click)="requestDecreaseCurrentTraining(1)" [icon]="faMinus"></fa-icon>
     </span>
     <div class="input-group-text border-0 bg-white col-1 justify-content-center">
-      <span [class.zero-stat]="currentTraining == 0"
+      <span [class.main-stat]="isMainStat"
             [class.nonzero-stat]="currentTraining > 0"
-            [class.main-stat]="isMainStat"
-            class="ms-2 me-1">{{currentTraining}}</span>
+            [class.zero-stat]="currentTraining == 0"
+            class="ms-2 me-1">{{ currentTraining }}</span>
     </div>
     <span class="btn d-inline text-center">
       <fa-icon (click)="requestIncreaseCurrentTraining(1)" [icon]="faPlus"></fa-icon>

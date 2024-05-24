@@ -1,27 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
-import {FormsModule} from "@angular/forms";
-import StatsSet from "pss-training-lib/dist/StatsSet";
-import TrainingTask from "pss-training-lib/dist/TrainingTask";
-import {CommonModule} from "@angular/common";
-import Training from "pss-training-lib/dist/Training";
-import Stat from "pss-training-lib/dist/Stat";
-import {StatExplainComponent} from "./stat-explain/stat-explain.component";
-import TrainingQuality from "pss-training-lib/dist/TrainingQuality";
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {LocalStorageService} from "./local-storage.service";
-import {TrainingTaskHelperService} from "./training-task-helper.service";
-import {faCircleMinus, faCirclePlus, faCircleRight} from "@fortawesome/free-solid-svg-icons";
-import {FaIconComponent} from "@fortawesome/angular-fontawesome";
-import {HpBreakPoint} from "pss-training-lib/dist/HpBreakPoint";
-import {Crispr} from "./Crispr";
-
-export interface Tile {
-  color: string;
-  cols: number;
-  rows: number;
-  text: string;
-}
+import {Component, OnInit} from '@angular/core'
+import {RouterOutlet} from '@angular/router'
+import {FormsModule} from "@angular/forms"
+import StatsSet from "pss-training-lib/dist/StatsSet"
+import TrainingTask from "pss-training-lib/dist/TrainingTask"
+import {CommonModule} from "@angular/common"
+import Training from "pss-training-lib/dist/Training"
+import Stat from "pss-training-lib/dist/Stat"
+import {StatExplainComponent} from "./stat-explain/stat-explain.component"
+import TrainingQuality from "pss-training-lib/dist/TrainingQuality"
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
+import {LocalStorageService} from "./local-storage.service"
+import {TrainingTaskHelperService} from "./training-task-helper.service"
+import {faCircleMinus, faCirclePlus} from "@fortawesome/free-solid-svg-icons"
+import {FaIconComponent} from "@fortawesome/angular-fontawesome"
+import {HpBreakPoint} from "pss-training-lib/dist/HpBreakPoint"
+import {Crispr} from "./Crispr"
 
 @Component({
   selector: 'app-root',
@@ -33,109 +26,112 @@ export interface Tile {
 
 export class AppComponent implements OnInit {
   title: string = "pixel-starship-training-tool"
-  training: Training = new Training(110, 0, TrainingTask.HP_COMMON, new StatsSet())
-  minimumPossibility: StatsSet = new StatsSet()
-  maximumPossibility: StatsSet = new StatsSet()
-  protected readonly Stat = Stat;
+  protected readonly faPlus = faCirclePlus
+  protected readonly faMinus = faCircleMinus
   protected readonly TrainingQuality = TrainingQuality;
-  private minimumReachProgressBarWidthInPercent = 15;
-  private _crispr = Crispr.NONE
-  private _baseTrainingPoint = 110
-  baseHpForBreakpoints = 10;
-  protected readonly faPlus = faCirclePlus;
-  protected readonly faMinus = faCircleMinus;
+  protected readonly Crispr = Crispr;
+  protected readonly Stat = Stat;
+  private readonly MINIMAL_PROGRESSION = 20
 
   constructor(private readonly localStorageService: LocalStorageService, private readonly trainingTaskHelper: TrainingTaskHelperService) {
+
   }
 
-  get autoSave(): boolean {
-    return this.localStorageService.readSaveOption();
+  private _minimumPossibility: StatsSet = new StatsSet()
+
+  get minimumPossibility(): StatsSet {
+    return this._minimumPossibility
   }
 
-  set autoSave(value: boolean) {
-    this.localStorageService.setSaveOption(value);
-  }
+  private _maximumPossibility: StatsSet = new StatsSet()
 
-  get baseTrainingPoint(): number {
-    return this._baseTrainingPoint;
-  }
-
-  set baseTrainingPoint(value: number) {
-    this._baseTrainingPoint = value;
-    this.training.totalTrainingPoint = this.totalTrainingPoint
-    this.updatePossibility();
+  get maximumPossibility(): StatsSet {
+    return this._maximumPossibility
   }
 
   get totalTrainingPoint() {
     return this.baseTrainingPoint + this.crispr.additionTp
   }
 
-  // set totalTrainingPoint(value: number) {
-  //   this.training.totalTrainingPoint = value
-  //   this.localStorageService.saveTraining(this.training)
-  //   this.updatePossibility()
-  // }
+  get baseTrainingPoint(): number {
+    return this.localStorageService.getBaseTp()
+  }
+
+  set baseTrainingPoint(value: number) {
+    this.localStorageService.setBaseTp(value)
+    this.updatePossibility()
+  }
+
+  get traingTask(): TrainingTask {
+    return this.localStorageService.getTrainingTask()
+  }
+
+  set traingTask(value: TrainingTask) {
+    this.localStorageService.setTrainingTask(value)
+  }
 
   get fatiguee(): number {
-    return this.training.fatigue
+    return this.localStorageService.getFatigue()
   }
 
   set fatiguee(value: number) {
-    this.training.fatigue = value
-    this.localStorageService.saveTraining(this.training)
+    this.localStorageService.setFatigue(value)
     this.updatePossibility()
   }
 
-  get targetStat(): string {
-    return this.training.traingTask.mainStat.name
+  get targetStat(): Stat {
+    return this.localStorageService.getMainStat()
   }
 
-  set targetStat(value: string) {
-    this.training.traingTask = this.trainingTaskHelper.getTrainingTask(value, this.targetQuality)
-    this.localStorageService.saveTraining(this.training)
+  set targetStat(value: Stat) {
+    this.localStorageService.setMainStat(value)
     this.updatePossibility()
   }
 
-  get targetQuality(): string {
-    return this.training.traingTask.quality.name
+  get targetQuality(): TrainingQuality {
+    return this.localStorageService.getQuality()
   }
 
-  set targetQuality(value: string) {
-    this.training.traingTask = this.trainingTaskHelper.getTrainingTask(this.targetStat, value)
-    this.localStorageService.saveTraining(this.training)
+  set targetQuality(value: TrainingQuality) {
+    this.localStorageService.setQuality(value)
     this.updatePossibility()
   }
 
-  get trainingTask() {
-    return this.training.traingTask
+  get statsSet() {
+    return this.localStorageService.getStats()
   }
 
-  set trainingTask(task: TrainingTask) {
-    this.training.traingTask = task
-    this.localStorageService.saveTraining(this.training)
-  }
-
-  get currentTraining() {
-    return this.training.currentTraining
-  }
-
-  set currentTraining(value: StatsSet) {
-    this.training.currentTraining = value
-    this.localStorageService.saveTraining(this.training)
+  set statsSet(value: StatsSet) {
+    this.localStorageService.setStats(value)
   }
 
   get usedTp() {
-    return Stat.ALL.reduce((previousValue, currentValue) => {
-      return previousValue + this.currentTraining.get(currentValue)
-    }, 0)
+    return this.statsSet.total()
   }
 
   get percentReach() {
-    let percent = 100 * this.currentTraining.total() / this.totalTrainingPoint
-    if (percent < this.minimumReachProgressBarWidthInPercent) {
-      percent = this.minimumReachProgressBarWidthInPercent
+    let percent = 100 * this.statsSet.total() / this.totalTrainingPoint
+    if (percent < this.MINIMAL_PROGRESSION) {
+      percent = this.MINIMAL_PROGRESSION
     }
     return percent
+  }
+
+  get baseHpForBreakpoints(): number {
+    return this.localStorageService.getBaseHp()
+  }
+
+  set baseHpForBreakpoints(value: number) {
+    this.localStorageService.setBaseHp(value)
+  }
+
+  get crispr(): Crispr {
+    return this.localStorageService.getCrispr()
+  }
+
+  set crispr(value: Crispr) {
+    this.localStorageService.setCrispr(value)
+    this.updatePossibility()
   }
 
   get hpBreakpoints() {
@@ -153,8 +149,7 @@ export class AppComponent implements OnInit {
         break
       }
       breakpoints.push({
-        hpAddition: hp,
-        tpAddition: tp
+        hpAddition: hp, tpAddition: tp
       })
 
       hp++
@@ -163,13 +158,11 @@ export class AppComponent implements OnInit {
     return breakpoints
   }
 
-  get crispr(): Crispr {
-    return this._crispr;
+  get trainingTask(): TrainingTask {
+    return this.localStorageService.getTrainingTask()
   }
 
-  set crispr(value: Crispr) {
-    this._crispr = value;
-    this.training.totalTrainingPoint = this.totalTrainingPoint
+  ngOnInit(): void {
     this.updatePossibility()
   }
 
@@ -177,15 +170,9 @@ export class AppComponent implements OnInit {
     return `width: ${percent}%`
   }
 
-  ngOnInit(): void {
-    this.autoSave = this.localStorageService.readSaveOption()
-    this.training = this.localStorageService.readTraining();
-    this.updatePossibility();
-  }
-
   changeCurrentTraining(stat: Stat, value: number) {
-    const currentPoint = this.currentTraining.get(stat);
-    const availablePoint = this.totalTrainingPoint - this.currentTraining.total()
+    const currentPoint = this.statsSet.get(stat)
+    const availablePoint = this.totalTrainingPoint - this.statsSet.total()
     let maximumPoint = currentPoint + availablePoint
     let afterChange = currentPoint + value
     if (afterChange <= 0) {
@@ -194,31 +181,28 @@ export class AppComponent implements OnInit {
       afterChange = maximumPoint
     }
 
-    this.currentTraining.set(stat, afterChange);
-    this.localStorageService.saveTraining(this.training)
+    this.statsSet.set(stat, afterChange)
+    this.localStorageService.setStats(this.statsSet)
     this.updatePossibility()
   }
 
   updatePossibility() {
+    const training = new Training(this.totalTrainingPoint, this.fatiguee, this.traingTask, this.statsSet)
     for (const stat of Stat.ALL) {
-      const min = this.training.minimumPossibleImprovement(stat)
+      const min = training.minimumPossibleImprovement(stat)
       this.minimumPossibility.set(stat, min)
-      const max = this.training.maximumPossibleImprovement(stat)
+      const max = training.maximumPossibleImprovement(stat)
       this.maximumPossibility.set(stat, max)
     }
-  }
-
-  saveStats() {
-    this.localStorageService.saveTraining(this.training, true)
   }
 
   resetStats() {
     this.baseTrainingPoint = 100
     this.crispr = Crispr.NONE
     this.fatiguee = 0
-    this.training.totalTrainingPoint = this.totalTrainingPoint
-    this.trainingTask = TrainingTask.HP_COMMON
-    this.currentTraining = new StatsSet()
+    this.targetStat = Stat.HP
+    this.targetQuality = TrainingQuality.COMMON
+    this.statsSet = new StatsSet()
     this.updatePossibility()
   }
 
@@ -270,17 +254,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  setCrisprNone() {
-    this._crispr = Crispr.NONE
+  setCrispr(value: Crispr) {
+    this.localStorageService.setCrispr(value)
   }
-
-  setCrisprSilver() {
-    this._crispr = Crispr.SILVER
-  }
-
-  setCrisprBronze() {
-    this._crispr = Crispr.BRONZE
-  }
-
-  protected readonly Crispr = Crispr;
 }
