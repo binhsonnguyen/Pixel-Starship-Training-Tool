@@ -31,8 +31,8 @@ export class StatExplainComponent {
   @Input("minimum_possibility") minimumPossibility: number = 0;
   @Input("maximum_possibility") maximumPossibility: number = 0;
 
-  @Output("onSetTargetStat") onSetTargetStat = new EventEmitter<string>();
-  @Output("onCurrentTrainingChanged") currentTrainingChanged = new EventEmitter<number>();
+  @Output("setTargetStatRequested") setTargetStatRequested = new EventEmitter<string>();
+  @Output("currentTrainingChangeRequested") currentTrainingChangeRequested = new EventEmitter<number>();
   protected readonly TrainingQuality = TrainingQuality;
   private timeoutHandler?: number | null;
 
@@ -63,25 +63,19 @@ export class StatExplainComponent {
     return this.imageService.getStatIcon(this.stat);
   }
 
-  onCurrentTrainingChanged() {
-    this.currentTrainingChanged.emit(this.currentTraining)
+  requestChangeCurrentTraining(value: number) {
+    this.currentTrainingChangeRequested.emit(value)
   }
 
-  increaseCurrentTraining(value = 1) {
-    this.currentTraining += value
-    this.onCurrentTrainingChanged()
+  protected requestIncreaseCurrentTraining(value: number) {
+    this.requestChangeCurrentTraining(value)
   }
 
-  decreaseCurrentTraining(value = 1) {
-    let newValue = this.currentTraining - value
-    if (newValue < 0) {
-      newValue = 0
-    }
-    this.currentTraining = newValue;
-    this.onCurrentTrainingChanged()
+  protected requestDecreaseCurrentTraining(value: number) {
+    this.requestChangeCurrentTraining(-value)
   }
 
-  setTargetStat() {
-    this.onSetTargetStat.emit(this.stat?.name);
+  protected requestSetTargetStat() {
+    this.setTargetStatRequested.emit(this.stat?.name);
   }
 }

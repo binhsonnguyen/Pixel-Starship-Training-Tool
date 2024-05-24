@@ -1,10 +1,10 @@
 <div class="">
   <div class="input-group input-group-sm mb-1">
     <div class="input-group-text border-white bg-white">
-      <input (click)="setTargetStat()" [checked]="isMainStat"
+      <input (click)="requestSetTargetStat()" [checked]="isMainStat"
              class="form-check-input mt-0" name="targetStat" type="radio">
     </div>
-    <span (click)="setTargetStat()" [class.fw-bold]="isMainStat"
+    <span (click)="requestSetTargetStat()" [class.fw-bold]="isMainStat"
           class="input-group-text border-white bg-white col-3 col-sm-2">
       <img [alt]="stat?.name" [src]="image()">
       <!--      <span *ngIf="hasEffect" class="text-primary">&nbsp;+{{trainingEffect}}</span>-->
@@ -17,10 +17,10 @@
       </span>
     </span>
     <span class="btn d-inline text-center">
-      <fa-icon (click)="decreaseCurrentTraining(10)" [icon]="faLeft"></fa-icon>
+      <fa-icon (click)="requestDecreaseCurrentTraining(10)" [icon]="faLeft"></fa-icon>
     </span>
     <span class="btn d-inline text-center">
-      <fa-icon (click)="decreaseCurrentTraining()" [icon]="faMinus"></fa-icon>
+      <fa-icon (click)="requestDecreaseCurrentTraining(1)" [icon]="faMinus"></fa-icon>
     </span>
     <div class="input-group-text border-0 bg-white col-1 justify-content-center">
       <span [class.zero-stat]="currentTraining == 0"
@@ -29,10 +29,10 @@
             class="ms-2 me-1">{{currentTraining}}</span>
     </div>
     <span class="btn d-inline text-center">
-      <fa-icon (click)="increaseCurrentTraining()" [icon]="faPlus"></fa-icon>
+      <fa-icon (click)="requestIncreaseCurrentTraining(1)" [icon]="faPlus"></fa-icon>
     </span>
     <span class="btn d-inline text-center">
-      <fa-icon (click)="increaseCurrentTraining(10)" [icon]="faRight"></fa-icon>
+      <fa-icon (click)="requestIncreaseCurrentTraining(10)" [icon]="faRight"></fa-icon>
     </span>
   </div>
 </div>

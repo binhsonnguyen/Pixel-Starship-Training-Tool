@@ -183,8 +183,18 @@ export class AppComponent implements OnInit {
     this.updatePossibility();
   }
 
-  updateCurrentTraining(stat: Stat, value: number) {
-    this.currentTraining.set(stat, value)
+  changeCurrentTraining(stat: Stat, value: number) {
+    const currentPoint = this.currentTraining.get(stat);
+    const availablePoint = this.totalTrainingPoint - this.currentTraining.total()
+    let maximumPoint = currentPoint + availablePoint
+    let afterChange = currentPoint + value
+    if (afterChange <= 0) {
+      afterChange = 0
+    } else if (afterChange > maximumPoint) {
+      afterChange = maximumPoint
+    }
+
+    this.currentTraining.set(stat, afterChange);
     this.localStorageService.saveTraining(this.training)
     this.updatePossibility()
   }
