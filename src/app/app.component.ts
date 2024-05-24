@@ -138,14 +138,6 @@ export class AppComponent implements OnInit {
     return percent
   }
 
-  get percentAvailable() {
-    return 100 * this.totalTrainingPoint / 200
-  }
-
-  get percentRemaining() {
-    return this.percentAvailable - this.percentReach
-  }
-
   get hpBreakpoints() {
     const breakpoints: { hpAddition: number, tpAddition: number }[] = []
 
