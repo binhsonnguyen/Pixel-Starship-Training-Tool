@@ -1,11 +1,11 @@
 <div class="">
   <div class="input-group input-group-sm mb-1">
-    <div class="input-group-text">
+    <div class="input-group-text border-white bg-white">
       <input (click)="setTargetStat()" [checked]="isMainStat"
-             [value]="" class="form-check-input mt-0" name="targetStat" type="radio">
+             class="form-check-input mt-0" name="targetStat" type="radio">
     </div>
     <span (click)="setTargetStat()" [class.fw-bold]="isMainStat"
-          class="input-group-text bg-white col-4">
+          class="input-group-text border-white bg-white col-3 col-sm-2">
       <img [alt]="stat?.name" [src]="image()">
       <!--      <span *ngIf="hasEffect" class="text-primary">&nbsp;+{{trainingEffect}}</span>-->
 
