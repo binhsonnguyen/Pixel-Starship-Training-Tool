@@ -14,6 +14,7 @@ import {TrainingTaskHelperService} from "./training-task-helper.service";
 import {faCircleMinus, faCirclePlus, faCircleRight} from "@fortawesome/free-solid-svg-icons";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {HpBreakPoint} from "pss-training-lib/dist/HpBreakPoint";
+import {Crispr} from "./Crispr";
 
 export interface Tile {
   color: string;
@@ -38,6 +39,7 @@ export class AppComponent implements OnInit {
   protected readonly Stat = Stat;
   protected readonly TrainingQuality = TrainingQuality;
   private minimumReachProgressBarWidthInPercent = 15;
+  private _crispr = Crispr.NONE
   baseHpForBreakpoints = 10;
   protected readonly faPlus = faCirclePlus;
   protected readonly faMinus = faCircleMinus;
@@ -242,5 +244,17 @@ export class AppComponent implements OnInit {
         this.totalTrainingPoint = 200
         break
     }
+  }
+
+  setCrisprNone() {
+    this._crispr = Crispr.NONE
+  }
+
+  setCrisprSilver() {
+    this._crispr = Crispr.SILVER
+  }
+
+  setCrisprBronze() {
+    this._crispr = Crispr.BRONZE
   }
 }
