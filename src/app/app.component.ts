@@ -260,4 +260,6 @@ export class AppComponent implements OnInit {
   setCrisprBronze() {
     this._crispr = Crispr.BRONZE
   }
+
+  protected readonly Crispr = Crispr;
 }
