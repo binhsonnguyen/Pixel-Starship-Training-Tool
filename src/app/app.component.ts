@@ -220,6 +220,7 @@ export class AppComponent implements OnInit {
   }
 
   updatePossibility() {
+    console.log("total tp", this.totalTrainingPoint)
     const training = new Training(this.totalTrainingPoint, this.fatiguee, this.trainingTask, this._statsSet)
     for (const stat of Stat.ALL) {
       const min = training.minimumPossibleImprovement(stat)
@@ -231,7 +232,7 @@ export class AppComponent implements OnInit {
 
   resetStats() {
     console.log("reset")
-    this.baseTrainingPoint = 100
+    this.baseTrainingPoint = 110
     this.crispr = Crispr.NONE
     this.fatiguee = 0
     this.targetStat = Stat.HP
