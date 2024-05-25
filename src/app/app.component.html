@@ -4,16 +4,6 @@
       <h5 class="card-title small">Training Possibility</h5>
 
       <div class="row">
-        <div class="input-group input-group-sm mt-1 mb-1">
-          <span class="input-group-text">Quality</span>
-          <select [(ngModel)]="trainingQuality"
-                  class="form-select"
-                  style="width:auto;">
-            <option *ngFor="let item of availableTrainingQuality" [ngValue]="item">
-              {{ item.name }}
-            </option>
-          </select>
-        </div>
         <div class="w-100 fatigue flex-container input-group input-group-sm mb-1">
           <button (click)="fatiguee=0" [class.bg-primary]="fatiguee == 0" class="flex-fill fatigue btn btn-outline-primary"
                   type="button">
@@ -41,8 +31,14 @@
           </button>
         </div>
         <div class="input-group input-group-sm mb-1">
+          <select [(ngModel)]="trainingQuality"
+                  class="form-select">
+            <option *ngFor="let item of availableTrainingQuality" [ngValue]="item">
+              {{ item.name }}
+            </option>
+          </select>
           <input [value]="trainingTask.name"
-                 class="form-control text-primary bg-white border-primary-subtle text-center" disabled readonly
+                 class="w-auto form-control text-primary bg-white border-primary-subtle text-center" disabled readonly
                  type="text">
         </div>
 
