@@ -96,7 +96,11 @@ export class AppComponent implements OnInit {
 
   set targetStat(value: Stat) {
     console.log("set target stat", value.name)
-    this._trainingTask = this.trainingTaskHelper.getTrainingTask(value.name, this.trainingQuality.name)
+    try {
+      this._trainingTask = this.trainingTaskHelper.getTrainingTask(value.name, this.trainingQuality.name);
+    } catch (e) {
+      this.trainingQuality = TrainingQuality.COMMON
+    }
     this.localStorageService.setMainStat(value)
     this.updatePossibility()
   }

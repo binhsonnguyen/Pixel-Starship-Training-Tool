@@ -9,7 +9,7 @@
           <select [(ngModel)]="trainingQuality"
                   class="form-select"
                   style="width:auto;">
-            <option *ngFor="let item of TrainingQuality.ALL" [ngValue]="item">
+            <option *ngFor="let item of availableTrainingQuality" [ngValue]="item">
               {{ item.name }}
             </option>
           </select>
