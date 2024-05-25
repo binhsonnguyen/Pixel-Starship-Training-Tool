@@ -62,7 +62,7 @@
             </div>
           </div>
           <div class="progress-stacked ms-2">
-            <div (click)="setCrispr(Crispr.NONE)" class="progress" role="" style="width: 80%">
+            <div (click)="crispr = Crispr.NONE" class="progress" role="" style="width: 80%">
               <div [class.bg-primary]="crispr == Crispr.NONE"
                    [class.bg-secondary-subtle]="crispr != Crispr.NONE"
                    [class.text-black]="crispr != Crispr.NONE"
@@ -71,7 +71,7 @@
                 {{ Crispr.NONE.name }}
               </div>
             </div>
-            <div (click)="setCrispr(Crispr.BRONZE)" class="progress" role="progressbar" style="width: 80%">
+            <div (click)="crispr = Crispr.BRONZE" class="progress" role="progressbar" style="width: 80%">
               <div [class.bg-success-subtle]="crispr != Crispr.BRONZE"
                    [class.bg-success]="crispr == Crispr.BRONZE"
                    [class.text-black]="crispr != Crispr.BRONZE"
@@ -79,7 +79,7 @@
                 {{ Crispr.BRONZE.name }}
               </div>
             </div>
-            <div (click)="setCrispr(Crispr.SILVER)" class="progress" role="progressbar" style="width: 80%">
+            <div (click)="crispr = Crispr.SILVER" class="progress" role="progressbar" style="width: 80%">
               <div [class.bg-warning-subtle]="crispr != Crispr.SILVER"
                    [class.bg-warning]="crispr == Crispr.SILVER"
                    [class.text-black]="crispr != Crispr.SILVER"

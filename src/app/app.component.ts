@@ -69,6 +69,7 @@ export class AppComponent implements OnInit {
   }
 
   set baseTrainingPoint(value: number) {
+    console.log("set base_tp", value)
     this._baseTrainingPoint = value
     this.localStorageService.setBaseTp(value)
     this.updatePossibility()
@@ -81,6 +82,7 @@ export class AppComponent implements OnInit {
   }
 
   set fatiguee(value: number) {
+    console.log("set fatiguee", value)
     this._fatiguee = value
     this.localStorageService.setFatigue(value)
     this.updatePossibility()
@@ -93,6 +95,7 @@ export class AppComponent implements OnInit {
   }
 
   set targetStat(value: Stat) {
+    console.log("set target stat", value.name)
     this._trainingTask = this.trainingTaskHelper.getTrainingTask(value.name, this.trainingQuality.name)
     this.localStorageService.setMainStat(value)
     this.updatePossibility()
@@ -103,6 +106,7 @@ export class AppComponent implements OnInit {
   }
 
   set trainingQuality(value: TrainingQuality) {
+    console.log("set quality", value.name)
     this._trainingTask = this.trainingTaskHelper.getTrainingTask(this.targetStat.name, value.name)
     this.localStorageService.setQuality(value)
     this.updatePossibility()
@@ -125,6 +129,7 @@ export class AppComponent implements OnInit {
   }
 
   set baseHp(value: number) {
+    console.log("set base_hp", value)
     this._baseHp = value
     this.localStorageService.setBaseHp(value)
   }
@@ -136,6 +141,7 @@ export class AppComponent implements OnInit {
   }
 
   set crispr(value: Crispr) {
+    console.log("set crispr", value.name)
     this._crispr = value
     this.localStorageService.setCrispr(value)
     this.updatePossibility()
@@ -144,14 +150,12 @@ export class AppComponent implements OnInit {
   get hpBreakpoints() {
     const breakpoints: { hpAddition: number, tpAddition: number }[] = []
 
-    console.log("total", this.totalTrainingPoint)
     let hp = 1
     do {
       const tp = HpBreakPoint
         .withBase(this.baseHp)
         .withAdditionHp(hp)
         .getValue()
-      console.log("tp", tp)
       if (tp > this.totalTrainingPoint) {
         break
       }
@@ -178,6 +182,7 @@ export class AppComponent implements OnInit {
   }
 
   setStat(stat: Stat, value: number) {
+    console.log("set", stat.name, value)
     this._statsSet.set(stat, value)
     this.localStorageService.setStat(stat, value)
   }
@@ -216,6 +221,7 @@ export class AppComponent implements OnInit {
   }
 
   resetStats() {
+    console.log("reset")
     this.baseTrainingPoint = 100
     this.crispr = Crispr.NONE
     this.fatiguee = 0
@@ -275,7 +281,4 @@ export class AppComponent implements OnInit {
     }
   }
 
-  setCrispr(value: Crispr) {
-    this.localStorageService.setCrispr(value)
-  }
 }
