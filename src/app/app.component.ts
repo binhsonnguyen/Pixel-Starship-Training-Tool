@@ -11,7 +11,7 @@ import TrainingQuality from "pss-training-lib/dist/TrainingQuality"
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
 import {LocalStorageService} from "./local-storage.service"
 import {TrainingTaskHelperService} from "./training-task-helper.service"
-import {faCircleMinus, faCirclePlus} from "@fortawesome/free-solid-svg-icons"
+import {faCircleMinus, faCirclePlus, faTrashCan} from "@fortawesome/free-solid-svg-icons"
 import {FaIconComponent} from "@fortawesome/angular-fontawesome"
 import {HpBreakPoint} from "pss-training-lib/dist/HpBreakPoint"
 import {Crispr} from "./Crispr"
@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
   title: string = "pixel-starship-training-tool"
   protected readonly faPlus = faCirclePlus
   protected readonly faMinus = faCircleMinus
+  protected readonly faRecycle = faTrashCan
   protected readonly TrainingQuality = TrainingQuality;
   protected readonly Crispr = Crispr;
   protected readonly Stat = Stat;
