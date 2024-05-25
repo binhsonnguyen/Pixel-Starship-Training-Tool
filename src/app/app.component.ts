@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
   protected readonly Crispr = Crispr;
   protected readonly Stat = Stat;
   private readonly MINIMAL_PROGRESSION = 20
+  private _statsSet: StatsSet
 
   constructor(private readonly localStorageService: LocalStorageService, private readonly trainingTaskHelper: TrainingTaskHelperService) {
     this._baseTrainingPoint = this.localStorageService.getBaseTp()
@@ -90,14 +91,22 @@ export class AppComponent implements OnInit {
 
   private _trainingTask: TrainingTask
 
+  get trainingTask(): TrainingTask {
+    return this._trainingTask
+  }
+
+  private set trainingTask(value) {
+    this._trainingTask = value
+  }
+
   get targetStat(): Stat {
-    return this._trainingTask.mainStat
+    return this.trainingTask.mainStat
   }
 
   set targetStat(value: Stat) {
     console.log("set target stat", value.name)
     try {
-      this._trainingTask = this.trainingTaskHelper.getTrainingTask(value.name, this.trainingQuality.name);
+      this.trainingTask = this.trainingTaskHelper.getTrainingTask(value.name, this.trainingQuality.name);
     } catch (e) {
       this.trainingQuality = TrainingQuality.COMMON
     }
@@ -106,17 +115,15 @@ export class AppComponent implements OnInit {
   }
 
   get trainingQuality(): TrainingQuality {
-    return this._trainingTask.quality
+    return this.trainingTask.quality
   }
 
   set trainingQuality(value: TrainingQuality) {
     console.log("set quality", value.name)
-    this._trainingTask = this.trainingTaskHelper.getTrainingTask(this.targetStat.name, value.name)
+    this.trainingTask = this.trainingTaskHelper.getTrainingTask(this.targetStat.name, value.name)
     this.localStorageService.setQuality(value)
     this.updatePossibility()
   }
-
-  private _statsSet: StatsSet
 
   get percentReach() {
     let percent = 100 * this.getTotalStatUsed() / this.totalTrainingPoint
@@ -173,8 +180,10 @@ export class AppComponent implements OnInit {
     return breakpoints
   }
 
-  get trainingTask(): TrainingTask {
-    return this.localStorageService.getTrainingTask()
+  get availableTrainingQuality() {
+    return TrainingTask.ALL
+      .filter(value => value.mainStat.name == this.targetStat.name)
+      .map(value => value.quality)
   }
 
   getTotalStatUsed(): number {
@@ -283,12 +292,6 @@ export class AppComponent implements OnInit {
         this.baseTrainingPoint = 200
         break
     }
-  }
-
-  get availableTrainingQuality() {
-    return TrainingTask.ALL
-      .filter(value => value.mainStat.name == this.targetStat.name)
-      .map(value => value.quality)
   }
 
 }
