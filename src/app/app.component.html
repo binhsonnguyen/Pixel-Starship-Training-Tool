@@ -31,15 +31,15 @@
           </button>
         </div>
         <div class="input-group input-group-sm mb-1">
+          <input [value]="trainingTask.name"
+                 class="w-auto form-control text-primary bg-white border-primary-subtle text-center" disabled readonly
+                 type="text">
           <select [(ngModel)]="trainingQuality"
                   class="form-select">
             <option *ngFor="let item of availableTrainingQuality" [ngValue]="item">
               {{ item.name }}
             </option>
           </select>
-          <input [value]="trainingTask.name"
-                 class="w-auto form-control text-primary bg-white border-primary-subtle text-center" disabled readonly
-                 type="text">
         </div>
 
 
