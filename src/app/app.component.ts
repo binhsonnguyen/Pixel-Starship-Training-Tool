@@ -32,7 +32,6 @@ export class AppComponent implements OnInit {
   protected readonly TrainingQuality = TrainingQuality;
   protected readonly Crispr = Crispr;
   protected readonly Stat = Stat;
-  private readonly MINIMAL_PROGRESSION = 20
   private _statsSet: StatsSet
 
   constructor(private readonly localStorageService: LocalStorageService, private readonly trainingTaskHelper: TrainingTaskHelperService) {
@@ -127,11 +126,7 @@ export class AppComponent implements OnInit {
   }
 
   get percentReach() {
-    let percent = 100 * this.getTotalStatUsed() / this.totalTrainingPoint
-    if (percent < this.MINIMAL_PROGRESSION) {
-      percent = this.MINIMAL_PROGRESSION
-    }
-    return percent
+    return 100 * this.getTotalStatUsed() / this.totalTrainingPoint
   }
 
   private _baseHp: number

@@ -42,21 +42,29 @@
           </select>
         </div>
 
-
         <div class="btn-group-sm flex-container mt-2 mb-3">
           <span class="btn d-inline-block text-center">
             <fa-icon (click)="toPreviousRarity()" [icon]="faMinus"></fa-icon>
           </span>
-          <div class="progress-stacked flex-fill">
-            <div [style]="numberToWidthStyle(percentReach)" aria-label="Current TP"
-                 class="progress" role="progressbar">
-              <div [class.progress-bar-animated]="getTotalStatUsed() != totalTrainingPoint"
-                   [class.progress-bar-striped]="getTotalStatUsed() != totalTrainingPoint"
-                   class="progress-bar bg-success progress-bar-striped">
-                <span *ngIf="crispr == Crispr.NONE">{{ getTotalStatUsed() }} / {{ baseTrainingPoint }}</span>
-                <span *ngIf="crispr != Crispr.NONE">{{ getTotalStatUsed() }} / {{ baseTrainingPoint }}
-                  +{{ crispr.additionTp }}</span>
-              </div>
+          <div  aria-label="Current TP"
+               class="progress flex-fill bg-secondary">
+            <div [class.progress-bar-animated]="getTotalStatUsed() != totalTrainingPoint"
+                 [class.progress-bar-striped]="getTotalStatUsed() != totalTrainingPoint"
+                 [style]="numberToWidthStyle(percentReach)"
+                 role="progressbar"
+                 [attr.aria-valuenow]="getTotalStatUsed()"
+                 aria-valuemin="0"
+                 [attr.aria-valuemax]="totalTrainingPoint"
+                 class="progress-bar bg-success">
+                <span class="position-absolute mx-1">
+                  <span>
+                    {{ getTotalStatUsed() }} /
+                  </span>
+                  <span class="fw-bold">
+                    {{ baseTrainingPoint }}
+                  </span>
+                  <span style="color: gold" *ngIf="crispr != Crispr.NONE">+{{ crispr.additionTp }}</span>
+                </span>
             </div>
           </div>
           <div class="progress-stacked ms-2">
@@ -107,8 +115,8 @@
     </div>
 
     <div class="btn-group-sm flex-container mb-3 justify-content-end px-3 text-warning">
-      <div class="btn btn-outline-danger bg-danger-subtle px-2">
-        <fa-icon (click)="resetStats()" [icon]="faRecycle"></fa-icon>
+      <div (click)="resetStats()" class="btn btn-outline-danger bg-danger-subtle px-2">
+        <fa-icon [icon]="faRecycle"></fa-icon>
       </div>
     </div>
   </div>
