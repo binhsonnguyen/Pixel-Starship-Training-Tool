@@ -285,4 +285,10 @@ export class AppComponent implements OnInit {
     }
   }
 
+  get availableTrainingQuality() {
+    return TrainingTask.ALL
+      .filter(value => value.mainStat.name == this.targetStat.name)
+      .map(value => value.quality)
+  }
+
 }
