@@ -6,8 +6,10 @@
       <div class="row">
         <div class="input-group input-group-sm mt-1 mb-1">
           <span class="input-group-text">Quality</span>
-          <select [(ngModel)]="trainingQuality" class="form-select" style="width:auto;">
-            <option *ngFor="let item of TrainingQuality.ALL" [value]="item.name">
+          <select [(ngModel)]="trainingQuality"
+                  class="form-select"
+                  style="width:auto;">
+            <option *ngFor="let item of TrainingQuality.ALL" [ngValue]="item">
               {{ item.name }}
             </option>
           </select>
