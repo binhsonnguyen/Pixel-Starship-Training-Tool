@@ -98,88 +98,15 @@
             <fa-icon (click)="toNextRarity()" [icon]="faPlus"></fa-icon>
           </span>
         </div>
-
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.HP, $event)"
+        <app-stat-explain *ngFor="let stat of Stat.ALL"
+                          (currentTrainingChangeRequested)="changeCurrentTraining(stat, $event)"
                           (setTargetStatRequested)="targetStat = $event"
-                          [current_training]="getStat(Stat.HP)"
-                          [is_main_stat]="(trainingTask.mainStat == Stat.HP)"
-                          [maximum_possibility]="maximumPossibility.hp"
-                          [minimum_possibility]="minimumPossibility.hp"
-                          [stat]="Stat.HP"
-                          [training_effect]="trainingTask.statsEffective.hp">
-        </app-stat-explain>
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.ATK, $event)"
-                          (setTargetStatRequested)="targetStat = $event"
-                          [current_training]="getStat(Stat.ATK)"
-                          [is_main_stat]="trainingTask.mainStat == Stat.ATK"
-                          [maximum_possibility]="maximumPossibility.atk"
-                          [minimum_possibility]="minimumPossibility.atk"
-                          [stat]="Stat.ATK"
-                          [training_effect]="trainingTask.statsEffective.atk">
-        </app-stat-explain>
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.RPR, $event)"
-                          (setTargetStatRequested)="targetStat = $event"
-                          [current_training]="getStat(Stat.RPR)"
-                          [is_main_stat]="trainingTask.mainStat == Stat.RPR"
-                          [maximum_possibility]="maximumPossibility.rpr"
-                          [minimum_possibility]="minimumPossibility.rpr"
-                          [stat]="Stat.RPR"
-                          [training_effect]="trainingTask.statsEffective.rpr">
-        </app-stat-explain>
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.ABL, $event)"
-                          (setTargetStatRequested)="targetStat = $event"
-                          [current_training]="getStat(Stat.ABL)"
-                          [is_main_stat]="trainingTask.mainStat == Stat.ABL"
-                          [maximum_possibility]="maximumPossibility.abl"
-                          [minimum_possibility]="minimumPossibility.abl"
-                          [stat]="Stat.ABL"
-                          [training_effect]="trainingTask.statsEffective.abl">
-        </app-stat-explain>
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.STA, $event)"
-                          (setTargetStatRequested)="targetStat = $event"
-                          [current_training]="getStat(Stat.STA)"
-                          [is_main_stat]="trainingTask.mainStat == Stat.STA"
-                          [maximum_possibility]="maximumPossibility.sta"
-                          [minimum_possibility]="minimumPossibility.sta"
-                          [stat]="Stat.STA"
-                          [training_effect]="trainingTask.statsEffective.sta">
-        </app-stat-explain>
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.PLT, $event)"
-                          (setTargetStatRequested)="targetStat = $event"
-                          [current_training]="getStat(Stat.PLT)"
-                          [is_main_stat]="trainingTask.mainStat == Stat.PLT"
-                          [maximum_possibility]="maximumPossibility.plt"
-                          [minimum_possibility]="minimumPossibility.plt"
-                          [stat]="Stat.PLT"
-                          [training_effect]="trainingTask.statsEffective.plt">
-        </app-stat-explain>
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.SCI, $event)"
-                          (setTargetStatRequested)="targetStat = $event"
-                          [current_training]="getStat(Stat.SCI)"
-                          [is_main_stat]="trainingTask.mainStat == Stat.SCI"
-                          [maximum_possibility]="maximumPossibility.sci"
-                          [minimum_possibility]="minimumPossibility.sci"
-                          [stat]="Stat.SCI"
-                          [training_effect]="trainingTask.statsEffective.sci">
-        </app-stat-explain>
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.ENG, $event)"
-                          (setTargetStatRequested)="targetStat = $event"
-                          [current_training]="getStat(Stat.ENG)"
-                          [is_main_stat]="trainingTask.mainStat == Stat.ENG"
-                          [maximum_possibility]="maximumPossibility.eng"
-                          [minimum_possibility]="minimumPossibility.eng"
-                          [stat]="Stat.ENG"
-                          [training_effect]="trainingTask.statsEffective.eng">
-        </app-stat-explain>
-        <app-stat-explain (currentTrainingChangeRequested)="changeCurrentTraining(Stat.WPN, $event)"
-                          (setTargetStatRequested)="targetStat = $event"
-                          [current_training]="getStat(Stat.WPN)"
-                          [is_main_stat]="trainingTask.mainStat == Stat.WPN"
-                          [maximum_possibility]="maximumPossibility.wpn"
-                          [minimum_possibility]="minimumPossibility.wpn"
-                          [stat]="Stat.WPN"
-                          [training_effect]="trainingTask.statsEffective.wpn">
-        </app-stat-explain>
+                          [current_training]="getStat(stat)"
+                          [is_main_stat]="(trainingTask.mainStat == stat)"
+                          [maximum_possibility]="maximumPossibility.get(stat)"
+                          [minimum_possibility]="minimumPossibility.get(stat)"
+                          [stat]="stat"
+                          [training_effect]="trainingTask.statsEffective.get(stat)"/>
       </div>
     </div>
 
